@@ -20,13 +20,23 @@
   <style>
     html { background:#020A06; }
     body { min-height:100vh; }
-    /* el lienzo de ancho fijo, centrado */
-    body > x-dc > div:first-of-type { margin-left:auto; margin-right:auto; }
     a { color:inherit; }
+
+    /* El lienzo se dibujó a 1440 px, pero servirlo así deja la página como una
+       isla con fondo vacío a los lados -- que es exactamente lo que delata una
+       maqueta. Aquí se suelta a ancho completo: las rejillas internas ya son
+       fluidas (repeat(n, minmax(0,1fr))) y los márgenes van en padding, así que
+       estirar el contenedor reparte el espacio en vez de dejarlo muerto.
+       El tope de 1920 evita que en un monitor ultrapanorámico las tarjetas
+       crezcan hasta perder proporción. Por debajo de 1180 el envoltorio vuelve
+       a escalar, porque ahí las rejillas de 4 columnas ya no respiran. */
+    body > x-dc > div[style*="width:1440px"] { width:100% !important; max-width:1920px; margin:0 auto; }
+
   </style>
   <script>
   (function () {
     var ANCHO = 1440;
+    var MINIMO = 1180;
     var MOVIL = null;
     /* A un teléfono se le manda la versión de 390 px si existe. Se comprueba
        una vez, antes de pintar, y solo hacia abajo: nunca devuelve al de
@@ -35,9 +45,12 @@
       location.replace(MOVIL + location.search + location.hash);
       return;
     }
+    /* Entre MINIMO y el tope, el diseño es fluido y no hace falta tocar nada.
+       Por debajo de MINIMO se escala para que entre completo en vez de dejar
+       barra horizontal. */
     function encajar() {
       var v = document.documentElement.clientWidth;
-      document.documentElement.style.zoom = v < ANCHO ? (v / ANCHO) : '';
+      document.documentElement.style.zoom = v < MINIMO ? (v / MINIMO) : '';
     }
     encajar();
     addEventListener('resize', encajar);
@@ -186,6 +199,32 @@
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
 
+    /* ---------- mega-menu ----------
+       Se abre al pasar el cursor, sin JavaScript: un menu de navegacion que
+       depende de un script se queda muerto si el script falla, y este es el
+       camino principal al catalogo. El panel se ancla al ancho de la cabecera
+       (por eso el elemento lleva position:static y la cabecera position:relative)
+       y sigue abierto mientras el cursor este sobre el, para poder bajar a
+       elegir sin que se cierre a mitad de camino. */
+    .nav-item { position:static; }
+    .mega {
+      position:absolute; left:0; right:0; top:100%;
+      background:#040F09; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      box-shadow:0 26px 52px rgba(0,0,0,0.6);
+      opacity:0; visibility:hidden; transform:translateY(-8px); pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease, visibility .2s;
+      z-index:40; text-align:left;
+    }
+    .nav-item:hover .mega, .nav-item:focus-within .mega {
+      opacity:1; visibility:visible; transform:none; pointer-events:auto;
+    }
+    .nav-item:hover > a.lnk { color:var(--text-hi); }
+    .mega-col a { display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:9px 0; font-size:14px; color:var(--text-link); text-decoration:none;
+      border-bottom:1px solid rgba(26,38,32,0.7); transition:color .18s ease, padding-left .18s ease; }
+    .mega-col a:hover { color:var(--text-hi); padding-left:6px; }
+    .mega-col a span.n { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--text-faintest); }
+
     .lnk { color:var(--text-link); transition:color .2s ease; }
     .lnk:hover { color:var(--text-hi); }
     .ico { width:38px; height:38px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-raised); transition:border-color .25s ease, background .25s ease; }
@@ -216,10 +255,76 @@
         <span class="wordmark" style="font-size:23px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
       </a>
       <nav style="display:flex; align-items:center; gap:30px; font-size:14px;">
-        <a class="lnk" href="mascaras.html" style="display:inline-flex; align-items:center; text-decoration:none; color:#F5FAF7;">Catálogo</a>
-        <a class="lnk" href="looks.html" style="display:inline-flex; align-items:center; text-decoration:none;">Colecciones</a>
-        <a class="lnk" href="parejas.html" style="display:inline-flex; align-items:center; text-decoration:none;">Parejas</a>
-        <a class="lnk" href="historias.html" style="display:inline-flex; align-items:center; text-decoration:none;">Historias</a>
+        <div class="nav-item">
+          <a class="lnk" href="mascaras.html" style="display:inline-flex; align-items:center; text-decoration:none; color:#F5FAF7;">Catálogo<svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="margin-left:5px; opacity:.65;"><path d="M6 9.5l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+        <div class="mega">
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1.1fr; gap:52px; padding:34px 64px 30px 64px; max-width:1920px; margin:0 auto;">
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Mascaras &middot; 41</div>
+              <a href="mascaras.html">De goma <span class="n">28</span></a>
+              <a href="mascaras.html">De pl&aacute;stico <span class="n">13</span></a>
+              <a href="coleccion-payaso.html">Payaso siniestro <span class="n">7</span></a>
+              <a href="coleccion-cazador.html">Cazador enmascarado <span class="n">5</span></a>
+            </div>
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Disfraces &middot; 58</div>
+              <a href="disfraces.html">Ver todos <span class="n">58</span></a>
+              <a href="coleccion-glamour.html">Glamour adulto <span class="n">5</span></a>
+              <a href="coleccion-hadas.html">Cuentos de hadas <span class="n">4</span></a>
+              <a href="parejas.html">En pareja <span class="n">9</span></a>
+            </div>
+            <div>
+              <div class="kicker" style="font-size:10px; color:var(--text-faintest); margin-bottom:14px;">Del cat&aacute;logo</div>
+              <a href="producto.html" style="display:flex; gap:16px; align-items:center; text-decoration:none; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:14px;">
+                <div class="pbg" style="width:78px; height:92px; border-radius:8px; flex-shrink:0;"><img src="mascara-goma-17-michael-myers.webp" height="78" alt="" style="height:78px; width:auto; display:block;"></div>
+                <div style="flex-grow:1;">
+                  <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);">Michael Myers</div>
+                  <div class="mono" style="font-size:11px; color:var(--text-faint); margin-top:6px;">GOMA</div>
+                  <div class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi); margin-top:8px;">S/130</div>
+                </div>
+              </a>
+              <a href="catalogo.html" class="btn-p" style="display:flex; align-items:center; justify-content:center; gap:9px; margin-top:14px; padding:13px; font-size:13.5px; text-decoration:none;">Ver los 99 productos <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h13M12.5 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="nav-item">
+          <a class="lnk" href="looks.html" style="display:inline-flex; align-items:center; text-decoration:none;">Colecciones<svg width="10" height="10" viewBox="0 0 24 24" fill="none" style="margin-left:5px; opacity:.65;"><path d="M6 9.5l6 6 6-6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+
+        <div class="mega">
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1.1fr; gap:52px; padding:34px 64px 30px 64px; max-width:1920px; margin:0 auto;">
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Arquetipos</div>
+              <a href="coleccion-payaso.html">Payaso siniestro <span class="n">7</span></a>
+              <a href="coleccion-cazador.html">Cazador enmascarado <span class="n">5</span></a>
+              <a href="coleccion-glamour.html">Glamour adulto <span class="n">5</span></a>
+              <a href="coleccion-hadas.html">Cuentos de hadas <span class="n">4</span></a>
+            </div>
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">C&oacute;mo verlo</div>
+              <a href="looks.html">Los cuatro arquetipos</a>
+              <a href="parejas.html">Parejas <span class="n">9</span></a>
+              <a href="historias.html">Historias <span class="n">12</span></a>
+              <a href="nosotros.html">C&oacute;mo trabajamos</a>
+            </div>
+            <div>
+              <div class="kicker" style="font-size:10px; color:var(--text-faintest); margin-bottom:14px;">Arquetipo destacado</div>
+              <a href="coleccion-payaso.html" style="display:block; position:relative; height:158px; border-radius:12px; overflow:hidden; text-decoration:none; background:var(--photo-shadow);">
+                <img src="payaso-siniestro-wide.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                <span style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.92), transparent 62%);"></span>
+                <span class="dsp" style="position:absolute; left:16px; bottom:14px; font-weight:700; font-size:20px; color:var(--text-hi);">Payaso siniestro</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="nav-item">
+          <a class="lnk" href="parejas.html" style="display:inline-flex; align-items:center; text-decoration:none;">Parejas</a>
+        </div>
+        <div class="nav-item">
+          <a class="lnk" href="historias.html" style="display:inline-flex; align-items:center; text-decoration:none;">Historias</a>
+        </div>
       </nav>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">

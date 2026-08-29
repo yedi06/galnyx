@@ -20,13 +20,23 @@
   <style>
     html { background:#020A06; }
     body { min-height:100vh; }
-    /* el lienzo de ancho fijo, centrado */
-    body > x-dc > div:first-of-type { margin-left:auto; margin-right:auto; }
     a { color:inherit; }
+
+    /* El lienzo se dibujó a 1440 px, pero servirlo así deja la página como una
+       isla con fondo vacío a los lados -- que es exactamente lo que delata una
+       maqueta. Aquí se suelta a ancho completo: las rejillas internas ya son
+       fluidas (repeat(n, minmax(0,1fr))) y los márgenes van en padding, así que
+       estirar el contenedor reparte el espacio en vez de dejarlo muerto.
+       El tope de 1920 evita que en un monitor ultrapanorámico las tarjetas
+       crezcan hasta perder proporción. Por debajo de 1180 el envoltorio vuelve
+       a escalar, porque ahí las rejillas de 4 columnas ya no respiran. */
+    body > x-dc > div[style*="width:1440px"] { width:100% !important; max-width:1920px; margin:0 auto; }
+
   </style>
   <script>
   (function () {
     var ANCHO = 1440;
+    var MINIMO = 1180;
     var MOVIL = null;
     /* A un teléfono se le manda la versión de 390 px si existe. Se comprueba
        una vez, antes de pintar, y solo hacia abajo: nunca devuelve al de
@@ -35,9 +45,12 @@
       location.replace(MOVIL + location.search + location.hash);
       return;
     }
+    /* Entre MINIMO y el tope, el diseño es fluido y no hace falta tocar nada.
+       Por debajo de MINIMO se escala para que entre completo en vez de dejar
+       barra horizontal. */
     function encajar() {
       var v = document.documentElement.clientWidth;
-      document.documentElement.style.zoom = v < ANCHO ? (v / ANCHO) : '';
+      document.documentElement.style.zoom = v < MINIMO ? (v / MINIMO) : '';
     }
     encajar();
     addEventListener('resize', encajar);
@@ -185,6 +198,32 @@
     .pbg > img { position:relative; z-index:2; }
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+
+    /* ---------- mega-menu ----------
+       Se abre al pasar el cursor, sin JavaScript: un menu de navegacion que
+       depende de un script se queda muerto si el script falla, y este es el
+       camino principal al catalogo. El panel se ancla al ancho de la cabecera
+       (por eso el elemento lleva position:static y la cabecera position:relative)
+       y sigue abierto mientras el cursor este sobre el, para poder bajar a
+       elegir sin que se cierre a mitad de camino. */
+    .nav-item { position:static; }
+    .mega {
+      position:absolute; left:0; right:0; top:100%;
+      background:#040F09; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      box-shadow:0 26px 52px rgba(0,0,0,0.6);
+      opacity:0; visibility:hidden; transform:translateY(-8px); pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease, visibility .2s;
+      z-index:40; text-align:left;
+    }
+    .nav-item:hover .mega, .nav-item:focus-within .mega {
+      opacity:1; visibility:visible; transform:none; pointer-events:auto;
+    }
+    .nav-item:hover > a.lnk { color:var(--text-hi); }
+    .mega-col a { display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:9px 0; font-size:14px; color:var(--text-link); text-decoration:none;
+      border-bottom:1px solid rgba(26,38,32,0.7); transition:color .18s ease, padding-left .18s ease; }
+    .mega-col a:hover { color:var(--text-hi); padding-left:6px; }
+    .mega-col a span.n { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--text-faintest); }
 
     .lnk { color:var(--text-link); transition:color .2s ease; }
     .lnk:hover { color:var(--text-hi); }

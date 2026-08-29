@@ -148,6 +148,32 @@ const CSS = `
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
 
+    /* ---------- mega-menu ----------
+       Se abre al pasar el cursor, sin JavaScript: un menu de navegacion que
+       depende de un script se queda muerto si el script falla, y este es el
+       camino principal al catalogo. El panel se ancla al ancho de la cabecera
+       (por eso el elemento lleva position:static y la cabecera position:relative)
+       y sigue abierto mientras el cursor este sobre el, para poder bajar a
+       elegir sin que se cierre a mitad de camino. */
+    .nav-item { position:static; }
+    .mega {
+      position:absolute; left:0; right:0; top:100%;
+      background:#040F09; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      box-shadow:0 26px 52px rgba(0,0,0,0.6);
+      opacity:0; visibility:hidden; transform:translateY(-8px); pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease, visibility .2s;
+      z-index:40; text-align:left;
+    }
+    .nav-item:hover .mega, .nav-item:focus-within .mega {
+      opacity:1; visibility:visible; transform:none; pointer-events:auto;
+    }
+    .nav-item:hover > a.lnk { color:var(--text-hi); }
+    .mega-col a { display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:9px 0; font-size:14px; color:var(--text-link); text-decoration:none;
+      border-bottom:1px solid rgba(26,38,32,0.7); transition:color .18s ease, padding-left .18s ease; }
+    .mega-col a:hover { color:var(--text-hi); padding-left:6px; }
+    .mega-col a span.n { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--text-faintest); }
+
     .lnk { color:var(--text-link); transition:color .2s ease; }
     .lnk:hover { color:var(--text-hi); }
     .ico { width:38px; height:38px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-raised); transition:border-color .25s ease, background .25s ease; }
@@ -275,24 +301,91 @@ const R = (n) => (RUTAS[n] ? RUTAS[n].url : 'index.html');
 const WHATSAPP = 'https://wa.me/51904817248';
 
 const NAVLINKS = [
-  ['Catálogo', 'catalogo', R('Mascaras')],
-  ['Colecciones', 'colecciones', R('Looks')],
+  ['Catálogo', 'catalogo', R('Mascaras'), () => megaCatalogo()],
+  ['Colecciones', 'colecciones', R('Looks'), () => megaColecciones()],
   ['Parejas', 'parejas', R('Pareja')],
   ['Historias', 'historias', R('Historias')],
 ];
+
+/* Contenido de los dos desgloses. Los conteos salen del inventario, no estan
+   escritos a mano: si manana entran diez mascaras nuevas, el menu lo dice solo. */
+const megaCatalogo = () => `
+        <div class="mega">
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1.1fr; gap:52px; padding:34px 64px 30px 64px; max-width:1920px; margin:0 auto;">
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Mascaras &middot; ${catalogo(CAT_GOMA).length + catalogo(CAT_PLASTICO).length}</div>
+              <a href="${R('Mascaras')}">De goma <span class="n">${catalogo(CAT_GOMA).length}</span></a>
+              <a href="${R('Mascaras')}">De pl&aacute;stico <span class="n">${catalogo(CAT_PLASTICO).length}</span></a>
+              <a href="${R('Coleccion')}">Payaso siniestro <span class="n">7</span></a>
+              <a href="${R('ColeccionCazador')}">Cazador enmascarado <span class="n">5</span></a>
+            </div>
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Disfraces &middot; ${catalogo(CAT_DISFRACES).length}</div>
+              <a href="${R('Disfraces')}">Ver todos <span class="n">${catalogo(CAT_DISFRACES).length}</span></a>
+              <a href="${R('ColeccionGlamour')}">Glamour adulto <span class="n">5</span></a>
+              <a href="${R('ColeccionHadas')}">Cuentos de hadas <span class="n">4</span></a>
+              <a href="${R('Pareja')}">En pareja <span class="n">9</span></a>
+            </div>
+            <div>
+              <div class="kicker" style="font-size:10px; color:var(--text-faintest); margin-bottom:14px;">Del cat&aacute;logo</div>
+              <a href="${R('Producto')}" style="display:flex; gap:16px; align-items:center; text-decoration:none; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:14px;">
+                <div class="pbg" style="width:78px; height:92px; border-radius:8px; flex-shrink:0;">${foto('mascara-goma-17-michael-myers', 78)}</div>
+                <div style="flex-grow:1;">
+                  <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);">${esc(_porSlug.get('mascara-goma-17-michael-myers').nombre)}</div>
+                  <div class="mono" style="font-size:11px; color:var(--text-faint); margin-top:6px;">GOMA</div>
+                  <div class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi); margin-top:8px;">${esc(_porSlug.get('mascara-goma-17-michael-myers').precio)}</div>
+                </div>
+              </a>
+              <a href="${R('Catalogo')}" class="btn-p" style="display:flex; align-items:center; justify-content:center; gap:9px; margin-top:14px; padding:13px; font-size:13.5px; text-decoration:none;">Ver los ${_inv.listos.length} productos ${ICONS.arrow}</a>
+            </div>
+          </div>
+        </div>`;
+
+const megaColecciones = () => `
+        <div class="mega">
+          <div style="display:grid; grid-template-columns: 1fr 1fr 1.1fr; gap:52px; padding:34px 64px 30px 64px; max-width:1920px; margin:0 auto;">
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Arquetipos</div>
+              <a href="${R('Coleccion')}">Payaso siniestro <span class="n">7</span></a>
+              <a href="${R('ColeccionCazador')}">Cazador enmascarado <span class="n">5</span></a>
+              <a href="${R('ColeccionGlamour')}">Glamour adulto <span class="n">5</span></a>
+              <a href="${R('ColeccionHadas')}">Cuentos de hadas <span class="n">4</span></a>
+            </div>
+            <div class="mega-col">
+              <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">C&oacute;mo verlo</div>
+              <a href="${R('Looks')}">Los cuatro arquetipos</a>
+              <a href="${R('Pareja')}">Parejas <span class="n">9</span></a>
+              <a href="${R('Historias')}">Historias <span class="n">${Object.keys(_historias).length}</span></a>
+              <a href="${R('Nosotros')}">C&oacute;mo trabajamos</a>
+            </div>
+            <div>
+              <div class="kicker" style="font-size:10px; color:var(--text-faintest); margin-bottom:14px;">Arquetipo destacado</div>
+              <a href="${R('Coleccion')}" style="display:block; position:relative; height:158px; border-radius:12px; overflow:hidden; text-decoration:none; background:var(--photo-shadow);">
+                <img src="${arte('payaso-siniestro', 'wide')}" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;">
+                <span style="position:absolute; inset:0; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.92), transparent 62%);"></span>
+                <span class="dsp" style="position:absolute; left:16px; bottom:14px; font-weight:700; font-size:20px; color:var(--text-hi);">Payaso siniestro</span>
+              </a>
+            </div>
+          </div>
+        </div>`;
+
 const header = (active, cart, sticky) => `
   <div style="background:#06150F; border-bottom:1px solid #14211B; padding:11px 0; text-align:center;">
     <span class="mono" style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#7C8B83;">Envío 24–48 h en Lima · Cambios en 7 días · Pedidos hasta el 28 de octubre</span>
   </div>
 
-  <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 64px; border-bottom:1px solid #14211B;${sticky ? ' position:sticky; top:0; z-index:20; background:rgba(2,10,6,0.94);' : ' background:#020A06;'}">
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 64px; border-bottom:1px solid #14211B; ${sticky ? 'position:sticky; top:0; z-index:20; background:rgba(2,10,6,0.94);' : 'position:relative; background:#020A06;'}">
     <div style="display:flex; align-items:center; gap:44px;">
       <a href="${R('Main')}" style="display:flex; align-items:center; gap:11px; text-decoration:none;">
         ${logo(30)}
         <span class="wordmark" style="font-size:23px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
       </a>
       <nav style="display:flex; align-items:center; gap:30px; font-size:14px;">
-${NAVLINKS.map(([label, id, href]) => '        <a class="lnk" href="' + href + '" style="display:inline-flex; align-items:center; text-decoration:none;' + (active === id ? ' color:#F5FAF7;' : '') + '">' + label + '</a>').join('\n')}
+${NAVLINKS.map(([label, id, href, mega]) =>
+  '        <div class="nav-item">\n' +
+  '          <a class="lnk" href="' + href + '" style="display:inline-flex; align-items:center; text-decoration:none;' + (active === id ? ' color:#F5FAF7;' : '') + '">' + label + (mega ? ICONS.chev : '') + '</a>' +
+  (mega ? '\n' + mega() : '') + '\n' +
+  '        </div>').join('\n')}
       </nav>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
@@ -496,13 +589,26 @@ const shell = (body, script, meta) => `<!doctype html>
   <style>
     html { background:#020A06; }
     body { min-height:100vh; }
-    /* el lienzo de ancho fijo, centrado */
-    body > x-dc > div:first-of-type { margin-left:auto; margin-right:auto; }
     a { color:inherit; }
+${meta.ancho === 390 ? `
+    /* Página de celular: 390 px centrados sobre el fondo de marca. */
+    body > x-dc > div:first-of-type { width:390px; margin:0 auto; }
+` : `
+    /* El lienzo se dibujó a 1440 px, pero servirlo así deja la página como una
+       isla con fondo vacío a los lados -- que es exactamente lo que delata una
+       maqueta. Aquí se suelta a ancho completo: las rejillas internas ya son
+       fluidas (repeat(n, minmax(0,1fr))) y los márgenes van en padding, así que
+       estirar el contenedor reparte el espacio en vez de dejarlo muerto.
+       El tope de 1920 evita que en un monitor ultrapanorámico las tarjetas
+       crezcan hasta perder proporción. Por debajo de 1180 el envoltorio vuelve
+       a escalar, porque ahí las rejillas de 4 columnas ya no respiran. */
+    body > x-dc > div[style*="width:1440px"] { width:100% !important; max-width:1920px; margin:0 auto; }
+`}
   </style>
   <script>
   (function () {
     var ANCHO = ${meta.ancho};
+    var MINIMO = ${meta.ancho === 390 ? 390 : 1180};
     var MOVIL = ${meta.movil ? JSON.stringify(meta.movil) : 'null'};
     /* A un teléfono se le manda la versión de 390 px si existe. Se comprueba
        una vez, antes de pintar, y solo hacia abajo: nunca devuelve al de
@@ -511,9 +617,12 @@ const shell = (body, script, meta) => `<!doctype html>
       location.replace(MOVIL + location.search + location.hash);
       return;
     }
+    /* Entre MINIMO y el tope, el diseño es fluido y no hace falta tocar nada.
+       Por debajo de MINIMO se escala para que entre completo en vez de dejar
+       barra horizontal. */
     function encajar() {
       var v = document.documentElement.clientWidth;
-      document.documentElement.style.zoom = v < ANCHO ? (v / ANCHO) : '';
+      document.documentElement.style.zoom = v < MINIMO ? (v / MINIMO) : '';
     }
     encajar();
     addEventListener('resize', encajar);

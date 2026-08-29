@@ -20,13 +20,16 @@
   <style>
     html { background:#020A06; }
     body { min-height:100vh; }
-    /* el lienzo de ancho fijo, centrado */
-    body > x-dc > div:first-of-type { margin-left:auto; margin-right:auto; }
     a { color:inherit; }
+
+    /* Página de celular: 390 px centrados sobre el fondo de marca. */
+    body > x-dc > div:first-of-type { width:390px; margin:0 auto; }
+
   </style>
   <script>
   (function () {
     var ANCHO = 390;
+    var MINIMO = 390;
     var MOVIL = null;
     /* A un teléfono se le manda la versión de 390 px si existe. Se comprueba
        una vez, antes de pintar, y solo hacia abajo: nunca devuelve al de
@@ -35,9 +38,12 @@
       location.replace(MOVIL + location.search + location.hash);
       return;
     }
+    /* Entre MINIMO y el tope, el diseño es fluido y no hace falta tocar nada.
+       Por debajo de MINIMO se escala para que entre completo en vez de dejar
+       barra horizontal. */
     function encajar() {
       var v = document.documentElement.clientWidth;
-      document.documentElement.style.zoom = v < ANCHO ? (v / ANCHO) : '';
+      document.documentElement.style.zoom = v < MINIMO ? (v / MINIMO) : '';
     }
     encajar();
     addEventListener('resize', encajar);
@@ -185,6 +191,32 @@
     .pbg > img { position:relative; z-index:2; }
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
     .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+
+    /* ---------- mega-menu ----------
+       Se abre al pasar el cursor, sin JavaScript: un menu de navegacion que
+       depende de un script se queda muerto si el script falla, y este es el
+       camino principal al catalogo. El panel se ancla al ancho de la cabecera
+       (por eso el elemento lleva position:static y la cabecera position:relative)
+       y sigue abierto mientras el cursor este sobre el, para poder bajar a
+       elegir sin que se cierre a mitad de camino. */
+    .nav-item { position:static; }
+    .mega {
+      position:absolute; left:0; right:0; top:100%;
+      background:#040F09; border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+      box-shadow:0 26px 52px rgba(0,0,0,0.6);
+      opacity:0; visibility:hidden; transform:translateY(-8px); pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease, visibility .2s;
+      z-index:40; text-align:left;
+    }
+    .nav-item:hover .mega, .nav-item:focus-within .mega {
+      opacity:1; visibility:visible; transform:none; pointer-events:auto;
+    }
+    .nav-item:hover > a.lnk { color:var(--text-hi); }
+    .mega-col a { display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:9px 0; font-size:14px; color:var(--text-link); text-decoration:none;
+      border-bottom:1px solid rgba(26,38,32,0.7); transition:color .18s ease, padding-left .18s ease; }
+    .mega-col a:hover { color:var(--text-hi); padding-left:6px; }
+    .mega-col a span.n { font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--text-faintest); }
 
     .lnk { color:var(--text-link); transition:color .2s ease; }
     .lnk:hover { color:var(--text-hi); }
