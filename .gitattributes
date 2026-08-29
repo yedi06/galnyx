@@ -1,0 +1,8 @@
+# Normaliza saltos de línea solo en texto; los binarios se marcan explícitos
+# para que Git no intente convertirlos y los corrompa.
+* text=auto eol=lf
+*.webp binary
+*.png  binary
+*.mp4  binary
+*.woff2 binary
+*.svg  text eol=lf
