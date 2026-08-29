@@ -1,0 +1,8 @@
+/* Fuentes del índice (index.html). Las páginas .dc.html traen su propio bloque
+   @font-face incrustado por el build; este archivo es solo para la portada del
+   sitio, que no pasa por build.mjs. Apunta a los mismos woff2 hermanos. */
+@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;src:url("InstrumentSerif-Regular.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;src:url("InstrumentSerif-Italic.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Instrument Sans";font-style:normal;font-weight:400 700;src:url("InstrumentSans-Variable.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Big Shoulders Variable";font-style:normal;font-weight:100 900;src:url("BigShoulders-Variable.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:400;src:url("JetBrainsMono-Regular.woff2") format("woff2");font-display:swap}

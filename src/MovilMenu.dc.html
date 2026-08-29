@@ -1,0 +1,93 @@
+<div style="position:relative; width:390px; height:844px; background:var(--bg); color:var(--text); overflow:hidden;">
+
+  <!-- ============ página detrás ============ -->
+  <div style="filter:blur(2px) saturate(0.7); opacity:0.5;">
+<!--@MHEADER:2@-->
+    <div class="pbg" style="height:500px;">
+      <!--@SCENE:mansion@-->
+      <!--@PHOTO:duo:380@-->
+    </div>
+  </div>
+  <div style="position:absolute; inset:0; background:rgba(var(--bg-rgb),0.88);"></div>
+
+  <!-- ============ panel de menú ============ -->
+  <div style="position:absolute; inset:0; display:flex; flex-direction:column;">
+
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:0 8px 0 20px; height:56px; border-bottom:1px solid var(--card); background:#040F09;">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <!--@LOGO:24@-->
+        <span class="wordmark" style="font-size:19px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
+      </div>
+      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="var(--text)" stroke-width="1.9" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <div style="flex-grow:1; overflow:hidden; padding:8px 0 0 0;">
+
+      <!-- Catálogo, abierto -->
+      <div style="padding:0 20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; height:52px;">
+          <span class="kicker" style="font-size:17px; color:var(--text-hi);">Catálogo</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="transform:rotate(180deg);"><path d="M6 9.5l6 6 6-6" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:2px 14px; padding:4px 0 14px 0;">
+          <span style="font-size:14.5px; color:var(--text-link); height:40px; display:flex; align-items:center;">Máscaras</span>
+          <span style="font-size:14.5px; color:var(--text-link); height:40px; display:flex; align-items:center;">Disfraces</span>
+        </div>
+        <div style="display:flex; gap:8px; padding-bottom:16px;">
+          <span class="chip" style="padding:9px 16px; font-size:13px; border-color:var(--accent); background:rgba(var(--accent-rgb),0.09); color:var(--text-hi);">Unisex</span>
+          <span class="chip" style="padding:9px 16px; font-size:13px;">Hombre</span>
+          <span class="chip" style="padding:9px 16px; font-size:13px;">Mujer</span>
+        </div>
+      </div>
+
+      <div style="height:1px; background:var(--card); margin:0 20px;"></div>
+
+      <div style="padding:0 20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; height:56px;">
+          <span class="kicker" style="font-size:17px; color:var(--text);">Colecciones</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 9.5l6 6 6-6" stroke="var(--text-faint)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div style="height:1px; background:var(--card); margin:0 20px;"></div>
+
+      <div style="padding:0 20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; height:56px;">
+          <span class="kicker" style="font-size:17px; color:var(--text);">Arquetipos</span>
+          <span class="mono" style="font-size:10px; color:var(--accent); border:1px solid var(--accent-deep); border-radius:4px; padding:3px 8px;">4</span>
+        </div>
+      </div>
+      <div style="height:1px; background:var(--card); margin:0 20px;"></div>
+
+      <div style="padding:0 20px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; height:56px;">
+          <span class="kicker" style="font-size:17px; color:var(--text);">Historias</span>
+        </div>
+      </div>
+      <div style="height:1px; background:var(--card); margin:0 20px 20px 20px;"></div>
+
+      <!-- destacado dentro del menú -->
+      <div style="padding:0 20px;">
+        <div style="display:flex; gap:14px; align-items:center; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:12px;">
+          <div class="pbg" style="width:74px; height:88px; border-radius:8px; flex-shrink:0;"><!--@IMG:mascara-goma-24-payaso-robber:80@--></div>
+          <div style="flex-grow:1;">
+            <div class="kicker" style="font-size:9.5px; color:var(--accent); margin-bottom:6px;">Del catálogo</div>
+            <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);"><!--@P:mascara-goma-24-payaso-robber:nombre@--></div>
+            <div class="mono" style="font-size:11px; color:var(--text-muted); margin-top:5px;"><!--@P:mascara-goma-24-payaso-robber:cat@--> · <!--@P:mascara-goma-24-payaso-robber:precio@--></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- acciones rápidas -->
+    <div style="border-top:1px solid var(--card); background:#040F09; padding:14px 20px 20px 20px;">
+      <div style="display:flex; align-items:center; gap:12px; background:var(--bg-raised); border:1px solid var(--border); border-radius:10px; padding:13px 14px; margin-bottom:12px;">
+        <!--@ICON:search@-->
+        <span style="font-size:14px; color:var(--text-faintest);">Buscar máscara, traje o efecto</span>
+      </div>
+      <div class="btn-p" style="padding:15px; font-size:14.5px; display:flex; align-items:center; justify-content:center; gap:10px;"><!--@ICON:wa@-->Escribirnos por WhatsApp</div>
+      <div class="mono" style="font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-faintest); text-align:center; margin-top:14px;">Envío 24–48 h · Cambios en 7 días</div>
+    </div>
+  </div>
+</div>

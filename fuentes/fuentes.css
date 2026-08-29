@@ -1,0 +1,52 @@
+/* Sistema tipográfico GALNYX — @font-face listo para usar.
+   Coloca este archivo y los .woff2 en la misma carpeta que tu CSS principal,
+   o ajusta las rutas de url(...) según donde los guardes en tu proyecto. */
+
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./InstrumentSerif-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  src: url("./InstrumentSerif-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url("./InstrumentSans-Variable.woff2") format("woff2-variations"), url("./InstrumentSans-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("./BigShoulders-Variable.woff2") format("woff2-variations"), url("./BigShoulders-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./JetBrainsMono-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./JetBrainsMono-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* Roles de uso en GALNYX:
+   - Instrument Serif (+ itálica): titulares grandes, nombres de producto — el toque editorial/lujo.
+   - Big Shoulders (variable, usa font-stretch/font-variation-settings "wdth"): etiquetas, kickers, categorías en mayúsculas condensadas.
+   - Instrument Sans: cuerpo de texto, botones, navegación — se queda neutra a propósito.
+   - JetBrains Mono: precios, SKU, datos de stock — el toque "sistema/tecnológico". */

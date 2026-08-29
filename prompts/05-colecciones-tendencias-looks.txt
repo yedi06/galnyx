@@ -1,0 +1,412 @@
+GALNYX — PROMPTS PARA IA DE IMÁGENES: COLECCIONES, TENDENCIAS Y LOOKS
+====================================================================================
+VERSIÓN 2 — REHECHA DESDE CERO. La v1 fallaba porque las 13 imágenes
+compartían la misma puesta en escena (cuarto vacío genérico, misma pose
+de pie con manos a los lados, misma luz lateral) — eso es lo que se ve
+barato y repetitivo, no el diseño de cada máscara. Esta versión le da a
+CADA imagen su propio set/locación, su propia cámara/ángulo y su propia
+pose, como si fuera una sesión de fotos real con dirección de arte
+distinta en cada toma — así es como se ve una producción de verdad, no
+una grilla de IA.
+
+Cómo usar este archivo: pega UN prompt a la vez, espera el resultado, y
+recién ahí pasa al siguiente. No pegues varios juntos en un solo
+mensaje.
+
+
+REGLA DE CHATS — UN CHAT NUEVO POR CADA IMAGEN DE COLECCIÓN/TENDENCIA
+------------------------------------------------------------------------------
+Cada imagen de abajo tiene su propio set y su propia cámara — por
+diseño, para que no se parezcan entre sí. Por eso es AÚN más importante
+que cada una vaya en un chat nuevo y vacío: si generas dos seguidas en
+el mismo chat, el modelo tiende a mezclar el set/pose de la anterior con
+la nueva, y perderías justo la variedad que estamos buscando.
+
+  UN CHAT NUEVO = UNA IMAGEN NUEVA, para los prompts 1 al 9.
+
+  EXCEPCIÓN — los Looks (prompts 10 a 13): cada Look reutiliza el MISMO
+  set y la MISMA máscara que su colección hermana (el Look 10 es el
+  mismo personaje y el mismo salón de baile del prompt 1, pero de
+  cuerpo completo y con otra cámara). Para esos sí conviene seguir en
+  el chat donde aprobaste la imagen de la colección correspondiente:
+  sube esa imagen aprobada, dile "genera la versión de cuerpo completo
+  de este mismo personaje en este mismo lugar" y pega el prompt del
+  Look. Pero nunca mezcles dos arquetipos distintos en un mismo chat.
+
+Si un resultado se ve MUY elegante/de gala y pierde el toque de terror,
+o si se ve MUY gore/decayado (piel agrietada, sangre, heridas), usa
+estas frases de rescate al final del mismo prompt:
+
+  RESCATE (si sale muy "gala"): "Make it noticeably more unsettling and
+  quietly threatening — less glamorous fashion editorial, more
+  restrained horror. Keep everything else the same."
+
+  RESCATE (si sale muy gore/decayado): "The mask must stay flawless,
+  smooth and pristine — no cracks, no blood, no wounds, no decayed
+  texture. The unease comes from stillness and precision, not damage.
+  Keep everything else the same."
+
+  RESCATE (si se parece a una imagen anterior de este archivo): "This
+  must be a completely different location, camera angle and pose from
+  anything generated before — do not reuse the same room, the same
+  standing pose, or the same lighting setup. Generate a fresh, original
+  scene from scratch."
+
+
+ANCLA DE ESTILO GALNYX (lo único que se repite en las 13 — todo lo
+demás, cambia a propósito de una imagen a otra):
+  - Fotografía realista, no ilustración ni 3D render.
+  - Máscaras de látex/resina impecables, artesanales, sin daño ni gore.
+  - Paleta de color: negro casi puro (#020A06), superficie oscura
+    (#06150F), y un acento de luz verde fósforo (#56BD78) — pero la
+    FUENTE narrativa de esa luz cambia en cada imagen (una ventana rota,
+    un tubo de luz fría, la luna a través de un vidrio, etc.), nunca es
+    el mismo "spot light" genérico repetido.
+  - Espacio negativo reservado para titular.
+  - Nunca: texto, marca de agua, logos, ni parecido a ningún personaje
+    o actor existente — todo diseño original.
+  - CADA imagen tiene su propio set, su propia cámara (ángulo, lente,
+    distancia) y su propia pose — nunca reutilices el mismo cuarto
+    vacío ni la misma pose de pie con las manos a los lados.
+
+
+====================================================================================
+PARTE 1 — COLECCIONES "INSPIRADO EN EL CINE DE TERROR" (6 imágenes,
+banner horizontal para cada página de colección, 16:9)
+====================================================================================
+
+1. PAYASO SINIESTRO — set: salón de baile abandonado
+------------------------------------------------------------
+Generate this as a completely original scene — do not reuse any
+generic empty room. SET: a decaying grand ballroom/theater at night —
+tall arched windows (some glass broken), ornate crown molding
+crumbling at the edges, a cracked black-and-white checkerboard marble
+floor, an overturned gilded chair in the middle distance, dust visible
+floating in the air. POSE: the figure is caught mid-stride, walking
+toward camera along the checkerboard floor at a three-quarter angle,
+one hand trailing along the back of the overturned gilded chair as he
+passes it — not a static standing pose. CHARACTER: a pristine
+hyperrealistic latex clown mask, flawlessly smooth (expensive
+theatrical quality, no damage or decay), pale white face, a closed
+painted smile that stays calm rather than exaggerated, small dark eye
+openings; a fitted black suit with a single muted-color detail (a loose
+bow), tailored and intact. CAMERA: low angle, close to the floor,
+looking slightly upward at the figure — wide-ish 35mm feel, dramatic
+scale. LIGHT: a single hard shaft of moonlight cutting diagonally
+through one broken window across the checkerboard floor, everything
+else in deep shadow, a faint phosphor-green tint (#56BD78) bleeding in
+from an unseen source behind the figure as rim light. Color grade:
+near-black shadows (#020A06), dark surface tones (#06150F), subtle film
+grain, 4K quality, horizontal 16:9 composition with empty negative
+space in the upper third for a headline. No text, no watermark, no
+logos, no brand names, no likeness of any existing character or actor,
+no blood, no gore, no visible wounds or decay.
+
+2. MUÑECA POSEÍDA — set: ático polvoriento
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse the ballroom or any previous room. SET: a dusty attic
+playroom at night — sheet-covered furniture shapes in the background,
+a single old wooden rocking horse, a round cracked window letting in
+pale moonlight, cobwebs in the corners, loose floorboards. POSE: the
+figure sits directly on the wooden floor (not a chair), legs folded to
+one side, head tilted unnaturally far, one hand raised holding a small
+cracked porcelain toy up toward the light — not the stiff seated-on-a-
+chair pose. CHARACTER: a pristine hyperrealistic doll-style latex/resin
+mask, porcelain-smooth finish (no cracks, no chips, no decay), a
+delicate painted face with rosy cheeks, wide unblinking eye openings, a
+small closed mouth; neat symmetrical pigtails; a dark vintage-inspired
+dress with a subtle lace collar, fabric intact, muted deep tones.
+CAMERA: high angle, looking down at her from roughly 45 degrees above,
+medium-close framing — the elevated viewpoint itself feels voyeuristic
+and unsettling. LIGHT: pale cold moonlight pooling through the round
+window directly onto her, a faint phosphor-green glow (#56BD78)
+reflecting off the dusty floorboards around her. Color grade: near-
+black shadows (#020A06), dark surface tones (#06150F), subtle film
+grain, 4K quality, horizontal 16:9 composition with empty negative
+space on one side for a headline. No text, no watermark, no logos, no
+brand names, no likeness of any existing character, no blood, no gore,
+no visible wounds or decay.
+
+3. CAZADOR ENMASCARADO — set: bosque de niebla
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose. SET: the edge of a dense pine
+forest at night, thick ground fog rolling between the trunks, a hint of
+a distant clearing behind. POSE: the figure is crouched low on one
+knee at the treeline, body turned three-quarter AWAY from camera —
+back and shoulders visible, head turned back over one shoulder toward
+camera as if just noticed — emerging partially from the fog bank, not
+standing upright and facing forward. CHARACTER: a pristine
+hyperrealistic tactical-style hunter mask in matte dark resin, smooth
+and flawless, angular minimal features, narrow eye slits; a fitted dark
+hooded jacket, collar raised, no weapons or props in frame. CAMERA:
+telephoto compression (85mm feel), shallow depth of field, the trees
+behind soft and blurred, fog diffusing the background into abstraction.
+LIGHT: cold pale moonlight raking through the tree canopy, a thin
+phosphor-green glow (#56BD78) catching the fog itself rather than the
+figure directly. Color grade: near-black shadows (#020A06), dark
+surface tones (#06150F), subtle film grain, 4K quality, horizontal
+16:9 composition with empty negative space on one side for a headline.
+No text, no watermark, no logos, no brand names, no likeness of any
+existing character, no blood, no gore, no weapons, no visible wounds or
+decay.
+
+4. ESPECTRO VICTORIANO — set: escalera de mansión en ruinas
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose. SET: the grand staircase of a
+decaying Victorian mansion — peeling floral wallpaper, a large cracked
+freestanding mirror on the stair landing, a broken chandelier hanging
+overhead. POSE: the figure stands at the top of the staircase, one
+hand resting on the banister, her reflection faintly visible and
+slightly warped in the cracked mirror beside her — a double-image
+effect, not a plain frontal stance. CHARACTER: a pristine
+hyperrealistic pale porcelain-textured mask, flawless and smooth,
+serene expressionless features, a sheer dark veil partially covering
+it; a high-collared Victorian-inspired dark dress, pristine antique
+lace detail. CAMERA: low angle from the base of the staircase looking
+up, the converging lines of the banister and steps leading the eye to
+the figure — vertical-leaning composition. LIGHT: the broken chandelier
+casts fractured pools of cold light down the stairwell, a faint
+phosphor-green glow (#56BD78) caught in the cracked mirror's reflection.
+Color grade: near-black shadows (#020A06), dark surface tones
+(#06150F), subtle film grain, 4K quality, horizontal 16:9 composition
+with empty negative space on one side for a headline. No text, no
+watermark, no logos, no brand names, no likeness of any existing
+character, no blood, no gore, no visible wounds or decay.
+
+5. CRIATURA DE LABORATORIO — set: laboratorio/morgue abandonado
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose, and do not reuse the face or
+mask from any previous image. SET: an abandoned tiled laboratory or
+morgue — cracked white tile walls, a single hanging surgical lamp
+swaying slightly overhead, glass specimen jars soft-focus on a shelf in
+the background, a steel table. POSE: the figure sits on the edge of
+the steel table, leaning forward with elbows on knees, head lowered so
+the mask catches uplight from below — not standing upright with hands
+at the sides. CHARACTER: a pristine hyperrealistic latex creature mask
+whose defining feature is a network of fine seams and stitching lines
+sculpted INTO the surface as a deliberate couture-like design detail
+(not damage, not a wound), clearly visible across cheeks and forehead —
+pale greenish-grey tone, slightly elongated features, calm closed
+expression; a fitted dark buttoned shirt, sleeves rolled neatly.
+CAMERA: eye-level close three-quarter shot, tight enough to read the
+stitching detail clearly. LIGHT: dramatic uplight from the swaying
+surgical lamp below/beside the figure instead of a flat side light, a
+phosphor-green glow (#56BD78) reflecting off the tile wall behind.
+Color grade: near-black shadows (#020A06), dark surface tones
+(#06150F), subtle film grain, 4K quality, horizontal 16:9 composition
+with empty negative space on one side for a headline. No text, no
+watermark, no logos, no brand names, no likeness of any existing
+character, no blood, no open wounds, no gore — the stitching is
+sculptural design, never a wound.
+
+6. BRUJA MODERNA — set: invernadero moderno con flores muertas
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose, and do not reuse the face or
+mask from any previous image. SET: a modern minimalist glass
+conservatory at night, filled with wilted black flowers and dead
+climbing vines, moonlight pooling through the glass panes onto a stone
+floor, condensation on the glass. POSE: the figure is caught mid-stride
+walking AWAY from camera, coat flowing behind her from the motion, head
+turned back over one shoulder toward camera — not a static frontal
+stance. CHARACTER: this must clearly read as a WITCH archetype — a
+pristine hyperrealistic latex mask with distinctly feminine, angular
+features, a strong brow, hollowed cheekbones, dark smoky shading
+sculpted into the mask around the eyes, dark sleek hair pulled back
+tightly; a sleek modern black coat with clean tailored lines. CAMERA:
+wide low angle from slightly behind and to the side, the glass frame's
+architectural lines leading through the composition. LIGHT: cold
+moonlight through the glass ceiling, a phosphor-green glow (#56BD78)
+catching the condensation on the panes. Color grade: near-black shadows
+(#020A06), dark surface tones (#06150F), subtle film grain, 4K
+quality, horizontal 16:9 composition with empty negative space on one
+side for a headline. No text, no watermark, no logos, no brand names,
+no likeness of any existing character, no blood, no gore, no visible
+wounds or decay.
+
+
+====================================================================================
+PARTE 2 — LÍNEAS DE TENDENCIAS (3 imágenes, banner horizontal para
+cada página de tendencia, 16:9)
+====================================================================================
+
+7. TENDENCIA: VINTAGE / CLÁSICO DE TERROR — set: camerino de cine antiguo
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose, and do not reuse the face or
+mask from any previous image. This must look CLEARLY different in
+photographic treatment from a modern sharp shot — unmistakable as a
+restored 1930s-40s film still. SET: an old cinema's backstage dressing
+area — heavy velvet curtains, a freestanding vanity mirror ringed with
+bare bulbs (a few burnt out), an antique dressing table. POSE: the
+figure sits in side-profile at the vanity, one gloved hand resting near
+the jaw, gazing into the mirror rather than at camera — a classic old-
+Hollywood portrait staging, waist-up, not full body standing. CHARACTER:
+a pristine hyperrealistic latex mask with a classic, timeless monster-
+movie silhouette, angular pale face, deep-set eye openings, flawless
+craftsmanship reminiscent of an old-Hollywood practical-effects mask; a
+dark tailored coat with a vintage silhouette. CAMERA: classic studio-
+portrait crop, waist-up, framed like an original vintage film still —
+not the wide environmental shots used elsewhere in this set. LIGHT:
+the bare vanity bulbs as the key light source, warm-cool mixed, low-key;
+strong visible film grain, noticeably desaturated tones (near black-
+and-white with only a faint hint of color surviving in the deep
+shadows), a soft vignette darkening the corners, faint dust and scratch
+texture like a genuinely old film print. Color grade: near-black
+shadows (#020A06), dark surface (#06150F), a directional phosphor-green
+rim light (#56BD78) kept very subtle and half-desaturated. Horizontal
+16:9 composition with empty negative space on one side for a headline.
+No text, no watermark, no logos, no brand names, no likeness of any
+existing character or film, no blood, no gore, no visible wounds or
+decay.
+
+8. TENDENCIA: MODERNO / TECH-HORROR — set: garaje subterráneo
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose. SET: an underground parking
+garage or server corridor — wet concrete floor reflecting a single
+cold light strip along the ceiling, a steam vent hissing faintly in the
+background, exposed pipes. POSE: the figure is mid-stride, dynamic, one
+leg forward as if walking briskly toward camera, coat catching motion
+at the hem — not a static standing pose — and their reflection is
+visible in the wet floor below. CHARACTER: a pristine hyperrealistic
+latex/resin mask with a sleek, minimal, almost architectural design —
+smooth geometric planes, no texture damage; a fitted technical black
+jacket with clean modern lines. CAMERA: low Dutch-tilt angle, wide
+lens, the wet-floor reflection doubling the figure in frame. LIGHT: the
+cold light strip overhead plus a phosphor-green glow (#56BD78) bouncing
+off the wet concrete, a hint of lens flare from the strip light.
+Color grade: near-black shadows (#020A06), dark surface (#06150F),
+subtle film grain, 4K quality, horizontal 16:9 composition with empty
+negative space on one side for a headline. No text, no watermark, no
+logos, no brand names, no likeness of any existing character, no
+blood, no gore, no visible wounds or decay.
+
+9. TENDENCIA: ELEGANTE / EDITORIAL — set: salón de baile pulido con silla
+   de época
+------------------------------------------------------------
+Generate this as a completely original scene, in a fresh empty chat —
+do not reuse any previous room or pose. SET: a pristine, polished
+(NOT decayed) grand ballroom — a gleaming black-and-white checkerboard
+floor, tall clean windows, a single ornate antique chair placed in the
+center. POSE: the figure sits in the ornate chair, one leg crossed,
+chin tilted down, eyes toward camera through the mask's eye openings —
+a high-fashion magazine sitting pose, not a standing figure. CHARACTER:
+a pristine hyperrealistic latex mask with a refined, almost couture
+silhouette, smooth, flawless, delicate proportions, calm closed
+expression; an elegant fitted black gown or tailored suit with a single
+sculptural detail. CAMERA: medium shot, symmetric composition centered
+on the chair, soft-hard key light from a large window just out of
+frame. LIGHT: soft daylight-moonlight hybrid through the tall windows,
+a directional phosphor-green rim light (#56BD78) used sparingly along
+one edge of the chair and figure. Color grade: near-black shadows
+(#020A06), dark surface (#06150F), subtle film grain, 4K quality,
+horizontal 16:9 composition with empty negative space on one side for
+a headline. No text, no watermark, no logos, no brand names, no
+likeness of any existing character, no blood, no gore, no visible
+wounds or decay — the most elegant of the set, but must still read as
+quietly unsettling, never purely a glamour shot.
+
+
+====================================================================================
+PARTE 3 — LOOKS DESTACADOS (4 imágenes, combo completo armado, vertical
+3:4 — mismo set y mismo personaje que su colección hermana, pero de
+cuerpo completo y con otra cámara)
+====================================================================================
+
+10. LOOK: "PAYASO SINIESTRO COMPLETO" — mismo salón de baile del prompt 1
+------------------------------------------------------------
+Generate this in the SAME chat where you approved image 1 (Payaso
+siniestro), reusing that exact character and ballroom set — upload that
+approved image first if needed. Photorealistic full-body photo, same
+decaying grand ballroom (checkerboard floor, broken arched windows,
+overturned gilded chair), same clown mask and black suit. POSE: this
+time the figure stands still and upright at a distance down the
+checkerboard hallway, small in frame relative to the architecture, so
+the entire outfit AND the grand scale of the room are both visible —
+different from the close mid-stride shot in image 1. CAMERA: wider,
+farther back, full body head to feet clearly visible, symmetric
+hallway composition. LIGHT: same shaft of moonlight through the broken
+window, phosphor-green rim light (#56BD78). Color grade: near-black
+shadows (#020A06), dark surface (#06150F), subtle film grain, 4K
+quality, vertical 3:4 composition with empty negative space at the top
+for a small label. No text, no watermark, no logos, no brand names, no
+likeness of any existing character, no blood, no gore, no visible
+wounds or decay.
+
+11. LOOK: "MUÑECA POSEÍDA, LOOK ENTERO" — mismo ático del prompt 2
+------------------------------------------------------------
+Generate this in the SAME chat where you approved image 2 (Muñeca
+poseída), reusing that exact character and attic set — upload that
+approved image first if needed. Photorealistic full-body photo, same
+dusty attic (rocking horse, round cracked window, sheet-covered
+furniture), same doll mask and dress. POSE: this time the figure stands
+upright beside the rocking horse, one hand resting on it, full outfit
+visible head to feet — different from the seated-on-the-floor shot in
+image 2. CAMERA: eye-level, medium-wide, full body clearly visible.
+LIGHT: same pale moonlight through the round window, phosphor-green
+glow (#56BD78) on the floorboards. Color grade: near-black shadows
+(#020A06), dark surface (#06150F), subtle film grain, 4K quality,
+vertical 3:4 composition with empty negative space at the top for a
+small label. No text, no watermark, no logos, no brand names, no
+likeness of any existing character, no blood, no gore, no visible
+wounds or decay.
+
+12. LOOK: "CAZADOR NOCTURNO COMPLETO" — mismo bosque del prompt 3
+------------------------------------------------------------
+Generate this in the SAME chat where you approved image 3 (Cazador
+enmascarado), reusing that exact character and forest set — upload
+that approved image first if needed. Photorealistic full-body photo,
+same foggy pine forest edge, same hunter mask and hooded jacket. POSE:
+this time the figure stands upright at the treeline facing camera at a
+three-quarter angle, full coat and boots visible — different from the
+crouched turned-away pose in image 3. CAMERA: medium-wide, full body
+head to feet, fog still diffusing the background. LIGHT: same cold
+moonlight through the canopy, phosphor-green glow (#56BD78) in the fog.
+Color grade: near-black shadows (#020A06), dark surface (#06150F),
+subtle film grain, 4K quality, vertical 3:4 composition with empty
+negative space at the top for a small label. No text, no watermark, no
+logos, no brand names, no likeness of any existing character, no
+blood, no gore, no weapons, no visible wounds or decay.
+
+13. LOOK: "BRUJA EDITORIAL COMPLETA" — mismo invernadero del prompt 6
+------------------------------------------------------------
+Generate this in the SAME chat where you approved image 6 (Bruja
+moderna), reusing that exact character and conservatory set — upload
+that approved image first if needed. Photorealistic full-body photo,
+same glass conservatory with dead black flowers, same witch mask and
+coat. POSE: this time the figure stands still facing camera among the
+wilted flowers, full outfit visible head to feet, coat open — different
+from the mid-stride walking-away pose in image 6. CAMERA: eye-level,
+medium-wide, full body clearly visible, glass architecture framing the
+shot. LIGHT: same cold moonlight through the glass ceiling, phosphor-
+green glow (#56BD78) on the condensation. Color grade: near-black
+shadows (#020A06), dark surface (#06150F), subtle film grain, 4K
+quality, vertical 3:4 composition with empty negative space at the top
+for a small label. No text, no watermark, no logos, no brand names, no
+likeness of any existing character, no blood, no gore, no visible
+wounds or decay.
+
+
+====================================================================================
+NOTA FINAL
+====================================================================================
+Estas 13 imágenes cubren: las 6 páginas de colección "Inspirado en el
+cine de terror" (cada una con su propio set: salón de baile, ático,
+bosque, escalera de mansión, laboratorio, invernadero), las 3 páginas
+de Tendencias (camerino vintage, garaje tech, salón de baile pulido), y
+4 Looks destacados que reutilizan el set de su colección hermana pero
+en cuerpo completo. Ve guardando cada imagen con un nombre claro (ej.
+"coleccion-payaso-siniestro.png", "tendencia-vintage.png",
+"look-cazador-nocturno.png") en la carpeta de imágenes de tu marca,
+para que cuando le pases este material a Claude Code (repo de la web)
+sepa exactamente dónde va cada una.
+
+Si al ver el set completo todavía sientes que dos imágenes se parecen
+demasiado entre sí, dime cuáles y te ajusto esas dos puntualmente —
+pero con set, pose y cámara distintos en cada una como está armado
+ahora, no deberían leerse como una grilla repetida.

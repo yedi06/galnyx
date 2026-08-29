@@ -1,0 +1,170 @@
+GALNYX — PROMPT PARA CLAUDE CODE: PASE DE UX/UI EXPERTO — MENOS TEXTO DE RELLENO, COMPRA EN UN CLIC, MÁS DINAMISMO VISUAL
+====================================================================================
+Pega este texto completo en la sesión de Claude Code que tiene el repositorio
+de la web de GALNYX abierto (la misma que ya usaste para los prompts 04, 06
+y 07 — corre este DESPUÉS de que ese ya esté aplicado).
+
+
+CONTEXTO CRÍTICO — LEE ESTO PRIMERO
+------------------------------------------
+GALNYX es una tienda real, no un experimento: la inversión de dirección de
+arte, contenido y desarrollo detrás de este sitio es de aproximadamente
+$60,000 USD. El tráfico va a venir de anuncios pagados (Meta/TikTok Ads),
+lo que significa que la mayoría de los visitantes van a llegar directo a una
+página de producto o colección desde un anuncio, en el celular, con
+intención de compra inmediata o casi nula paciencia para leer.
+
+Hoy el sitio tiene un problema de fondo: hay demasiado texto explicativo /
+de relleno (por ejemplo, secciones tipo "¿Cómo comprar?" que funcionan como
+manual de instrucciones) y no suficiente dirección visual (imágenes,
+botones, jerarquía clara). Un sitio de e-commerce premium NO necesita
+explicarle al usuario cómo comprar — el proceso de compra tiene que ser tan
+obvio (precio visible, botón de compra prominente, checkout en el menor
+número de pasos posible) que ese tipo de sección sobra. Si existe, es una
+señal de que el flujo de compra no es lo suficientemente claro por sí
+mismo — el problema no se resuelve agregando más texto explicándolo, se
+resuelve simplificando el flujo y la jerarquía visual hasta que no haga
+falta explicación.
+
+
+TU ROL EN ESTA TAREA
+------------------------
+Piensa y actúa como un diseñador/a UX/UI senior especializado en e-commerce
+de conversión (DTC — direct to consumer), no como alguien que solo
+implementa un pedido literal. Antes de tocar código:
+
+1. Recorre el sitio completo (todas las páginas: Home, Catálogo, ficha de
+   producto, páginas de Colección, Tendencias, Looks, Carrito/Checkout,
+   Nosotros, Contacto, Blog, 404) y arma un inventario de:
+   - Bloques de texto largo o explicativo que podrían eliminarse,
+     acortarse a una frase, o reemplazarse por un ícono/imagen/badge.
+   - Cualquier sección tipo "cómo funciona", "cómo comprar", "guía de
+     compra" o similar — evalúa si debe eliminarse por completo
+     simplificando el flujo real de compra en su lugar.
+   - Puntos del recorrido de compra (Home → Catálogo/Colección → Producto
+     → Carrito → Checkout) donde el usuario tiene que dar más clics o leer
+     más de lo necesario para comprar.
+   - Espacios donde hoy hay solo texto pero podría (y debería) haber una
+     imagen real de las que ya integramos (fotos de producto, las 13
+     imágenes de Colecciones/Tendencias/Looks) — el sitio tiene que sentirse
+     visual primero, no un documento con fotos insertadas.
+   - Botones/CTAs (llamados a la acción) que faltan, están escondidos, o
+     no son lo suficientemente prominentes — cada página de producto,
+     colección y look necesita un camino de un clic hacia comprar o ver
+     el producto.
+   - Secciones, componentes, páginas, enlaces de menú o elementos que
+     quedaron del prototipo/mock inicial pero que en la versión real de
+     GALNYX no se van a usar — cosas que existen en el diseño pero no
+     cumplen ninguna función en el negocio real tal como está definido
+     hoy (por ejemplo: enlaces a funcionalidades que no existen,
+     secciones decorativas sin propósito, páginas o bloques duplicados,
+     elementos que se pusieron "por si acaso" durante el diseño inicial
+     y nunca se conectaron a nada real). Estos no se acortan ni se
+     rediseñan: se ELIMINAN por completo. Si tienes duda sobre si algo
+     se usa o no, inclúyelo en el inventario como "candidato a eliminar"
+     en vez de borrarlo directo, para que yo lo confirme.
+
+2. Preséntame ese inventario ANTES de rediseñar nada — una lista corta de
+   "esto sobra / esto falta / esto se simplifica / esto se elimina", para
+   que puedas confirmar el diagnóstico conmigo antes de invertir tiempo en
+   cambios grandes de código. Después de mi ok (o si mi instrucción fue
+   "aplica todo directo", entonces procede sin esperar), continúa con el
+   rediseño.
+
+
+PRINCIPIOS DE DISEÑO A APLICAR
+-----------------------------------
+- REGLA GENERAL: si una frase no ayuda a decidir la compra o a entender el
+  producto en menos de 3 segundos, se acorta o se elimina. Preferir
+  fragmentos cortos, badges, íconos y jerarquía tipográfica por sobre
+  párrafos largos.
+- Flujo de compra sin fricción: desde cualquier página de producto, el
+  camino a "comprar" tiene que ser inmediato — precio, botón de compra
+  y disponibilidad visibles sin scroll excesivo (above the fold en
+  celular). Revisa el carrito y el checkout con el mismo criterio: el
+  menor número de pasos y campos posible.
+- Más imagen, menos bloque de texto: cada sección debe apoyarse en las
+  imágenes reales ya disponibles (producto, Colecciones, Tendencias,
+  Looks) en vez de fondo de color o texto solo. Si una sección no tiene
+  imagen real disponible, dilo en tu reporte en vez de dejarla en blanco
+  o rellenarla de texto.
+- Dinamismo: usa el sistema de diseño ya definido (verde fósforo #56BD78
+  sobre casi-negro #020A06, superficie #06150F, Instrument Serif para
+  titulares, Instrument Sans para cuerpo, Big Shoulders para elementos de
+  impacto, JetBrains Mono para datos/precios) para introducir jerarquía
+  con movimiento sutil (hover states, transiciones, scroll reveals ya
+  definidos si existen) — no estático de arriba a abajo. Evita que dos
+  secciones seguidas se sientan exactamente iguales en estructura.
+  Consistencia de marca sí, monotonía de layout no.
+- Botones y CTAs: cada tarjeta de producto/colección/look necesita un
+  CTA claro y con jerarquía visual (no un link de texto perdido). Usa
+  microcopy corto y directo en los botones ("Comprar ahora", "Ver
+  máscara", "Explorar colección") en vez de genérico ("Ver más", "Click
+  aquí").
+- Prueba social y confianza sin inventar nada: si el sitio necesita
+  elementos de confianza (envío, medios de pago, política de cambios),
+  represéntalos con íconos/badges cortos, no párrafos — y solo con
+  información real que yo ya te haya dado o que confirmes conmigo, nunca
+  inventada.
+- Elimina, no acumules: cualquier sección, componente, enlace de menú o
+  página que no cumpla una función real en el negocio (ver el inventario
+  del punto 1) se elimina del prototipo, no se deja "por si acaso" ni se
+  oculta con CSS. Un sitio con elementos que no llevan a ningún lado
+  confunde más que uno con menos secciones pero todas funcionales —
+  prefiere un sitio más corto y 100% funcional a uno más largo con partes
+  muertas.
+
+
+CONTEXTO DEL MODELO DE NEGOCIO — recordatorio obligatorio
+--------------------------------------------------------------
+GALNYX opera bajo dropshipping/catálogo: no hay estudio propio, no hay
+sesiones con múltiples ángulos por producto, no hay video de marca ni de
+producto. Todo el rediseño tiene que apoyarse en las imágenes reales que
+YA existen (imagen_principal por producto + las 13 imágenes de
+Colecciones/Tendencias/Looks) — no diseñes composiciones que necesiten
+fotos que no vamos a poder generar (galerías de ángulos, video, sets).
+Si identificas un hueco visual real que necesitaría una imagen nueva,
+repórtamelo puntualmente (qué sección, qué tipo de imagen) para que lo
+generemos con IA como ya hicimos con las 13 anteriores, en vez de dejarlo
+en blanco o taparlo con texto.
+
+
+TAREA — RESUMEN
+----------------
+1. Audita el sitio completo y entrégame el inventario de "sobra / falta /
+   se simplifica / se elimina" descrito arriba — incluyendo cualquier
+   sección, componente o página que no cumpla función real y sea
+   candidata a eliminarse por completo.
+2. Rediseña con foco en: eliminar del todo lo que no se usa realmente en
+   el negocio, eliminar o acortar texto de relleno (empezando por
+   cualquier sección tipo "cómo comprar"), simplificar el flujo de compra
+   a lo mínimo indispensable, aumentar el uso de imagen real, mejorar
+   jerarquía y prominencia de los botones/CTA, y dar más dinamismo visual
+   entre secciones.
+3. Respeta el sistema de marca ya definido (colores, tipografía) — este
+   es un pase de UX/IA de contenido, jerarquía y limpieza de elementos
+   sin uso, no un cambio de identidad visual.
+4. Levanta el sitio en local/preview y revisa el recorrido completo de
+   compra (Home → Colección/Catálogo → Producto → Carrito → Checkout) en
+   vista de celular y de escritorio antes de dar por cerrada la tarea —
+   la mayoría del tráfico real va a ser celular.
+5. Cierra con un REPORTE FINAL: qué eliminaste por completo (y por qué no
+   se usaba), qué acortaste, qué secciones rediseñaste, y cualquier hueco
+   visual que haya quedado por falta de una imagen real (para poder
+   generarla).
+6. SIEMPRE, al terminar, dame el link del artifact/preview actualizado
+   (el mismo que ya vengo revisando) para poder ver los cambios en vivo —
+   no des la tarea por cerrada solo con el reporte de texto, necesito
+   poder abrir el sitio y verlo. Si tu flujo de trabajo requiere publicar
+   o guardar una nueva versión del artifact para que el link se actualice,
+   hazlo como parte de cerrar esta tarea.
+
+
+LO QUE NO DEBES TOCAR
+--------------------------
+No cambies los datos de producto, precios, ni las imágenes/carpetas
+fuente (Mascaras/, Disfraces/, PARTE-1/2/3) — son contenido ya validado.
+No inventes información de envíos, pagos o políticas que yo no te haya
+confirmado. No publiques/despliegues a producción sin que yo lo revise
+primero — deja el cambio listo en el repo (idealmente rama o commit
+separado) y avísame para dar el ok final.

@@ -1,0 +1,186 @@
+GALNYX — PROMPT PARA CLAUDE CODE: REEMPLAZO DE CONTENIDO DE PRODUCTO EN PRODUCCIÓN
+====================================================================================
+Pega este texto completo en la sesión de Claude Code que tiene el repositorio
+de la web de GALNYX abierto.
+
+
+⚠️ CONTEXTO CRÍTICO — LEE ESTO ANTES DE TOCAR CUALQUIER ARCHIVO
+------------------------------------------------------------------
+Esto NO es una tarea de prueba. El contenido que vas a insertar se le
+muestra directamente a la audiencia real de GALNYX (tienda de máscaras y
+disfraces de terror hiperrealistas, público +14, tráfico pagado desde
+Meta/TikTok Ads). Un precio mal escrito, una imagen rota, un nombre
+truncado o una descripción con placeholder ("Lorem ipsum", "Producto de
+ejemplo", etc.) que llegue a producción es un error de marca, no un
+detalle menor. Trabaja con el mismo nivel de cuidado que usarías si
+estuvieras entregando un catálogo impreso que no se puede corregir
+después de imprimirse.
+
+Antes de escribir nada:
+1. Si el repo es un repositorio git, haz commit o al menos confirma que
+   el working tree está limpio ANTES de empezar, para que todo este
+   reemplazo sea reversible con un solo `git diff` / `git checkout`.
+2. No asumas la estructura de datos del sitio — investígala primero
+   (ver "PROCESO" más abajo). Este prompt te da la fuente de datos, no
+   el destino: el destino es el código real del proyecto tal como está
+   hoy.
+
+
+FUENTE DE DATOS — DOS CARPETAS, ESTRUCTURA EXACTA
+------------------------------------------------------
+Todo el contenido real de producto vive en:
+
+  imagenes/Mascaras/Goma/<carpeta-por-modelo>/
+  imagenes/Mascaras/Plastico/<carpeta-por-modelo>/
+  imagenes/Disfraces/<carpeta-por-modelo>/
+
+Dentro de CADA carpeta de modelo hay:
+
+  a) Varias imágenes, pero SOLO UNA está lista para producción: la que
+     tiene "imagen_principal" en el nombre de archivo (cualquier
+     extensión: .jpg, .jpeg, .png, .webp). Busca ese archivo por
+     coincidencia de nombre, sin importar mayúsculas/minúsculas.
+     TODAS las demás imágenes de esa carpeta NO están editadas
+     (son fotos crudas del proveedor) — NO las uses, ni como fondo, ni
+     como imagen secundaria, ni en ningún lugar del sitio. Si un
+     producto no tiene ningún archivo "imagen_principal", NO inventes
+     una imagen ni uses una de las crudas: repórtalo como pendiente al
+     final (ver "REPORTE FINAL").
+
+  b) Un archivo producto.txt con el texto real del producto. Hay DOS
+     formatos distintos según la carpeta — detecta cuál es y parsea
+     según corresponda:
+
+     FORMATO MÁSCARAS (imagenes/Mascaras/...):
+       Número: <NN>
+       Nombre: <nombre del modelo>
+       Precio: S/<monto>
+
+       Descripcion:
+       <texto de descripción>
+
+       El campo "Número" es la fuente de verdad para el orden de
+       catálogo (01–30 en Goma, 01–13 en Plástico) — el nombre de la
+       carpeta puede o no tener el número como prefijo, no te bases en
+       el nombre de carpeta para el orden, básate en este campo.
+
+     FORMATO DISFRACES (imagenes/Disfraces/...):
+       Nombre: Disfraz de <nombre>
+       Precio: S/<monto>
+
+       Descripcion:
+       <texto de descripción>
+
+       Aquí NO hay campo "Número" dentro del texto — el número de
+       catálogo está en el PREFIJO del nombre de la carpeta (ej. "01
+       Vaquera", "44 Harley Quinn"). Extráelo con una expresión regular
+       tipo ^(\d+)\s+(.*)$ sobre el nombre de carpeta.
+
+
+TAREA
+-----
+Reemplazar, en la fuente de datos real del sitio (el archivo o los
+archivos donde hoy están definidos los productos — JSON, TypeScript,
+CMS headless, base de datos, lo que sea que el proyecto use), TODO el
+contenido de cada producto por su versión real:
+
+  - imagen principal → la imagen_principal de su carpeta
+  - nombre → el campo Nombre
+  - precio → el campo Precio
+  - descripción → el campo Descripcion
+  - categoría → Máscaras de Goma / Máscaras de Plástico / Disfraces
+    (respeta esta subdivisión, ya está reflejada en el menú y las
+    colecciones del sitio)
+  - orden dentro de su categoría → el número de catálogo (ver arriba)
+
+No dejes ningún producto placeholder, de ejemplo o "mock" en el sitio
+una vez termines. Si el sitio tenía más productos de placeholder que
+productos reales encontrados en estas carpetas, elimina los que sobran
+en vez de dejarlos con datos falsos.
+
+
+REGLAS DE CALIDAD — CONTENIDO PREMIUM, CERO ERRORES
+--------------------------------------------------------
+- Precio: formato consistente en todo el sitio, "S/" pegado al monto
+  sin espacio (S/130), sin decimales si el monto es entero.
+- Nombre: respeta capitalización de marca/nombre propio (Michael
+  Myers, Terrifier, Kaneki), no lo pases todo a mayúsculas ni a
+  minúsculas salvo que el sistema de diseño ya definido en el sitio
+  lo pida por CSS (text-transform), nunca a nivel de dato.
+- Descripción: mantén el tono de marca ya definido (elegante,
+  seguro de sí mismo, +14, nunca infantil) — ver el prompt maestro de
+  diseño (03-prompt-diseno-web-completo.txt) si necesitas recordar el
+  tono exacto. Varios productos del catálogo de Máscaras tienen
+  descripciones muy pobres o casi inexistentes en el archivo fuente
+  (por ejemplo Pigsaw, Twisted Metal, Tyson Rios, Joker pelicula,
+  Máscara Terminator). Para esos casos, redacta 1–2 frases cortas en
+  el mismo tono de marca, PERO sin inventar materiales, certificaciones
+  o características que no se puedan confirmar — si no sabes el
+  material exacto, usa lenguaje honesto genérico ("acabado realista,
+  lista para sorprender") en vez de inventar datos técnicos falsos.
+  Esto es consistente con el análisis de experto que ya definimos
+  sobre transparencia de material como argumento de venta: no rompas
+  esa confianza inventando specs.
+- Nunca dejes una imagen rota: si copias/optimizas las imágenes hacia
+  la carpeta de assets del proyecto, verifica que la ruta final
+  cargue antes de dar por terminado ese producto.
+- Optimiza el peso de cada imagen_principal para web (formato moderno
+  si el proyecto ya usa uno — WebP/AVIF — o el mismo formato de origen
+  si el proyecto no tiene ese pipeline) sin perder calidad visible;
+  estas fotos son el argumento de venta principal del catálogo.
+
+
+CASOS ESPECIALES A VALIDAR ANTES DE PUBLICAR
+-------------------------------------------------
+- "Payaso Terrifier" (Máscaras > Goma) figuraba como agotado
+  ("Sin existencias") en la fuente original. Verifica si sigues
+  queriendo mostrarlo como agotado (badge de "Agotado" / sin botón de
+  compra habilitado) en vez de quitarlo del catálogo — no lo muestres
+  como disponible si no lo está.
+- Cualquier carpeta sin imagen_principal o sin producto.txt: NO
+  publiques ese producto con datos inventados o vacíos. Sácalo de la
+  lista de "listos" y repórtalo al final.
+- Cualquier producto.txt con un campo vacío o ilegible: mismo trato,
+  repórtalo, no publiques con hueco.
+
+
+PROCESO SUGERIDO (paso a paso)
+-----------------------------------
+1. Escanea recursivamente las tres rutas fuente y arma un inventario
+   completo en memoria (o un JSON temporal) con, por cada producto:
+   ruta de su imagen_principal, nombre, precio, descripción, categoría
+   y número de orden.
+2. Antes de tocar el código del sitio, valida ese inventario: cuenta
+   cuántos productos encontraste por categoría, y lista cualquier
+   carpeta con imagen_principal faltante o producto.txt incompleto.
+   Muéstrame ese resumen de validación primero.
+3. Localiza en el proyecto dónde están definidos hoy los productos
+   (placeholder/mock) y qué forma tienen esos datos — no lo asumas,
+   revísalo en el código.
+4. Mapea el inventario real sobre esa estructura, reemplazando
+   producto por producto.
+5. Copia/optimiza las imágenes imagen_principal al directorio de
+   assets del proyecto con nombres de archivo limpios y consistentes.
+6. Antes de dar por cerrada la tarea, levanta el sitio en local (o el
+   preview que uses) y revisa visualmente al menos una categoría
+   completa de cada grupo (Máscaras Goma, Máscaras Plástico,
+   Disfraces) para confirmar que imágenes, nombres, precios y
+   descripciones se ven bien y no hay nada roto ni cortado.
+7. Termina con un REPORTE FINAL en texto plano: total de productos
+   reemplazados por categoría, lista de productos que quedaron
+   pendientes (sin imagen_principal o sin datos), y cualquier
+   inconsistencia que hayas encontrado en el camino.
+
+
+LO QUE NO DEBES TOCAR
+--------------------------
+- No modifiques el diseño, la maquetación ni los componentes visuales
+  ya construidos, salvo lo estrictamente necesario para que consuman
+  los datos reales en vez de los de prueba.
+- No borres ni modifiques las carpetas de origen
+  (imagenes/Mascaras/... e imagenes/Disfraces/...) — son la fuente de
+  verdad, trátalas como solo lectura.
+- No publiques/despliegues nada a producción sin que yo lo revise
+  primero si tu flujo de trabajo incluye un paso de deploy — deja el
+  cambio listo en el repo (idealmente en una rama o commit separado)
+  y avísame para que yo dé el ok final antes de publicar en vivo.

@@ -1,0 +1,104 @@
+GALNYX — CIERRE: CHECKLIST FINAL DE LO QUE SIGUE SIN APLICARSE (V10)
+====================================================================================
+Pega este texto en la misma sesión de Claude Code. Es un seguimiento
+directo de 07, 09 y 10 — varias cosas que ya quedaron acordadas ahí
+todavía no están aplicadas en la V10 que acabo de revisar.
+
+
+SOBRE EL MATERIAL — CONFIRMACIÓN, NO HAY QUE REORGANIZAR NADA
+-------------------------------------------------------------------
+Revisé mis propias carpetas y están completas y bien organizadas:
+imagenes/Mascaras/Goma (28) e imagenes/Mascaras/Plastico (13), cada una
+con su imagen_principal y su producto.txt; imagenes/Disfraces igual; y
+las 13 imágenes de PARTE-1/PARTE-2/PARTE-3 están las 13, completas. El
+material no es el problema — lo que falta es terminar de aplicar lo que
+ya te pedí en rondas anteriores. Antes de pedirte nada nuevo, cierra
+esto primero.
+
+
+CHECKLIST — ESTO SIGUE VISIBLE Y YA SE HABÍA PEDIDO ELIMINAR
+------------------------------------------------------------------
+Lo confirmé con capturas de la V10 actual. Ninguno de estos tres se
+aplicó todavía (venían del punto 1 de la auditoría, que ya confirmé en
+09-respuestas-auditoria-claude-code.txt):
+
+[ ] "Guía de compra" — la sección "Cómo elegir una máscara de terror
+    que aguante toda la noche" con las tres columnas (El material, El
+    acabado, La talla) SIGUE visible en el Home. Elimínala ahora.
+
+[ ] "Lo que más buscan" — el bloque de accesos rápidos (Máscaras de
+    silicona, Trajes talla XXL, Sangre escénica, Kit de maquillaje FX,
+    Looks completos, Guía de tallas, etc.) SIGUE visible. La mayoría de
+    esos enlaces van a categorías que no existen en el catálogo real.
+    Elimínalo ahora.
+
+[ ] "Avisos de reposición antes que nadie" — el formulario de email al
+    final del Home SIGUE visible y no envía a ningún lado real.
+    Elimínalo ahora.
+
+[ ] Blog ("Desde el taller") — sigue mostrando artículos genéricos
+    ("Látex, resina o silicona", "Cómo guardar tu máscara", "Seis
+    disfraces de grupo"). Ya te pedí cambiar el enfoque completo: en vez
+    de artículos genéricos, CADA PRODUCTO real del catálogo tiene que
+    tener su propia página de historia, y esa página tiene que terminar
+    bajando hacia el producto real con su botón de compra. Todavía no
+    se aplicó — dime si necesitas que te confirme algo más para
+    empezarlo.
+
+
+CHECKLIST — IMÁGENES DE PRODUCTO ROTAS EN LAS PÁGINAS DE COLECCIÓN
+------------------------------------------------------------------------
+En la página "Colección: Payaso siniestro" veo los nombres y precios
+correctos (Payaso It S/130, Payaso Robber S/130, Twisted Metal S/80,
+Monja S/90, Donnie darko conejo S/150, Payday S/50, Momo Latex S/90,
+Niño rata S/100) pero CADA TARJETA muestra un fondo genérico (luna,
+niebla, casa en silueta) en vez de la imagen_principal real de ESE
+producto. Por ejemplo, "Payaso It" ya tiene su imagen_principal real en
+imagenes/Mascaras/Goma/22 Payaso It/imagen_principal.png — tiene que
+aparecer esa foto en su tarjeta, no un fondo genérico.
+
+[ ] Corrige esto en TODAS las páginas de colección, no solo Payaso
+    siniestro — cada tarjeta de producto dentro de una colección debe
+    mostrar la imagen_principal real de ese producto específico.
+
+
+SOBRE LOS "CONJUNTOS" (corregido parcialmente en el prompt 10)
+--------------------------------------------------------------------
+La sección del Home "Máscara y disfraz que se entienden" (Payaso Robber
+S/130 + Disfraz de Harley Quinn S/95, cada uno con su propio precio y
+botón) SÍ está bien — cada producto mantiene su precio y botón
+individual, tal como pedí en el prompt 10. Verifica que este mismo
+criterio esté aplicado en TODAS las demás páginas donde se sugieran
+productos juntos (páginas de colección, Trajes de pareja, Looks) — no
+solo en esa sección del Home.
+
+Un tema aparte que noto: cuando muestras un arquetipo (ej. "Bruja
+moderna") junto con productos reales sugeridos debajo, algunos de esos
+productos no tienen relación visual ni temática con el arquetipo. No
+necesitas generar imágenes nuevas para esto — el problema es de
+selección, no de material. Elige los productos reales que mejor calcen
+temáticamente con cada arquetipo (por nombre y descripción del
+producto.txt), y si de verdad no hay ningún producto real que combine
+bien con un arquetipo, dímelo en tu reporte en vez de forzar una
+combinación que no tiene sentido.
+
+
+HOME INCOMPLETO
+--------------------
+Sigo viendo espacios vacíos / contenido sin terminar de cargar en varias
+partes del Home. Antes de decirme que está listo, recórrelo tú mismo de
+arriba a abajo una vez más, sección por sección, y confirma
+explícitamente cuáles están 100% completas con datos/imágenes reales y
+cuáles no — no des el Home por cerrado con un reporte general.
+
+
+CÓMO QUIERO EL REPORTE ESTA VEZ
+------------------------------------
+Esta ronda de correcciones ya lleva varias idas y vueltas sin que se
+aplique todo. Por eso, antes de decirme que terminaste, quiero que
+revises TÚ MISMO cada casilla de este checklist (las de arriba, con
+corchetes [ ]) y me confirmes una por una que quedó resuelta —no un
+resumen general. Si alguna no se pudo resolver, dime exactamente cuál y
+por qué, en vez de omitirla del reporte. Y como siempre, ciérralo
+dándome el link del artifact/preview actualizado para revisar todo en
+vivo.

@@ -1,0 +1,107 @@
+GALNYX — PROMPT PARA CLAUDE CODE: CORREGIR "TRAJES DE PAREJA" Y REVISAR HOME INCOMPLETO
+====================================================================================
+Pega este texto completo en la sesión de Claude Code que tiene el repositorio
+de la web de GALNYX abierto (la misma que ya usaste para los prompts 04 y 06).
+
+
+CONTEXTO
+--------
+Ya integraste el contenido real de producto (prompt 04) y las 13 imágenes de
+Colecciones/Tendencias/Looks de las carpetas PARTE-1/2/3 (prompt 06). Al
+revisar el sitio publicado en vivo quedaron dos huecos sin cerrar:
+
+
+HUECO 1 — Colección "Trajes de pareja" sigue en placeholder
+-------------------------------------------------------------
+La página de la colección "Trajes de pareja" (la de parejas/villanos) todavía
+muestra el placeholder viejo: el halo radial verde con silueta de máscara en
+el banner de cabecera, en vez de la foto real de la pareja de villanos que ya
+generamos en el prompt 01 (imagen_y_fondo_galnyx). Revisa dónde quedó guardada
+esa imagen (búscala por nombre relacionado a "pareja", "duo", "villanos" o
+revisa qué generaste a partir de imagenes/PARTE-1... o de la carpeta que uses
+para el prompt 01 — si no la encuentras en el repo, dímelo y te la vuelvo a
+pasar) y colócala como banner de cabecera de esa página de colección, igual
+que hiciste con Payaso siniestro en el prompt 06.
+
+Además, la sección "Las nueve combinaciones" de esa misma página (las 9
+tarjetas de combos de pareja) usa hoy una miniatura placeholder repetida en
+las 9 tarjetas. Como NO tenemos foto real por combinación (modelo
+dropshipping, una sola imagen principal por producto, sin sets fotográficos —
+ver contexto de negocio abajo), NO inventes ni repitas más placeholders:
+en vez de una foto por combo, rediseña esas 9 tarjetas para que funcionen sin
+foto — usa la imagen real de la pareja de villanos como fondo compartido de
+la sección (una sola vez, no repetida por tarjeta) y diferencia cada tarjeta
+por tipografía/color/badge con el nombre del combo y su precio, siguiendo el
+sistema de diseño ya definido (Instrument Serif para títulos, verde fósforo
+como acento). El objetivo es que ninguna tarjeta se vea con una imagen
+genérica repetida.
+
+
+HUECO 2 — Home incompleto
+----------------------------
+Al revisar el Home en producción hay secciones que se ven incompletas o sin
+terminar de cargar contenido real. Antes de asumir nada, haz lo siguiente:
+1. Recorre el Home de arriba a abajo, sección por sección, y lista cada
+   bloque (hero, colecciones destacadas, tendencias, looks, blog, footer,
+   etc.).
+2. Para cada bloque, confirma si está usando datos/imágenes reales (los que
+   ya integraste en los prompts 04 y 06) o si todavía queda algún
+   placeholder, imagen rota, texto de ejemplo, o espacio vacío esperando
+   contenido que nunca se conectó.
+3. Cualquier bloque que dependa de una imagen que no exista en el repo
+   (rota, ruta mal escrita, o simplemente nunca copiada desde
+   imagenes/PARTE-1, PARTE-2, PARTE-3, Mascaras o Disfraces), repáralo
+   conectándolo a la imagen real correspondiente. Si de verdad no existe
+   ninguna imagen real para ese bloque, no lo dejes con un hueco visual:
+   repórtamelo puntualmente (qué bloque, qué imagen falta) en vez de
+   dejarlo roto o con placeholder en producción.
+4. Presta atención especial a: imágenes que carguen en baja resolución o
+   estiradas/recortadas raro (contenedor con un aspect-ratio distinto al de
+   la imagen real), y bloques que muestren menos elementos de los que
+   debería (por ejemplo, si el Home muestra las 6 colecciones pero solo 4
+   tienen imagen real y las otras 2 muestran placeholder — repórtalo aunque
+   ya lo hayamos marcado como "hecho" antes).
+
+
+CONTEXTO DEL MODELO DE NEGOCIO — recordatorio
+------------------------------------------------
+GALNYX opera bajo dropshipping/catálogo: no hay estudio propio, no hay
+sesiones con múltiples ángulos por producto, no hay video. Toda sensación de
+"producción premium" viene de dirección de arte (tipografía, composición,
+las imágenes de Colecciones/Tendencias/Looks que sí son reales) y NUNCA de
+fotografía de producto adicional que no vamos a poder generar. No diseñes
+ni dejes espacios pensados para galerías de ángulos, carruseles de fotos por
+producto o video.
+
+
+TAREA — RESUMEN
+----------------
+1. Reemplaza el placeholder del banner de "Trajes de pareja" por la foto
+   real de la pareja de villanos (prompt 01).
+2. Rediseña las 9 tarjetas de "Las nueve combinaciones" para que no
+   dependan de una foto por combo (ver Hueco 1).
+3. Audita el Home completo bloque por bloque y repara cualquier imagen
+   rota, placeholder olvidado o hueco visual (ver Hueco 2).
+4. Optimiza cualquier imagen nueva que coloques (mismo criterio ya usado:
+   formato moderno sin perder calidad visible).
+5. Levanta el sitio en local/preview y revisa visualmente el Home completo
+   y la página de Trajes de pareja antes de dar por cerrada la tarea.
+6. Cierra con un REPORTE FINAL: qué corregiste en cada hueco, y si
+   encontraste algún otro bloque del sitio (fuera de Home y Trajes de
+   pareja) con el mismo problema de placeholder/imagen rota — repórtalo
+   aunque no lo arregles todavía, para poder priorizarlo.
+7. SIEMPRE, al terminar, dame el link del artifact/preview actualizado
+   (el mismo que ya vengo revisando) para poder ver los cambios en vivo —
+   no des la tarea por cerrada solo con el reporte de texto, necesito
+   poder abrir el sitio y verlo. Si tu flujo de trabajo requiere publicar
+   o guardar una nueva versión del artifact para que el link se actualice,
+   hazlo como parte de cerrar esta tarea.
+
+
+LO QUE NO DEBES TOCAR
+--------------------------
+No toques las carpetas Mascaras/, Disfraces/, PARTE-1/2/3 (son fuente de
+verdad, solo lectura) ni el contenido de producto ya integrado en el
+prompt 04. No publiques/despliegues a producción sin que yo lo revise
+primero — deja el cambio listo en el repo (idealmente rama o commit
+separado) y avísame para dar el ok final.

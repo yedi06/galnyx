@@ -1,0 +1,74 @@
+GALNYX — CORRECCIÓN URGENTE: ELIMINAR "CONJUNTOS" CON PRECIO COMBINADO
+====================================================================================
+Pega este texto como respuesta en la misma sesión de Claude Code, justo
+después (o junto con) el archivo 09-respuestas-auditoria-claude-code.txt.
+Esto CORRIGE y reemplaza lo que dije ahí sobre "Trajes de pareja".
+
+
+EL PROBLEMA QUE ENCONTRÉ
+-----------------------------
+Vi en la página de Colecciones (Payaso siniestro, Muñeca poseída, Cazador
+enmascarado, Espectro victoriano, etc.) que cada arquetipo se muestra como
+una tarjeta de "conjunto": junta una máscara + un traje en un solo bloque,
+con un precio combinado (por ejemplo S/249, S/289) y un solo botón "Ver el
+conjunto" — como si fuera un producto único.
+
+Yo NUNCA definí esos precios combinados ni pedí que se creara un producto
+nuevo que junte una máscara y un traje en uno solo. Esto no es posible para
+mi negocio: yo NO confecciono ni empaqueto productos combinados, solo vendo
+lo que existe tal cual en mi catálogo real, que son EXCLUSIVAMENTE dos tipos
+de producto, cada uno por separado:
+
+  C:\Users\yedis\Desktop\yedi-marca\imagenes\Mascaras\
+  C:\Users\yedis\Desktop\yedi-marca\imagenes\Disfraces\
+
+No tengo ningún otro tipo de producto. No existe un SKU, precio ni stock
+para "el conjunto Payaso siniestro" — existe la máscara (un producto, un
+precio) y existe el disfraz (otro producto, otro precio), cada uno vendible
+por separado.
+
+
+REGLA — APLICA EN TODO EL SITIO, NO SOLO EN COLECCIONES
+-------------------------------------------------------------
+En NINGÚN lugar del sitio debe existir una tarjeta, botón o flujo de compra
+que combine dos productos reales en un solo precio o un solo "agregar al
+carrito". Esto corrige y reemplaza el punto 2 ("Trajes de pareja") de mi
+respuesta anterior en 09-respuestas-auditoria-claude-code.txt — ahí dije
+que armaras combos con precio sumado; al verlo en pantalla me doy cuenta de
+que esto no refleja cómo vendo realmente. La corrección es:
+
+1. Revisa TODO el sitio (Colecciones, Trajes de pareja, Looks, Home,
+   cualquier otro lugar) buscando cualquier tarjeta o sección que junte
+   dos productos (una máscara + un disfraz) en un solo precio, un solo
+   botón de compra o un solo "conjunto". Repórtame la lista completa de
+   dónde aparece esto antes de corregirlo.
+2. Elimina el precio combinado y el botón único "Ver/Comprar el conjunto"
+   en todos esos lugares.
+3. Si quieres mantener la idea de "look" o "arquetipo" como inspiración
+   visual (la máscara y el traje que combinan bien juntos, con la foto
+   real que ya generamos para ese arquetipo), está bien mostrarlos JUNTOS
+   en la misma sección — pero cada uno con su propia tarjeta, su propio
+   precio real, su propia descripción real y su propio botón de compra
+   independiente. El usuario puede comprar la máscara sola, el disfraz
+   solo, o los dos por separado — nunca como un solo producto fusionado.
+4. Esto aplica también a "Trajes de pareja" y a "Looks": si vas a mostrar
+   una máscara y un disfraz juntos como sugerencia visual, cada uno
+   mantiene su tarjeta, precio y botón individual. Ningún precio se suma
+   ni se muestra como un solo total salvo que sea la suma que el carrito
+   calcula naturalmente cuando el usuario agrega los dos por su cuenta.
+5. Solo puedes usar productos que existen de verdad en
+   imagenes\Mascaras\ e imagenes\Disfraces\ — no inventes combinaciones
+   ni productos que no estén ahí.
+
+
+TAREA
+-----
+1. Encuentra y repórtame cada lugar del sitio con este patrón de
+   "conjunto con precio combinado".
+2. Corrígelo en todos esos lugares según la regla de arriba (tarjetas
+   individuales, precios individuales, botones individuales).
+3. Levanta el sitio en preview y confírmame visualmente que ya no queda
+   ningún precio combinado ni botón de "comprar el conjunto" en ningún
+   lado.
+4. Dame el link del artifact/preview actualizado para verlo, como ya
+   quedó acordado.

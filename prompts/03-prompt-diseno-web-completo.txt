@@ -1,0 +1,243 @@
+GALNYX — PROMPT MAESTRO PARA /design (web e-commerce nivel $60,000)
+============================================================================
+Pega este texto completo justo después del comando /design.
+
+
+CONTEXTO DEL NEGOCIO
+---------------------
+Soy dueño de GALNYX, una tienda online de máscaras y trajes de terror
+hiperrealistas para Halloween, operando en Lima, Perú, bajo modelo de
+dropshipping/catálogo (sin stock propio grande, trabajo con proveedores
+directos y despacho en 24–48h en Lima Metropolitana, provincias por
+Shalom). Pago con Yape, Plin, tarjeta y contra entrega. Mi tráfico viene
+principalmente de ads (Meta/TikTok), así que la primera impresión tiene
+que vender en segundos. Quiero que esta web se sienta como un sitio de
+$60,000 dólares: nada de plantilla genérica, nada que se vea "de
+Shopify gratis". Cada detalle tiene que estar resuelto a nivel de
+dirección de arte real.
+
+PÚBLICO OBJETIVO Y TONO — SOLO +14
+--------------------------------------
+Esta web no es para niños. Es para personas de 14 años a más que quieren
+sorprender de verdad en cada fiesta o en cada paso que dan — el tono tiene
+que sentirse elegante y un poco inquietante, nunca "juguetón" ni infantil.
+Traducido a diseño: nada de colores pastel de disfraz de jardín, nada de
+íconos redondeados tipo app para niños, ni copy con signos de exclamación
+en exceso. Todo el copy debe sonar seguro de sí mismo y directo, como ya
+está en el hero actual ("Deja de ser quien eras."), no vendedor barato.
+
+Pon un badge pequeño "+14" junto al logo en el header (mismo estilo que
+los kickers en mayúsculas condensadas), y en el primer ingreso a la web
+un modal breve y elegante de confirmación de edad ("¿Tienes 14 años o
+más?" con dos botones simples) — no es un trámite legal obligatorio para
+vender máscaras, pero refuerza la posición de marca de que esto no es
+un sitio de disfraces de niños, es una experiencia solo para quien
+realmente quiere dar miedo.
+
+
+RECURSOS DE MARCA YA LISTOS — ÚSALOS TAL CUAL, NO LOS RECREES
+----------------------------------------------------------------
+- Logo: tengo el isotipo y el lockup completo en color, blanco y negro,
+  en SVG real (carpeta logo/ de yedi-marca) — un ícono de máscara/luna
+  creciente en trazo monolínea. Impórtalo y úsalo tal cual, no generes
+  un logo nuevo.
+- Paleta de color ya validada: Verde Fósforo — verde #56BD78 sobre negro
+  casi puro #020A06, superficies en #06150F, bordes en #1A2620/#25312B,
+  texto en #DFE7E2/#9FB0A7/#7C8B83. Es la gama con la que ya está
+  construida toda la tienda actual — mantenla en todas las páginas
+  nuevas para que se vea como un solo sitio, no como parches distintos.
+- Sistema tipográfico de 4 familias ya elegido y con los archivos reales
+  en la carpeta fuentes/ (fuentes.css + los 6 .woff2, licencia libre,
+  sin depender de Google Fonts):
+    · Instrument Serif (+ itálica) → titulares grandes y precios.
+    · Big Shoulders (variable) → el wordmark GALNYX y toda etiqueta o
+      kicker en mayúsculas condensadas.
+    · Instrument Sans → cuerpo de texto, navegación, botones.
+    · JetBrains Mono → SKU, stock, descuentos, ratings — todo dato real.
+  Úsalos igual en cualquier página o componente nuevo, no introduzcas
+  una quinta tipografía.
+- Fondos de producto: ya tengo 6 tratamientos de fondo CSS diseñados
+  (halo radial, retícula técnica, cono de luz, grano de película,
+  anillos concéntricos, partido) — el que está en producción es el halo
+  radial (glow verde radial + grid técnico sutil sobre #020A06). Úsalo
+  como fondo estándar en toda foto de producto nueva.
+- Fotografía de producto: en la carpeta prompts/ tengo el prompt para
+  generar con IA el fondo estándar de producto y las instrucciones de un
+  GPT que recorta, mejora y compone cualquier foto de producto sobre ese
+  mismo fondo — asume que TODAS las fotos de producto que te dé van a
+  llegar ya tratadas con ese mismo fondo y encuadre consistente.
+- Imagen de pareja villana (hero de la categoría "Trajes de pareja" /
+  "Terror clásico"): tengo un prompt para generar una imagen realista y
+  cinematográfica de una pareja con maquillaje villano — payaso
+  siniestro y cómplice de coletas — en la gama de color de la marca,
+  con espacio negativo reservado para titular. Resérvale un hueco
+  visual grande a esa imagen en la página de esa categoría o en un
+  banner secundario de la home (no tiene que ir en el hero principal).
+- Referencia de tono editorial: quiero el mismo nivel de foto real +
+  tipografía serif elegante + fondo oscuro con degradado que tiene el
+  portfolio de Adrián Sáenz (nombre grande en serif cursiva partido en
+  dos líneas sobre una foto de persona real, con una tarjeta flotante
+  de "hitos" sobre la foto) — pero aplicado a producto, no a una persona.
+
+ARQUITECTURA DEL MENÚ — 5 GRUPOS, NADA MÁS
+------------------------------------------------
+Yo tenía pensado un menú con muchas entradas sueltas (Exponentes,
+Tendencias, Catálogo, Categorías, Hombre, Mujer...) pero eso se lee como
+mucho texto y el usuario deja de leer. Lo reorganicé en 5 grupos claros —
+menos clics para comprar, nada de relleno:
+
+1. CATÁLOGO (menú desplegable / mega-menú)
+   - Columnas por tipo de producto: Máscaras · Trajes · Accesorios ·
+     Efectos FX (esto reemplaza mi idea de "Categorías" como entrada
+     aparte — va adentro de Catálogo, no al lado).
+   - Una fila de chips rápidos: Hombre · Mujer · Unisex (esto reemplaza
+     mis ideas de "Hombre" y "Mujer" como entradas de menú propias — como
+     filtro rápido dentro del mega-menú, el usuario llega en 1 clic
+     igual, pero el menú de arriba no se ve saturado).
+   - "Ver todo el catálogo" al final, y un producto destacado con foto a
+     la derecha del mega-menú (usa el sistema de fondo de producto ya
+     definido).
+
+2. COLECCIONES (menú desplegable, junta mis dos ideas de "Exponentes" y
+   "Tendencias" en un solo grupo con dos columnas):
+   - Columna "Inspirado en el cine de terror": colecciones por
+     ARQUETIPO, no por personaje con nombre y apellido — por ejemplo
+     "Payaso siniestro", "Muñeca poseída", "Cazador enmascarado",
+     "Espectro victoriano", "Criatura de laboratorio", "Bruja moderna".
+     Ojo: mi idea original era nombrar actores y películas puntuales que
+     usaron cada disfraz — eso trae riesgo real (derecho de imagen del
+     actor + copyright de la película), y ninguna plataforma de ads te
+     va a aprobar un anuncio así. La versión por arquetipo consigue el
+     mismo "ah, ya sé a qué se parece" sin nombrar nada protegido, y de
+     paso es más fácil de tener siempre actualizada.
+   - Columna "Tendencias": Vintage/Clásico de terror, Moderno/Tech-horror,
+     Elegante/Editorial — exactamente tu idea original de moda vintage,
+     moderna y elegante, aplicada a disfraces.
+
+3. LOOKS — quité "Lo nuevo" de acá: un menú de "recién llegado" siempre
+   termina eclipsando al resto del catálogo (todo lo que no es "nuevo" se
+   lee como menos deseable, aunque sea igual de bueno), y eso es
+   justo lo que no quiero. En su lugar, LOOKS es un grupo curado de
+   combos completos ya armados — máscara + traje + accesorio + efecto FX
+   pensados juntos, por ejemplo "Payaso siniestro completo" o "Muñeca
+   poseída, look entero" — no importa si las piezas son antiguas o
+   nuevas en el catálogo, entran por lo bien que combinan, no por fecha.
+   Esto no lo hace nadie más en el rubro en Perú (la mayoría solo vende
+   piezas sueltas), es la diferenciación real que buscabas, y de paso
+   sube el ticket promedio porque el cliente compra el combo en vez de
+   una sola pieza. Se renuevan los combos destacados cada cierto tiempo,
+   pero SIN etiqueta de "nuevo" — se presentan como curaduría de estilo,
+   no como inventario reciente.
+
+4. BLOG — tal como ya está.
+
+5. Iconos a la derecha (sin texto, ya están en el header actual):
+   buscar, WhatsApp/contacto, carrito. No cuentan como "grupo" de menú,
+   son acciones rápidas — así el usuario que ya sabe qué quiere compra
+   sin tener que leer ningún menú.
+
+Mantén cada mega-menú corto: máximo 4–6 líneas por columna, sin
+descripciones largas — el usuario tiene que reconocer lo que busca de
+un vistazo, no leer un párrafo por categoría.
+
+
+PÁGINAS Y SECCIONES QUE NECESITO
+-----------------------------------
+Ya tengo construidas: Home, Ficha de producto (PDP), Blog, página de
+Gamas de color y página de Fondos de producto (referencia interna, no
+son páginas públicas). A partir de ahí, complétame la tienda completa:
+
+1. Catálogo / listado de categoría (Máscaras, Trajes, Accesorios,
+   Efectos FX) con filtros (tipo, género Hombre/Mujer/Unisex, material,
+   precio, disponibilidad) y grid de producto — mismo lenguaje visual
+   que la home. Esta página sostiene el mega-menú "Catálogo" de arriba.
+2. Página de colección (una plantilla reusable para cada arquetipo de
+   "Inspirado en el cine de terror" y cada línea de "Tendencias"), con
+   texto corto de intro y grid de producto — incluye la de "Trajes de
+   pareja" con la imagen villana original (ver más abajo) como pieza
+   central.
+3. Página de Looks: listado de combos completos, cada uno con foto del
+   set armado, nombre del look y las piezas que lo componen (máscara +
+   traje + accesorio + FX) con precio individual y precio de combo —
+   y una página de detalle de look que permita agregar el set entero al
+   carrito de un solo clic, o pieza por pieza si el cliente prefiere.
+4. Carrito de compra (drawer o página) y checkout en 2–3 pasos: datos de
+   envío → método de pago (Yape/Plin/tarjeta/contra entrega) →
+   confirmación — tiene que sentirse rápido y de confianza, no genérico.
+5. Página "Nosotros / Cómo trabajamos" — explica el modelo (proveedor
+   directo, stock real verificado a diario, fotos reales) para generar
+   confianza antes de la primera compra.
+6. Página de contacto / WhatsApp — botón flotante de WhatsApp en todo el
+   sitio, visible pero no invasivo.
+7. Página de una entrada de blog completa (ya tengo el listado, falta el
+   artículo individual) con tipografía de lectura larga cuidada.
+8. Estado vacío / 404 con el mismo tono de marca (no un genérico "Page
+   not found").
+
+ANÁLISIS DE EXPERTO — COSTO REAL Y MATERIAL
+------------------------------------------------
+Actúa como un consultor de e-commerce real, no solo como diseñador: cada
+decisión de abajo debe tener una razón de negocio, no solo estética.
+
+Costo del proyecto (esto es clave — el presupuesto real es bootstrapped,
+aunque el resultado se vea de $60,000): no propongas nada que dependa de
+fotografía profesional pagada, stock de imágenes premium, ni herramientas
+de pago. Todo lo que ya tengo es gratuito o ya está pagado una sola vez —
+las 6 fuentes son de licencia libre (OFL), el logo es SVG propio, y los
+fondos de producto son CSS puro (no imágenes pesadas que cuesten
+hosting). Constrúyeme cada prototipo nuevo con esos mismos recursos: el
+lujo tiene que venir de la dirección de arte (tipografía, espaciado,
+jerarquía, movimiento), no de comprar assets caros. Esa es la diferencia
+real entre una web de $60,000 y una de $600 — no es cuánto gastaste, es
+cuánto cuidado se nota.
+
+Mientras no tenga fotos reales de cada producto/look todavía: usa el
+mismo tratamiento de fondo de producto (halo radial verde sobre
+#020A06 + silueta de máscara en trazo monolínea, como ya está en las
+tarjetas de producto de Main.dc.html y Producto.dc.html) como placeholder
+en CUALQUIER tarjeta o sección nueva — Looks, Colecciones, lo que sea.
+Ninguna sección debe verse vacía o con un cuadro gris genérico de
+"imagen no disponible": el placeholder tiene que verse ya vendedor,
+como si fuera la foto final, para que pueda mostrar el sitio completo
+antes de tener todas las fotos reales tomadas.
+
+Material: cada producto y cada Look debe mostrar el material igual que ya
+lo hace el selector de "Acabado" en la ficha de producto (Mate, Húmedo,
+Fosforescente / látex, resina, silicona) — no es un detalle decorativo,
+es lo que justifica el precio frente a un disfraz de bazar barato.
+Muéstralo siempre visible, nunca escondido en un acordeón, en catálogo,
+colecciones y looks — el material es el argumento de venta más fuerte
+que tengo contra la competencia genérica.
+
+Diseño moderno: nada de esquinas muy redondeadas tipo app de delivery, ni
+sombras suaves difusas de Bootstrap — mantén el lenguaje ya establecido
+(bordes finos de 1px, radios pequeños de 8–14px, contraste alto
+texto/fondo, tipografía como protagonista) en cada página nueva.
+
+
+UX/UI Y PRODUCCIÓN — EL NIVEL "$60,000"
+-------------------------------------------
+- Movimiento sutil y con propósito en cada página nueva, no solo en la
+  home: glows que laten lento, hover-lift en tarjetas, transiciones de
+  entrada suaves — nada que se sienta "de plantilla animada", todo
+  discreto y cinematográfico, coherente con lo que ya hice en el hero de
+  la home (glow pulsante + partículas).
+- Micro-interacciones reales en el flujo de compra: selector de talla,
+  contador de cantidad, botón de agregar al carrito con feedback visual
+  al hacer clic, barra de progreso en el checkout.
+- Mantén siempre la promesa de marca "stock real, no stock fantasma" —
+  cada vez que muestres inventario, hazlo con datos concretos (unidades
+  exactas, no "¡últimas unidades!" genérico) usando JetBrains Mono como
+  ya está establecido.
+- Cero elementos que se vean como plugin gratuito (pop-ups agresivos,
+  countdown timers falsos, badges de "100% seguro" genéricos). La
+  confianza se construye con diseño y datos reales, no con trucos
+  visuales de urgencia falsa.
+- Todo en el mismo grid, mismo radio de bordes, misma escala tipográfica
+  que ya está definida en Main.dc.html / Producto.dc.html / Blog.dc.html
+  — esto tiene que sentirse como UN sitio diseñado de punta a punta, no
+  como páginas sueltas.
+
+Con todo esto ya definido, genera los prototipos de las páginas nuevas
+manteniendo exactamente la identidad, paleta, tipografía y fondos que ya
+están en producción.

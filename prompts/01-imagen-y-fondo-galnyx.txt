@@ -1,0 +1,111 @@
+GALNYX — PROMPTS PARA CHATGPT: IMAGEN DE PAREJA VILLANA + FONDO DE PRODUCTO
+============================================================================
+
+NOTA IMPORTANTE — POR QUÉ CHATGPT RECHAZÓ EL PROMPT ANTERIOR
+----------------------------------------------------------------
+Las imágenes que me pasaste eran de Harley Quinn y Joker, personajes
+registrados de DC/Warner. El primer prompt que te di ya NO los nombraba,
+pero describía la combinación exacta de rasgos que los hace reconocibles
+(pelo verde + cara blanca de payaso + traje morado; coletas rosa/celeste +
+chaqueta roja + choker) — y el filtro de ChatGPT detecta el PARECIDO aunque
+no digas el nombre. Cambiar palabras sueltas no lo va a pasar; hay que
+cambiar el personaje de verdad.
+
+Así que en vez de imitar a Joker y Harley con otro disfraz, cambié de
+estrategia — y es mejor para tu marca: el prompt de abajo usa el lenguaje
+visual de tus PROPIAS máscaras GALNYX (la cara ovalada, ojos almendrados,
+boca fina y sellada que ya usas en tus mockups de producto) en vez de
+copiar personajes de otra franquicia. Es 100% original, no depende de
+ningún parecido, y de paso te promociona tu propio producto en la imagen
+en lugar de promocionar a Warner Bros.
+
+Pégale esto a ChatGPT tal cual (funciona con DALL·E dentro de ChatGPT).
+
+
+NOTA SOBRE ESTA VERSIÓN (v3) — QUÉ CAMBIÉ Y POR QUÉ
+----------------------------------------------------------------
+La v1 quedó muy elegante/gala. Corrigiendo eso, la v2 se fue al otro
+extremo: "textura agrietada, piel desgastada, ropa rota, boca cosida" hizo
+que ChatGPT lo interpretara como zombie/cadáver en descomposición — gore,
+no terror elegante. Y eso tampoco es GALNYX: tus productos reales
+(Silente 01, Vigía, Osario) son máscaras de látex hiperrealista BIEN
+HECHAS, de acabado limpio — el terror viene de lo perfecto/inquietante,
+no de lo podrido. El punto medio real es "alta costura de horror", no
+"gala" ni "cadáver": máscara impecable pero con una expresión que
+incomoda, ropa intacta pero con una postura que tensiona, ambiente oscuro
+pero sin lucir abandonado o en ruinas.
+
+
+PROMPT A — imagen hero con fondo (para banner o sección de la home)
+---------------------------------------------------------------------
+Photorealistic horror-editorial photo, moody cinematic lighting, shot on a
+50mm lens, shallow depth of field, high contrast. A striking, unsettling
+couple standing in an empty dark interior at night — bare concrete walls,
+minimal architecture, a single hard light source from one side creating
+sharp shadows, faint atmospheric haze. Both wear pristine hyperrealistic
+latex masks, flawlessly smooth and well-crafted (expensive theatrical
+quality, not damaged or decayed): an elongated face shape with narrow
+almond eye openings and a closed, perfectly neutral mouth — the unease
+comes from how calm and flawless the mask is, not from any wound, crack,
+or texture damage. The woman's head is tilted slightly, one hand resting
+near her collar; she wears a sleek fitted black dress with a single
+emerald-green satin panel, fabric intact and pristine. The man stands a
+half-step behind her, upright and still, wearing a fitted black coat with
+a raised collar, hands at his sides — his stillness reads as more
+threatening than any exaggerated pose. Their expressions and posture are
+controlled and precise, not casual or smiling, not gory or grotesque.
+Color grade: deep emerald green and near-black shadows (hex #020A06 and
+#06150F), one directional green-tinted rim light, subtle film grain, 4K
+quality, vertical 3:4 composition with empty negative space in the upper
+third for a headline to be added later. No text, no watermark, no logos,
+no brand names, no likeness of any existing character, no blood, no gore,
+no visible wounds or decay — fully original design: elegant, precise,
+and quietly threatening rather than glamorous OR grotesque.
+
+
+PROMPT B — el mismo sujeto, recortado, para usar en cualquier fondo
+---------------------------------------------------------------------
+Same couple as above, identical masks, styling and pose, photographed
+against a plain flat white seamless studio backdrop, even studio lighting,
+sharp focus, full body visible from the knees up, high resolution 4K,
+minimal shadow on the backdrop — optimized for clean background removal.
+Isolated subject only, no background elements, no text, no watermark.
+
+Si te sigue quedando muy "gala": agrégale al final "unsettling stillness,
+quiet menace, like a horror film poster, not a fashion campaign smile".
+Si en cambio te queda muy gore/dañado otra vez: agrégale "flawless,
+pristine, undamaged — the horror comes from perfection, not decay". Con
+esas dos frases sueltas puedes mover el resultado sin reescribir todo el
+prompt de nuevo.
+
+Cómo dejarlo sin fondo de verdad: pídele a ChatGPT "quítale el fondo blanco
+y dámelo en PNG transparente" después de generar la imagen (o sube el
+resultado a remove.bg si tu plan de ChatGPT no exporta PNG transparente
+directo). Así te queda el PNG en alta calidad sin fondo que pediste, listo
+para poner sobre cualquier sección de tu web.
+
+Dónde usarla: como imagen ancha en la categoría "Trajes de pareja" / "Terror
+clásico", o más abajo en la home (no tiene que ser el banner principal) —
+con tu logo y un titular tipo "Deja de ser quien eras." superpuesto encima
+del espacio vacío que el prompt A ya deja reservado.
+
+Si ChatGPT igual rechaza esta versión: pídele que ajuste solo el detalle
+puntual que rechazó (por ejemplo el tono de la máscara o la pose), en vez
+de reintentar el prompt completo de nuevo — así no vuelve a caer en el
+mismo filtro por acumular varios rasgos "sospechosos" a la vez.
+
+
+PROMPT C — fondo estándar de producto (fondo real en foto, no solo CSS)
+---------------------------------------------------------------------
+Minimalist studio background photograph. Extremely dark near-black green
+base (hex #020A06) fading into a soft dark emerald glow (hex #0F241A)
+concentrated in the center, radial vignette toward the edges, a very subtle
+fine grid line texture at low opacity like a technical blueprint overlay,
+completely empty — no objects, no text, no logos. Smooth photographic
+gradient, 4K resolution, vertical 4:5 aspect ratio — designed as a blank
+backdrop for placing a product photo on top of it later.
+
+Para qué sirve: es la versión "foto real" del fondo que ya tiene tu web en
+CSS (la opción "Halo radial" de la página de Fondos). Úsalo cuando
+necesites un fondo en formato imagen — por ejemplo para posts de
+Instagram/TikTok o anuncios — donde no puedes usar el CSS de la web.

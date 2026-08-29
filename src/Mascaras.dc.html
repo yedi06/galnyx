@@ -1,0 +1,61 @@
+<!-- Catálogo de Máscaras. Sin data-collection: verde por defecto, como el resto
+     del catálogo que no es Cuentos de hadas ni Glamour adulto.
+
+     Las dos grillas las genera el build leyendo scripts/_inventario.json, que a
+     su vez sale de los producto.txt de imagenes/Mascaras/. Aquí no hay ningún
+     dato de producto escrito a mano: ni nombre, ni precio, ni descripción.
+     Goma y Plástico son subcategorías reales del menú y se mantienen separadas. -->
+<div style="position:relative; width:1440px; background:var(--bg); color:var(--text);">
+<!--@HEADER:catalogo:2:sticky@-->
+
+  <div style="padding:22px 64px 0 64px;">
+    <div style="font-size:12.5px; color:var(--text-faintest);">Inicio &nbsp;/&nbsp; <span style="color:var(--text-muted);">Máscaras</span></div>
+  </div>
+
+  <!-- ============ encabezado ============ -->
+  <div style="padding:34px 64px 0 64px;">
+    <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:18px; letter-spacing:0.16em;">Catálogo · máscaras</div>
+    <h1 class="dsp" style="font-weight:700; font-size:64px; line-height:1.02; letter-spacing:-0.025em; color:var(--text-hi); margin:0;">Máscaras</h1>
+
+    <div style="display:flex; align-items:baseline; gap:34px; margin-top:26px;">
+      <div>
+        <span class="dsp" style="font-weight:700; font-size:26px; color:var(--text-hi);"><!--@N:mascaras@--></span>
+        <span style="font-size:12px; color:var(--text-faint); margin-left:8px;">modelos en catálogo</span>
+      </div>
+      <div style="width:1px; height:26px; background:var(--line);"></div>
+      <div>
+        <span class="dsp" style="font-weight:700; font-size:26px; color:var(--text-hi);"><!--@N:goma@--></span>
+        <span style="font-size:12px; color:var(--text-faint); margin-left:8px;">de goma</span>
+      </div>
+      <div>
+        <span class="dsp" style="font-weight:700; font-size:26px; color:var(--text-hi);"><!--@N:plastico@--></span>
+        <span style="font-size:12px; color:var(--text-faint); margin-left:8px;">de plástico</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ goma ============ -->
+  <div style="padding:44px 64px 0 64px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; border-top:1px solid var(--line); padding-top:26px; margin-bottom:24px;">
+      <h2 class="dsp" style="font-weight:700; font-size:30px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">De goma</h2>
+      <span class="mono" style="font-size:11px; color:var(--text-faintest);"><!--@N:goma@--> modelos</span>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:26px;">
+<!--@GOMA@-->
+    </div>
+  </div>
+
+  <!-- ============ plástico ============ -->
+  <div style="padding:52px 64px 80px 64px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; border-top:1px solid var(--line); padding-top:26px; margin-bottom:24px;">
+      <h2 class="dsp" style="font-weight:700; font-size:30px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">De plástico</h2>
+      <span class="mono" style="font-size:11px; color:var(--text-faintest);"><!--@N:plastico@--> modelos</span>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:26px;">
+<!--@PLASTICO@-->
+    </div>
+  </div>
+
+<!--@FOOTER@-->
+<!--@FAB@-->
+</div>

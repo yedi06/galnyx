@@ -1,0 +1,113 @@
+<div style="position:relative; width:1440px; background:var(--bg); color:var(--text); padding-bottom:80px;">
+<!--@HEADER::2:sticky@-->
+
+  <!-- ============ portada ============ -->
+  <div style="position:relative; padding:56px 64px 44px 64px; border-bottom:1px solid var(--card); overflow:hidden;">
+    <div class="glow-pulse-corner" style="position:absolute; top:-180px; right:-60px; width:520px; height:520px; border-radius:50%; background:radial-gradient(circle, rgba(var(--accent-deep-rgb),0.14), transparent 65%); pointer-events:none;"></div>
+    <div style="position:relative; max-width:800px;">
+      <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:18px;">Documento interno · el fondo real de cada foto de producto</div>
+      <h1 class="dsp" style="font-weight:800; font-size:52px; line-height:1.03; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 18px 0;">
+        El fondo que<br><span class="dsp-i" style="font-weight:600; padding-left:42px;">usas hoy.</span>
+      </h1>
+      <p style="font-size:15.5px; line-height:1.75; color:var(--text-muted); margin:0 0 12px 0;">No es un catálogo de opciones para elegir una: es una sola pieza, siempre la misma, hecha de tres capas apiladas encima de cada foto de producto. Ninguna se activa o desactiva por separado — las tres van juntas, en toda tarjeta, toda ficha y todo banner de la web.</p>
+      <p style="font-size:13.5px; line-height:1.7; color:var(--text-faint); margin:0;">Vive como una sola clase CSS, <span class="mono" style="color:var(--accent-bright);">.pbg</span>, en el bloque de estilos compartido de <span class="mono" style="color:var(--accent-bright);">build.mjs</span>. Tú fotografías la máscara sobre negro y recortas: esto es lo que la web pone detrás.</p>
+    </div>
+  </div>
+
+  <!-- ============ resultado combinado ============ -->
+  <div style="padding:52px 64px 0 64px;">
+    <div style="display:grid; grid-template-columns: 460px 1fr; gap:44px; align-items:center;">
+      <div>
+        <div class="pbg" style="height:480px; border:1px solid var(--line); border-radius:16px;">
+          <svg width="150" height="186" viewBox="0 0 120 150" fill="none" style="position:relative;">
+            <path d="M60 8C33 8 14 27 14 55c0 30 18 58 46 78 28-20 46-48 46-78 0-28-19-47-46-47z" fill="#0B1F16" stroke="var(--accent-deep)" stroke-width="2.4"/>
+            <path d="M32 54c6-7 16-7 22 0-6 7-16 7-22 0zM66 54c6-7 16-7 22 0-6 7-16 7-22 0z" fill="var(--bg)" stroke="var(--accent)" stroke-width="2.4"/>
+            <path d="M48 104c8 4 16 4 24 0" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:16px;">Resultado combinado</div>
+        <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 16px 0;">Esto es lo que ves en cada tarjeta</h2>
+        <p style="font-size:14.5px; line-height:1.75; color:var(--text-muted); margin:0 0 28px 0; max-width:480px;">Las tres capas de abajo, en este orden exacto de atrás hacia adelante. Ninguna es opcional ni se usó nunca sola en ninguna página.</p>
+
+        <div style="display:flex; flex-direction:column; gap:0;">
+          <div style="display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--card);">
+            <span class="mono" style="font-size:11px; color:var(--accent); width:20px; flex-shrink:0; padding-top:2px;">01</span>
+            <div>
+              <div style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin-bottom:4px;">Halo radial <span class="mono" style="font-size:10.5px; color:var(--text-faintest); font-weight:400;">— fondo base de .pbg</span></div>
+              <div style="font-size:13px; color:var(--text-faint); line-height:1.55;">El resplandor detrás del producto. Da la sensación de foco de escenario y funciona con cualquier silueta.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--card);">
+            <span class="mono" style="font-size:11px; color:var(--accent); width:20px; flex-shrink:0; padding-top:2px;">02</span>
+            <div>
+              <div style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin-bottom:4px;">Retícula técnica + viñeta <span class="mono" style="font-size:10.5px; color:var(--text-faintest); font-weight:400;">— .pbg::before</span></div>
+              <div style="font-size:13px; color:var(--text-faint); line-height:1.55;">Una grilla casi invisible más un oscurecido hacia los bordes. Sostiene el lado técnico de la marca y hace que la mirada no se vaya a las esquinas.</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:16px; padding:16px 0; border-top:1px solid var(--card); border-bottom:1px solid var(--card);">
+            <span class="mono" style="font-size:11px; color:var(--accent); width:20px; flex-shrink:0; padding-top:2px;">03</span>
+            <div>
+              <div style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin-bottom:4px;">Grano de película <span class="mono" style="font-size:10.5px; color:var(--text-faintest); font-weight:400;">— .pbg::after</span></div>
+              <div style="font-size:13px; color:var(--text-faint); line-height:1.55;">Textura fina por encima de todo, incluida la foto del producto. Es lo que evita que la imagen se vea plana o "de app gratuita".</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ las tres capas, aisladas ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:30px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 8px 0;">Cada capa, sola</h2>
+    <p style="font-size:14px; color:var(--text-faint); margin:0 0 28px 0; max-width:680px;">Apagadas las otras dos, para que se note qué aporta cada una. Las capas 02 y 03 son deliberadamente sutiles — a intensidad real, no exagerada para la foto.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:20px;">
+
+      <!-- capa 1 aislada: solo el radial-gradient -->
+      <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div style="height:230px; background:radial-gradient(circle at 50% 40%, #143020, #04100A 74%);"></div>
+        <div style="background:var(--bg-raised); padding:18px 20px;">
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);">01 · Halo radial</div>
+          <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6; margin-top:6px;">Sola, es solo un degradado circular verde sobre negro. No sostiene nada por sí misma — necesita las otras dos para leerse como "fondo de producto" y no como un círculo de color.</div>
+        </div>
+      </div>
+
+      <!-- capa 2 aislada: solo el ::before (vinieta + reticula), sobre negro plano -->
+      <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div style="height:230px; background:var(--bg); position:relative;">
+          <div style="position:absolute; inset:0; background-image:linear-gradient(0deg, rgba(var(--bg-rgb),0.78), transparent 24%), radial-gradient(ellipse at 50% 42%, transparent 32%, rgba(var(--bg-rgb),0.60) 100%), linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px); background-size:100% 100%, 100% 100%, 44px 44px, 44px 44px;"></div>
+        </div>
+        <div style="background:var(--bg-raised); padding:18px 20px;">
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);">02 · Retícula + viñeta</div>
+          <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6; margin-top:6px;">A propósito casi imperceptible. Si se viera fuerte, competiría con la máscara en vez de sostenerla — su trabajo es de fondo, literal.</div>
+        </div>
+      </div>
+
+      <!-- capa 3 aislada: solo el grano ::after -->
+      <div style="border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div style="height:230px; background:var(--bg); position:relative;">
+          <div style="position:absolute; inset:0; opacity:0.5; background-image:radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px); background-size:3px 3px;"></div>
+        </div>
+        <div style="background:var(--bg-raised); padding:18px 20px;">
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);">03 · Grano de película</div>
+          <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6; margin-top:6px;">Un punteado fino a baja opacidad. En <span class="mono" style="color:var(--text-faintest);">.pbg::after</span> va por encima de todo lo demás — hasta de la propia foto del producto.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ cómo tomar la foto ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:14px; padding:28px 30px;">
+      <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:12px;">Antes de recortar</div>
+      <div class="dsp" style="font-weight:700; font-size:19px; color:var(--text-hi); margin-bottom:10px;">Cómo tomar la foto para que esto funcione</div>
+      <p style="font-size:13.5px; color:var(--text-muted); line-height:1.75; margin:0;">Coloca la máscara sobre una tela negra mate, con una sola fuente de luz lateral a 45° y sin flash directo. Dispara con el celular en horizontal, a la altura del producto, y deja aire alrededor. Recorta el fondo y guarda en PNG con transparencia: las tres capas de arriba las pone la web, no la foto. Toma siempre las mismas tres vistas — frontal, tres cuartos y lateral — para que el catálogo entero se vea consistente aunque fotografíes en días distintos.</p>
+    </div>
+  </div>
+
+<!--@FOOTER@-->
+<!--@FAB@-->
+</div>

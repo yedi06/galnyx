@@ -1,0 +1,105 @@
+<!-- Ficha de producto. El producto de muestra es Michael Myers, real: nombre,
+     precio, descripción e imagen salen del inventario por marcador, no escritos
+     a mano. Se quitaron los elementos que mostraban dato inventado y que en una
+     tienda con tráfico pagado son un problema de verdad: reseñas y estrellas,
+     precio tachado con "ahorras", cuotas sin interés, selector de acabados con
+     recargo, contador de unidades y fecha límite de pedido. Ninguno de esos
+     datos existe en producto.txt. Vuelven en cuanto haya de dónde sacarlos. -->
+<div style="width:1440px; background:var(--bg); color:var(--text);">
+
+<!--@HEADER:catalogo:2:plain@-->
+
+  <!-- breadcrumb -->
+  <div style="padding:20px 64px 0 64px;">
+    <div style="font-size:12.5px; color:var(--text-faintest);">Inicio &nbsp;/&nbsp; Máscaras &nbsp;/&nbsp; <span style="color:var(--text-muted);"><!--@P:mascara-goma-17-michael-myers:nombre@--></span></div>
+  </div>
+
+  <!-- PDP -->
+  <div style="display:grid; grid-template-columns: 1fr 480px; gap:56px; padding:28px 64px 72px 64px;">
+
+    <!-- galería -->
+    <div>
+      <div class="pbg" style="border:1px solid var(--line); border-radius:16px; height:560px;">
+        <!--@IMG:mascara-goma-17-michael-myers:480@-->
+      </div>
+      <div class="mono" style="font-size:11px; color:var(--text-faintest); margin-top:12px;">Foto real del producto. Este modelo tiene una sola toma disponible.</div>
+    </div>
+
+    <!-- info -->
+    <div>
+      <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:12px;">Máscaras · goma</div>
+      <h1 class="dsp" style="font-weight:800; font-size:42px; line-height:1.05; letter-spacing:-0.025em; color:var(--text-hi); margin:0 0 18px 0;"><!--@P:mascara-goma-17-michael-myers:nombre@--></h1>
+
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:28px;">
+        <span class="dsp" style="font-weight:800; font-size:38px; color:var(--text-hi);"><!--@P:mascara-goma-17-michael-myers:precio@--></span>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-bottom:14px; padding-top:4px;">
+        <div style="display:flex; align-items:center; gap:16px; border:1px solid var(--border); border-radius:8px; padding:0 16px;">
+          <span style="font-size:18px; color:var(--text-faint);">−</span>
+          <span class="mono" style="font-size:14px; color:var(--text-hi);">1</span>
+          <span style="font-size:18px; color:var(--text);">+</span>
+        </div>
+        <div class="btn-p" style="flex-grow:1; font-size:15.5px; padding:17px; text-align:center;">Agregar al carrito</div>
+      </div>
+      <div class="btn-s" style="font-size:15px; padding:16px; text-align:center; margin-bottom:28px;">Comprar ahora</div>
+
+      <!-- accordion -->
+      <div style="border-top:1px solid var(--card);">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--card);">
+          <span style="font-size:14.5px; font-weight:600; color:var(--text-hi);">Descripción</span>
+          <span style="font-size:16px; color:var(--text-faint);">−</span>
+        </div>
+        <p style="font-size:13.5px; color:var(--text-muted); line-height:1.7; padding:16px 0; margin:0; border-bottom:1px solid var(--card);">
+          <!--@P:mascara-goma-17-michael-myers:desc@-->
+        </p>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--card);">
+          <span style="font-size:14.5px; font-weight:600; color:var(--text);">Envíos y entregas</span>
+          <span style="font-size:16px; color:var(--text-faint);">+</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid var(--card);">
+          <span style="font-size:14.5px; font-weight:600; color:var(--text);">Cambios y devoluciones</span>
+          <span style="font-size:16px; color:var(--text-faint);">+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- relacionados -->
+  <div style="padding:0 64px 80px 64px; border-top:1px solid var(--card); padding-top:56px;">
+    <h2 class="dsp" style="font-weight:700; font-size:28px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 24px 0;">Del mismo catálogo</h2>
+    <div style="display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:20px;">
+      <div class="card-hov" style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:180px;"><!--@IMG:mascara-goma-12-leatherface-mascacre-en-texas:154@--></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:var(--text-hi);"><!--@P:mascara-goma-12-leatherface-mascacre-en-texas:nombre@--></div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi); margin-top:8px;"><!--@P:mascara-goma-12-leatherface-mascacre-en-texas:precio@--></div>
+        </div>
+      </div>
+      <div class="card-hov" style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:180px;"><!--@IMG:mascara-goma-23-payaso-it:154@--></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:var(--text-hi);"><!--@P:mascara-goma-23-payaso-it:nombre@--></div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi); margin-top:8px;"><!--@P:mascara-goma-23-payaso-it:precio@--></div>
+        </div>
+      </div>
+      <div class="card-hov" style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:180px;"><!--@IMG:mascara-goma-27-pigsaw:154@--></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:var(--text-hi);"><!--@P:mascara-goma-27-pigsaw:nombre@--></div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi); margin-top:8px;"><!--@P:mascara-goma-27-pigsaw:precio@--></div>
+        </div>
+      </div>
+      <div class="card-hov" style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:180px;"><!--@IMG:mascara-goma-29-sweet-tooth:154@--></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:var(--text-hi);"><!--@P:mascara-goma-29-sweet-tooth:nombre@--></div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi); margin-top:8px;"><!--@P:mascara-goma-29-sweet-tooth:precio@--></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--@FOOTER@-->
+<!--@FAB@-->
+</div>

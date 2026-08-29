@@ -1,0 +1,483 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+    <style>
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  src: url("InstrumentSerif-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  src: url("InstrumentSerif-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url("InstrumentSans-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("BigShoulders-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("JetBrainsMono-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("JetBrainsMono-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+    /* ---------- tema GALNYX Horror (por defecto) + Play + Glamour ----------
+       [data-collection="play"|"glamour"] envuelven tarjetas/secciones de
+       producto que no encajan con la estética de terror -- Play para
+       Cuentos de hadas (dorado), Glamour para Glamour adulto (rosa). El
+       header, footer, nav móvil, logo y checkout NUNCA llevan ninguno de
+       estos atributos: son el ancla de marca y se quedan siempre en verde,
+       vengan de header()/footer()/mheader()/mfooter()/logo()/fab()/
+       chkheader()/qrSvg() -- ninguna de esas funciones fue tocada. */
+    :root {
+      --bg:#020A06; --bg-raised:#06150F; --bg-raised-2:#0B1D14;
+      --card:#14211B; --line:#1A2620; --border:#25312B;
+      --text-faintest:#5E6E66; --text-faint:#7C8B83; --text-muted:#9FB0A7;
+      --text-link:#B9C6BF; --text:#DFE7E2; --text-hi:#F5FAF7;
+      --accent-deep:#2E854D; --accent:#56BD78; --accent-bright:#7BD497;
+      --on-accent:#02160A; --photo-glow:#143020; --photo-shadow:#04100A;
+      --bg-rgb:2,10,6; --accent-rgb:86,189,120; --accent-deep-rgb:46,133,77;
+    }
+    [data-collection="play"] {
+      --bg:#0B0710; --bg-raised:#170D1E; --bg-raised-2:#1E1226;
+      --card:#291A33; --line:#35223F; --border:#4A2F58;
+      --text-faintest:#8C7A93; --text-faint:#A793AC; --text-muted:#C7B6CC;
+      --text-link:#D6C8DA; --text:#EDE3EF; --text-hi:#FAF6F5;
+      --accent-deep:#B5822A; --accent:#D9A441; --accent-bright:#E8C878;
+      --on-accent:#160D1D; --photo-glow:#432B4D; --photo-shadow:#110A17;
+      --bg-rgb:11,7,16; --accent-rgb:217,164,65; --accent-deep-rgb:181,130,42;
+    }
+    [data-collection="glamour"] {
+      --bg:#0F0509; --bg-raised:#1C0A11; --bg-raised-2:#24101A;
+      --card:#331521; --line:#3F1B2A; --border:#542339;
+      --text-faintest:#8F6572; --text-faint:#A8828F; --text-muted:#C9A8B5;
+      --text-link:#D7BDC7; --text:#EDDCE2; --text-hi:#FAF3F5;
+      --accent-deep:#A02D5C; --accent:#D6417B; --accent-bright:#F07FA8;
+      --on-accent:#1B0A11; --photo-glow:#4D2234; --photo-shadow:#16080D;
+      --bg-rgb:15,5,9; --accent-rgb:214,65,123; --accent-deep-rgb:160,45,92;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Instrument Sans", ui-sans-serif, sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { color:var(--accent-bright); }
+
+    .dsp   { font-family:"Instrument Serif", Georgia, serif; font-style:normal; letter-spacing:-0.01em; }
+    .dsp-i { font-family:"Instrument Serif", Georgia, serif; font-style:italic; letter-spacing:-0.005em; }
+    .kicker {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 75;
+      text-transform:uppercase; font-weight:650; letter-spacing:0.1em;
+    }
+    .wordmark {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 100;
+      text-transform:uppercase; font-weight:700;
+    }
+    .mono { font-family:"JetBrains Mono", ui-monospace, monospace; }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity:0.55; transform:translate(-50%,-50%) scale(1); }
+      50%      { opacity:1;    transform:translate(-50%,-50%) scale(1.07); }
+    }
+    @keyframes pulse-glow-corner {
+      0%, 100% { opacity:0.6; transform:scale(1); }
+      50%      { opacity:1;   transform:scale(1.05); }
+    }
+    @keyframes ember-float {
+      0%   { transform:translateY(0) scale(1); opacity:0; }
+      12%  { opacity:0.9; }
+      100% { transform:translateY(-140px) scale(0.4); opacity:0; }
+    }
+    @keyframes rise-in {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .glow-pulse-corner { animation: pulse-glow-corner 7s ease-in-out infinite; }
+    .glow-pulse-center { animation: pulse-glow 6s ease-in-out infinite; }
+    .ember { position:absolute; bottom:20px; width:4px; height:4px; border-radius:50%; background:var(--accent-bright); box-shadow:0 0 8px 2px rgba(123,212,151,0.7); animation: ember-float 5.5s ease-in infinite; pointer-events:none; }
+    .card-hov { transition: transform .35s ease, border-color .35s ease; }
+    .card-hov:hover { transform:translateY(-5px); border-color:var(--accent-deep); }
+    .rise { animation: rise-in .7s cubic-bezier(.2,.7,.3,1) both; }
+
+    /* marco de foto de producto: halo radial + retícula técnica + viñeta + grano */
+    .pbg { position:relative; background:radial-gradient(circle at 50% 40%, var(--photo-glow), var(--photo-shadow) 74%); display:flex; align-items:flex-end; justify-content:center; overflow:hidden; }
+    .pbg::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+      background-image:linear-gradient(0deg, rgba(2,10,6,0.78), transparent 24%), radial-gradient(ellipse at 50% 42%, transparent 32%, rgba(2,10,6,0.60) 100%), linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size:100% 100%, 100% 100%, 44px 44px, 44px 44px; }
+    .pbg::after { content:""; position:absolute; inset:0; z-index:3; pointer-events:none; opacity:0.5;
+      background-image:radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px); background-size:3px 3px; }
+    .pbg > svg, .pbg > div.pset { position:relative; z-index:1; }
+    /* La foto real del producto SIEMPRE por encima de la escena ilustrada. Sin
+       esto la <img> queda estática (z-index auto) debajo del <svg> de escena,
+       que sí lleva z-index:1 -- y la tarjeta muestra un fondo genérico en vez
+       del producto. Pasó en Colección y en Catálogo. */
+    .pbg > img { position:relative; z-index:2; }
+    .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+    .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+
+    .lnk { color:var(--text-link); transition:color .2s ease; }
+    .lnk:hover { color:var(--text-hi); }
+    .ico { width:38px; height:38px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-raised); transition:border-color .25s ease, background .25s ease; }
+    .ico:hover { border-color:var(--accent-deep); background:#081B12; }
+    .btn-p { background:var(--accent); color:var(--on-accent); font-weight:600; border-radius:8px; text-align:center; transition:filter .2s ease, transform .12s ease; cursor:pointer; border:none; font-family:inherit; }
+    .btn-p:hover { filter:brightness(1.07); }
+    .btn-p:active { transform:translateY(1px); }
+    .btn-s { border:1px solid var(--border); color:var(--text); font-weight:600; border-radius:8px; text-align:center; background:transparent; transition:border-color .2s ease, color .2s ease; cursor:pointer; font-family:inherit; }
+    .btn-s:hover { border-color:var(--accent-deep); color:var(--text-hi); }
+    .chip { border:1px solid var(--border); border-radius:100px; padding:8px 16px; font-size:13px; color:var(--text-link); background:transparent; cursor:pointer; font-family:inherit; transition:border-color .2s ease, color .2s ease, background .2s ease; }
+    .chip:hover { border-color:var(--accent-deep); color:var(--text-hi); }
+    .fab { position:absolute; right:26px; bottom:26px; width:52px; height:52px; border-radius:14px; background:#06150F; border:1px solid #2E854D; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 7px rgba(86,189,120,0.05); }
+    .qty { width:30px; height:30px; border:1px solid var(--border); border-radius:6px; background:transparent; color:var(--text); font-size:15px; cursor:pointer; font-family:inherit; transition:border-color .2s ease; }
+    .qty:hover { border-color:var(--accent-deep); }
+
+    </style>
+</helmet>
+<div style="position:relative; width:1440px; background:var(--bg); color:var(--text); padding-bottom:88px;">
+
+  <!-- ============ portada ============ -->
+  <div style="position:relative; padding:64px 64px 48px 64px; border-bottom:1px solid var(--card); overflow:hidden;">
+    <div class="glow-pulse-corner" style="position:absolute; top:-200px; right:-60px; width:560px; height:560px; border-radius:50%; background:radial-gradient(circle, rgba(var(--accent-deep-rgb),0.14), transparent 65%); pointer-events:none;"></div>
+    <div style="position:relative; max-width:800px;">
+      <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:22px;">Documento interno · producción de imagen</div>
+      <h1 class="dsp" style="font-weight:800; font-size:60px; line-height:1.0; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 20px 0;">
+        Dos funciones<br><span class="dsp-i" style="font-weight:600; padding-left:52px;">por producto.</span>
+      </h1>
+      <p style="font-size:16.5px; line-height:1.75; color:var(--text-muted); margin:0;">Cada máscara o traje necesita dos tipos de imagen, y hacen trabajos distintos. La primera vende de lejos y da el ambiente; las siguientes venden de cerca y muestran la pieza. Toda la web está construida sobre esa separación.</p>
+    </div>
+  </div>
+
+  <!-- ============ las dos funciones ============ -->
+  <div style="padding:56px 64px 0 64px;">
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:28px;">
+
+      <div style="border:1px solid var(--accent-deep); border-radius:16px; overflow:hidden;">
+        <div class="pbg" style="height:300px;">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s0_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s0_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s0_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s0_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s0_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s0_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s0_k)"/><ellipse cx="1240" cy="190" rx="237.60000000000002" ry="237.60000000000002" fill="url(#s0_m)"/><circle cx="1240" cy="190" r="54" fill="#DFF3E6" opacity="0.30"/><circle cx="1240" cy="190" r="54" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 700h1600v200H0z" fill="#020A06"/><path d="M760 120 400 706h720z" fill="#061710"/><path d="M760 120 400 706h720z" fill="none" stroke="#2E854D" stroke-width="2" opacity="0.45"/><path d="M760 120 560 706M760 120 660 706M760 120 860 706M760 120 960 706" stroke="#0C2417" stroke-width="8"/><path d="M400 706c24-22 48-22 72 0s48 22 72 0 48-22 72 0 48 22 72 0 48-22 72 0 48 22 72 0 48-22 72 0 48 22 72 0" fill="none" stroke="#0F2C1C" stroke-width="9"/><path d="M760 120v-56h74l-22 20 22 20h-74" fill="#0F2C1C"/><path d="M150 470c180-90 420-120 610-96" fill="none" stroke="#193C28" stroke-width="2.4" opacity="0.7"/><g fill="#9BE9B8" opacity="0.55"><circle cx="200" cy="464" r="5"/><circle cx="300" cy="440" r="5"/><circle cx="400" cy="422" r="5"/><circle cx="500" cy="404" r="5"/><circle cx="600" cy="390" r="5"/><circle cx="700" cy="380" r="5"/></g><path d="M0 640c120-30 220-18 300 24l-40 60H0z" fill="#020A06"/><ellipse cx="800" cy="690" rx="1000" ry="58" fill="url(#s0_f)" filter="url(#s0_bf)" opacity="0.9"/><g transform="translate(980,760) scale(0.8015267175572519)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="780" rx="1000" ry="46" fill="url(#s0_f)" filter="url(#s0_bf)" opacity="0.55"/><path d="M0 762c260-26 520-26 800 0s540 26 800 0v138H0z" fill="#010604"/><rect y="330" width="1600" height="570" fill="url(#s0_v)"/></svg>
+          <svg height="266" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p0_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p0_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p0_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p0_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p0_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p0_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p0_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#p0_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#p0_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#p0_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#p0_r)" stroke-width="3.4" filter="url(#p0_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#p0_b8)"/><ellipse cx="74" cy="92" rx="22" ry="16" fill="url(#p0_o)" filter="url(#p0_b3)"/><ellipse cx="126" cy="92" rx="22" ry="16" fill="url(#p0_o)" filter="url(#p0_b3)"/><path d="M58 82l22 14-22 12z" fill="#010604"/><path d="M142 82l-22 14 22 12z" fill="#010604"/><path d="M58 82l22 14M142 82l-22 14" stroke="#9BE9B8" stroke-width="1.2" opacity="0.6"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M64 138c14 26 58 26 72 0" stroke="#030D07" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M64 141c14 26 58 26 72 0" stroke="#9BE9B8" stroke-width="1.1" fill="none" opacity="0.25"/><path d="M76 148v9M90 154v10M110 154v10M124 148v9" stroke="#0A1B11" stroke-width="2.4" opacity="0.8"/></svg>
+          <span class="kicker" style="position:absolute; top:16px; left:16px; z-index:4; font-size:10px; background:rgba(var(--bg-rgb),0.8); border:1px solid var(--accent-deep); color:var(--accent); padding:5px 11px; border-radius:4px;">IMAGEN 1</span>
+        </div>
+        <div style="padding:28px; background:var(--bg-raised);">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px;">
+            <h2 class="dsp" style="font-weight:700; font-size:26px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">Imagen de película</h2>
+            <span class="mono" style="font-size:12px; color:var(--accent);">16:9 · 1920 × 1080</span>
+          </div>
+          <div class="mono" style="font-size:12.5px; color:var(--accent-bright); background:var(--bg); border:1px solid var(--border); border-radius:7px; padding:11px 14px; margin-bottom:16px;">imagen-de-pelicula-mascara-1.webp</div>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.75; margin:0 0 16px 0;">Una panorámica de ambiente —el escenario donde vive esa máscara— con la pieza recortada encima, hacia el tercio derecho. Es lo único que se ve en la tarjeta del catálogo y lo primero que aparece en la ficha.</p>
+          <div style="display:flex; flex-direction:column; gap:9px; font-size:13px; color:var(--text-faint); line-height:1.6;">
+            <div style="display:flex; gap:11px;"><span style="color:var(--accent); flex-shrink:0; margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Tercio izquierdo vacío: ahí va el titular en la home y en los banners.</span></div>
+            <div style="display:flex; gap:11px;"><span style="color:var(--accent); flex-shrink:0; margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>La pieza sigue siendo reconocible aunque el fondo cambie por producto.</span></div>
+            <div style="display:flex; gap:11px;"><span style="color:var(--accent); flex-shrink:0; margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Se recorta sola a 3:4 y a 4:5 sin perder a la pieza: por eso va centrada en altura.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border:1px solid var(--line); border-radius:16px; overflow:hidden;">
+        <div class="pbg" style="height:300px;">
+          <svg height="266" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p1_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p1_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p1_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p1_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p1_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p1_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p1_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#p1_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#p1_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#p1_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#p1_r)" stroke-width="3.4" filter="url(#p1_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#p1_b8)"/><ellipse cx="74" cy="92" rx="22" ry="16" fill="url(#p1_o)" filter="url(#p1_b3)"/><ellipse cx="126" cy="92" rx="22" ry="16" fill="url(#p1_o)" filter="url(#p1_b3)"/><path d="M58 82l22 14-22 12z" fill="#010604"/><path d="M142 82l-22 14 22 12z" fill="#010604"/><path d="M58 82l22 14M142 82l-22 14" stroke="#9BE9B8" stroke-width="1.2" opacity="0.6"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M64 138c14 26 58 26 72 0" stroke="#030D07" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M64 141c14 26 58 26 72 0" stroke="#9BE9B8" stroke-width="1.1" fill="none" opacity="0.25"/><path d="M76 148v9M90 154v10M110 154v10M124 148v9" stroke="#0A1B11" stroke-width="2.4" opacity="0.8"/></svg>
+          <span class="kicker" style="position:absolute; top:16px; left:16px; z-index:4; font-size:10px; background:rgba(var(--bg-rgb),0.8); border:1px solid var(--border); color:var(--text-muted); padding:5px 11px; border-radius:4px;">IMÁGENES 2 A 5</span>
+        </div>
+        <div style="padding:28px; background:var(--bg-raised);">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:14px;">
+            <h2 class="dsp" style="font-weight:700; font-size:26px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">La pieza real</h2>
+            <span class="mono" style="font-size:12px; color:var(--accent);">4:5 · 1200 × 1500</span>
+          </div>
+          <div class="mono" style="font-size:12.5px; color:var(--accent-bright); background:var(--bg); border:1px solid var(--border); border-radius:7px; padding:11px 14px; margin-bottom:16px;">mascara-silente-01-latex-2.webp</div>
+          <p style="font-size:14px; color:var(--text-muted); line-height:1.75; margin:0 0 16px 0;">La máscara o el traje recortados sobre el fondo fijo verde, siempre igual: mismo halo, misma luz de contra, misma sombra de apoyo. Cuatro tomas por producto: frente, tres cuartos, perfil y detalle.</p>
+          <div style="display:flex; flex-direction:column; gap:9px; font-size:13px; color:var(--text-faint); line-height:1.6;">
+            <div style="display:flex; gap:11px;"><span style="color:var(--accent); flex-shrink:0; margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Idénticas entre sí: el catálogo se ve uniforme aunque las fotos vengan de proveedores distintos.</span></div>
+            <div style="display:flex; gap:11px;"><span style="color:var(--accent); flex-shrink:0; margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>La pieza ocupa entre el 75 % y el 85 % de la altura, apoyada abajo.</span></div>
+            <div style="display:flex; gap:11px;"><span style="color:var(--accent); flex-shrink:0; margin-top:2px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>Son las que resuelven la duda de compra: material, textura, acabado.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ cómo se genera el fondo ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <div style="border-top:1px solid var(--card); padding-top:52px;">
+      <div style="max-width:820px; margin-bottom:32px;">
+        <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:16px;">La regla que lo resuelve todo</div>
+        <h2 class="dsp" style="font-weight:700; font-size:38px; line-height:1.06; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 16px 0;">El fondo se genera una vez y no se vuelve a generar nunca</h2>
+        <p style="font-size:15.5px; line-height:1.75; color:var(--text-muted); margin:0;">Si le pides a la IA que invente el fondo en cada imagen, cada resultado sale con un verde distinto, otro centro de halo y otro grano. Con treinta productos tienes treinta fondos parecidos pero no iguales, y eso es exactamente lo que hace que una tienda se vea barata. Un archivo fijo elimina el problema de raíz.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden; margin-bottom:28px;">
+        <div style="background:var(--bg-raised); padding:28px;">
+          <div class="mono" style="font-size:13px; color:var(--accent); margin-bottom:22px;">01</div>
+          <div class="kicker" style="font-size:15px; color:var(--text-hi); margin-bottom:12px;">Tres archivos maestros</div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.7; margin:0 0 14px 0;">Generas el fondo una sola vez por proporción y los guardas. No se tocan más.</p>
+          <div style="display:flex; flex-direction:column; gap:7px;">
+            <div class="mono" style="font-size:11.5px; color:var(--accent-bright);">fondo-galnyx-4x5.png · 1200 × 1500</div>
+            <div class="mono" style="font-size:11.5px; color:var(--accent-bright);">fondo-galnyx-3x4.png · 1200 × 1600</div>
+            <div class="mono" style="font-size:11.5px; color:var(--accent-bright);">fondo-galnyx-16x9.png · 1920 × 1080</div>
+          </div>
+        </div>
+        <div style="background:var(--bg-raised); padding:28px;">
+          <div class="mono" style="font-size:13px; color:var(--accent); margin-bottom:22px;">02</div>
+          <div class="kicker" style="font-size:15px; color:var(--text-hi); margin-bottom:12px;">Candado de estilo</div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.7; margin:0 0 14px 0;">Un bloque fijo de texto que se pega al final de cualquier pedido de imagen: fondos, productos, panorámicas, anuncios de Meta y TikTok.</p>
+          <p style="font-size:13px; color:var(--text-faint); line-height:1.7; margin:0;">Es lo que hace que todo lo que genere la IA pertenezca a la misma marca aunque lo pidas con seis meses de diferencia.</p>
+        </div>
+        <div style="background:var(--bg-raised); padding:28px;">
+          <div class="mono" style="font-size:13px; color:var(--accent); margin-bottom:22px;">03</div>
+          <div class="kicker" style="font-size:15px; color:var(--text-hi); margin-bottom:12px;">El montaje va a mano</div>
+          <p style="font-size:13.5px; color:var(--text-muted); line-height:1.7; margin:0 0 14px 0;">Los modelos de imagen no pegan una foto sobre otra: la redibujan. Aunque adjuntes tu fondo, va a salir parecido pero no idéntico.</p>
+          <p style="font-size:13px; color:var(--text-faint); line-height:1.7; margin:0;">En photopea.com, gratis y sin instalar: abres el fondo, colocas el PNG recortado, lo escalas al 78 % de la altura y exportas. Dos minutos la primera vez, treinta segundos las siguientes.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1.25fr 1fr; gap:24px;">
+        <div style="background:#040F09; border:1px solid var(--accent-deep); border-radius:12px; overflow:hidden;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 22px; border-bottom:1px solid var(--card);">
+            <span class="mono" style="font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);">Pedido del fondo base · una sola vez</span>
+          </div>
+          <div class="mono" style="font-size:12.5px; line-height:1.85; color:var(--text-link); padding:24px 22px; white-space:pre-line;">Genera un fondo de estudio minimalista, completamente vacío, sin ningún objeto.
+
+Base de color verde casi negro (#020A06). Un halo radial suave centrado al 50 % horizontal y 40 % vertical, que sube a verde oscuro (#143020) en el centro y cae a (#04100A) hacia los bordes.
+
+Encima, una retícula técnica apenas perceptible: líneas finas cada 44 píxeles, como un plano de ingeniería a un 2 % de opacidad. Tiene que insinuarse, no leerse.
+
+Viñeta suave en las cuatro esquinas. Grano de película fino y parejo.
+
+En el borde inferior, una sombra elíptica difusa centrada, de unos dos tercios del ancho: la sombra de apoyo de un objeto que todavía no está.
+
+Completamente vacío: sin texto, sin logos, sin objetos, sin figuras, sin marcos. Degradado fotográfico limpio, sin bandas.
+
+Formato: 1200 × 1500 px, relación 4:5 vertical.</div>
+        </div>
+
+        <div style="background:#040F09; border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+          <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 22px; border-bottom:1px solid var(--card);">
+            <span class="mono" style="font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted);">Candado de estilo · va en todo</span>
+          </div>
+          <div class="mono" style="font-size:12px; line-height:1.85; color:var(--text-link); padding:24px 22px; white-space:pre-line;">Color: verde esmeralda profundo sobre negro casi puro. Base #020A06, sombras #04100A, medios #143020, acento #56BD78. Nada de azules, morados, naranjas ni rojos saturados. Nada de fondos blancos o claros.
+
+Luz: principal suave desde arriba a la izquierda. Luz de contra verde (#56BD78) en el borde derecho del sujeto. Contraste alto, negros profundos.
+
+Textura: grano de película fino, viñeta suave, acabado fotográfico realista. Nada de ilustración, render 3D obvio ni cartoon.
+
+Prohibido: texto, marcas de agua, logos, firmas, bordes, marcos, collages.
+
+Salida: nítida, sin ruido de compresión ni artefactos en los bordes.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:14px; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin-top:20px;">
+        <span style="color:var(--accent); flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <p style="font-size:13.5px; color:var(--text-muted); line-height:1.7; margin:0;">Los tres formatos usan el mismo texto: solo cambias la última línea por «1200 × 1600 px, relación 3:4 vertical» o por «1920 × 1080 px, relación 16:9 horizontal, con la sombra desplazada al tercio derecho y el tercio izquierdo más oscuro y limpio». Todo esto está también en <span class="mono" style="color:var(--accent-bright);">prompts/04-fondos-galnyx.txt</span>, listo para copiar sin abrir el navegador.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ cómo se usan ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">Dónde aparece cada una</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Los tres recortes salen de las mismas dos fotos. No hay que producir nada más.</p>
+
+    <div style="display:grid; grid-template-columns: 300px 300px 1fr; gap:28px; align-items:flex-start;">
+      <div>
+        <div class="pbg" style="aspect-ratio:4/5; border:1px solid var(--line); border-radius:12px;">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s1_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s1_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s1_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s1_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s1_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s1_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s1_k)"/><ellipse cx="300" cy="170" rx="264" ry="264" fill="url(#s1_m)"/><circle cx="300" cy="170" r="60" fill="#DFF3E6" opacity="0.30"/><circle cx="300" cy="170" r="60" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 720h1600v180H0z" fill="#020A06"/><path d="M860 720V400l180-140 180 140v320z" fill="#04120B"/><path d="M1000 400 1040 250l40 150z" fill="#061710"/><path d="M840 400 1040 244l200 156" fill="none" stroke="#2E854D" stroke-width="2.4" opacity="0.5"/><path d="M1220 720V330l70-70 70 70v390z" fill="#03100A"/><path d="M1210 330 1290 246l80 84" fill="none" stroke="#2E854D" stroke-width="2" opacity="0.4"/><rect x="1108" y="60" width="26" height="130" fill="#061710"/><g opacity="0.9"><rect x="930" y="470" width="52" height="76" rx="26" fill="#2E854D" opacity="0.32"/><rect x="1098" y="470" width="52" height="76" rx="26" fill="#7BD497" opacity="0.42" filter="url(#s1_bs)"/><rect x="1098" y="470" width="52" height="76" rx="26" fill="#9BE9B8" opacity="0.30"/><rect x="1264" y="452" width="42" height="62" rx="21" fill="#2E854D" opacity="0.26"/></g><path d="M930 546h52M1098 546h52" stroke="#0B2116" stroke-width="3"/><ellipse cx="800" cy="706" rx="1000" ry="54" fill="url(#s1_f)" filter="url(#s1_bf)" opacity="0.9"/><g stroke="#020A06" stroke-width="16" opacity="0.95"><path d="M40 790v-96M140 790v-96M240 790v-96M340 790v-96M440 790v-96M540 790v-96M640 790v-96"/></g><path d="M0 700h700" stroke="#020A06" stroke-width="14"/><g transform="translate(560,782) scale(0.7633587786259542)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><path d="M0 784c300-24 600-24 900 0s400 22 700 0v116H0z" fill="#010604"/><rect y="330" width="1600" height="570" fill="url(#s1_v)"/></svg>
+          <svg height="320" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p2_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p2_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p2_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p2_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p2_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p2_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p2_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#p2_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#p2_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#p2_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#p2_r)" stroke-width="3.4" filter="url(#p2_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#p2_b8)"/><ellipse cx="76" cy="96" rx="21" ry="18" fill="url(#p2_o)" filter="url(#p2_b3)"/><ellipse cx="124" cy="96" rx="21" ry="18" fill="url(#p2_o)" filter="url(#p2_b3)"/><ellipse cx="76" cy="96" rx="13" ry="15" fill="#010604"/><ellipse cx="124" cy="96" rx="13" ry="15" fill="#010604"/><circle cx="80" cy="91" r="3.2" fill="#CFF7DE" opacity="0.85"/><circle cx="128" cy="91" r="3.2" fill="#CFF7DE" opacity="0.85"/><path d="M63 96a13 15 0 0 1 26 0M111 96a13 15 0 0 1 26 0" stroke="#9BE9B8" stroke-width="1.2" fill="none" opacity="0.55"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M92 150c5 5 11 5 16 0" stroke="#040F09" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M128 40l7 20-12 8 9 16" stroke="#0A1B11" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9"/><path d="M128 40l7 20-12 8 9 16" stroke="#9BE9B8" stroke-width="0.8" fill="none" opacity="0.3"/></svg>
+        </div>
+        <div style="margin-top:14px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:7px;">
+            <span class="kicker" style="font-size:13px; color:var(--text-hi);">Tarjeta de catálogo</span>
+            <span class="mono" style="font-size:11.5px; color:var(--accent);">4:5</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--text-faint); line-height:1.65; margin:0;">Imagen 1 recortada. El nombre, el material y el precio van debajo, no encima: así se compara de un vistazo.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="pbg" style="aspect-ratio:3/4; border:1px solid var(--line); border-radius:12px;">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s2_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s2_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s2_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s2_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s2_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s2_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s2_k)"/><ellipse cx="1120" cy="300" rx="316.8" ry="316.8" fill="url(#s2_m)"/><circle cx="1120" cy="300" r="72" fill="#DFF3E6" opacity="0.30"/><circle cx="1120" cy="300" r="72" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 620c140-16 280-6 420 8s280 22 420 14 280-30 420-32 200 6 340 14v276H0z" fill="#03100A"/><path d="M0 660h1600v240H0z" fill="#04140C"/><g opacity="0.35"><ellipse cx="1120" cy="740" rx="60" ry="14" fill="#9BE9B8"/><ellipse cx="1120" cy="790" rx="44" ry="9" fill="#7BD497"/><ellipse cx="1120" cy="836" rx="30" ry="6" fill="#56BD78"/></g><g fill="#010604"><path d="M240 900V520c0-30-40-52-40-92 18 26 40 38 40 38V330c0-18 9-26 9-26s9 8 9 26v146s24-16 44-48c0 44-44 66-44 94v378z"/><path d="M180 470c-40-24-70-16-96 12 34-6 62 2 96 22z"/><path d="M318 440c40-26 72-20 100 8-36-8-66 0-100 20z"/></g><g stroke="#020A06" stroke-width="5" stroke-linecap="round"><path d="M60 900V700M96 900V670M132 900V712M168 900V684M1400 900V706M1440 900V676M1480 900V716M1520 900V690M1560 900V702"/></g><ellipse cx="800" cy="646" rx="1000" ry="44" fill="url(#s2_f)" filter="url(#s2_bf)" opacity="0.9"/><g transform="translate(700,700) scale(0.7251908396946565)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="712" rx="1000" ry="34" fill="url(#s2_f)" filter="url(#s2_bf)" opacity="0.7"/><g stroke="#193C28" stroke-width="2" opacity="0.4"><path d="M420 780h360M380 830h440"/></g><rect y="330" width="1600" height="570" fill="url(#s2_v)"/></svg>
+          <svg height="360" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p3_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p3_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p3_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p3_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p3_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p3_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p3_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#p3_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#p3_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#p3_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#p3_r)" stroke-width="3.4" filter="url(#p3_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#p3_b8)"/><ellipse cx="76" cy="96" rx="19" ry="12" fill="url(#p3_o)" filter="url(#p3_b3)"/><ellipse cx="124" cy="96" rx="19" ry="12" fill="url(#p3_o)" filter="url(#p3_b3)"/><path d="M62 97c8-7 20-7 28 0-8 7-20 7-28 0zM110 97c8-7 20-7 28 0-8 7-20 7-28 0z" fill="#010604"/><path d="M62 97c8-7 20-7 28 0M110 97c8-7 20-7 28 0" stroke="#9BE9B8" stroke-width="1.2" fill="none" opacity="0.6"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M84 152c10 5 22 5 32 0" stroke="#040F09" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M44 40h112L104 2z" fill="url(#p3_c)" stroke="#3C7F55" stroke-width="1.4" stroke-linejoin="round"/><path d="M44 40h112" stroke="#9BE9B8" stroke-width="1.1" opacity="0.35"/></svg>
+          <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:20px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.94), transparent);">
+            <div class="dsp" style="font-weight:700; font-size:21px; color:var(--text-hi);">Bruja moderna</div>
+            <div class="mono" style="font-size:10px; color:var(--text-muted); margin-top:5px;">7 piezas</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:7px;">
+            <span class="kicker" style="font-size:13px; color:var(--text-hi);">Tarjeta de colección</span>
+            <span class="mono" style="font-size:11.5px; color:var(--accent);">3:4</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--text-faint); line-height:1.65; margin:0;">Acá sí va el nombre encima, sobre el degradado: no se compara, se elige por ambiente.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="pbg" style="aspect-ratio:16/9; border:1px solid var(--line); border-radius:12px;">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s3_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s3_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s3_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s3_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s3_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s3_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s3_k)"/><ellipse cx="1080" cy="200" rx="220.00000000000003" ry="220.00000000000003" fill="url(#s3_m)"/><circle cx="1080" cy="200" r="50" fill="#DFF3E6" opacity="0.30"/><circle cx="1080" cy="200" r="50" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 690c60-40 90-96 130-96s60 56 120 60 90-70 140-70 70 66 130 70 96-84 150-84 82 78 140 82 96-62 150-62 84 60 140 62 100-52 160-52 130 46 160 62v138H0z" fill="#03100A"/><ellipse cx="800" cy="664" rx="1000" ry="50" fill="url(#s3_f)" filter="url(#s3_bf)" opacity="0.85"/><g fill="#010604"><path d="M250 900V520c0-28-30-50-30-84 14 24 30 34 30 34V330c0-20 10-30 10-30s10 10 10 30v148s18-14 34-42c0 38-34 60-34 86v378z"/><path d="M1330 900V560c0-26-28-44-28-76 12 22 28 30 28 30V400c0-18 9-28 9-28s9 10 9 28v112s16-12 30-38c0 34-30 54-30 78v348z"/><path d="M620 900V620c0-20-22-36-22-60 10 18 22 24 22 24V468c0-16 8-24 8-24s8 8 8 24v112s14-10 26-32c0 28-26 46-26 66v286z"/></g><g transform="translate(880,800) scale(0.7251908396946565)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="800" rx="1000" ry="44" fill="url(#s3_f)" filter="url(#s3_bf)" opacity="0.6"/><path d="M0 806c280-30 560-30 840 0s480 28 760 0v94H0z" fill="#010604"/><path d="M0 0c130 40 200 120 236 190-70-40-160-56-236-52z" fill="#020A06" opacity="0.9"/><rect y="330" width="1600" height="570" fill="url(#s3_v)"/></svg>
+          <svg height="250" viewBox="0 0 440 560" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p4_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p4_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p4_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p4_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p4_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p4_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p4_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="230" cy="300" rx="190" ry="240" fill="#2E854D" opacity="0.16" filter="url(#p4_b18)"/><path d="M300 168c-19 0-32 9-37 24l-22 148-11 220h140l-11-220-22-148c-5-15-18-24-37-24z" fill="url(#p4_c)"/><path d="M300 168c-19 0-32 9-37 24l-22 148-11 220" fill="none" stroke="#2B5239" stroke-width="1.6"/><path d="M370 340l11 220" fill="none" stroke="url(#p4_r)" stroke-width="3.4" filter="url(#p4_b3)"/><path d="M279 176l21 52 21-52" fill="#0A1B11"/><path d="M279 176l21 52 21-52" fill="none" stroke="#3C7F55" stroke-width="1.5" stroke-linejoin="round"/><path d="M300 228v300" stroke="#0A1B11" stroke-width="2.6"/><rect x="318" y="206" width="20" height="13" fill="#2E854D" opacity="0.75"/><ellipse cx="300" cy="118" rx="30" ry="40" fill="url(#p4_s)"/><ellipse cx="303" cy="118" rx="30" ry="40" fill="none" stroke="url(#p4_r)" stroke-width="2.4" filter="url(#p4_b3)"/><path d="M283 112c5-6 13-6 18 0-5 6-13 6-18 0zM301 112c5-6 13-6 18 0-5 6-13 6-18 0z" fill="#010604"/><path d="M283 112c5-6 13-6 18 0M301 112c5-6 13-6 18 0" stroke="#9BE9B8" stroke-width="1" fill="none" opacity="0.65"/><path d="M291 140h18" stroke="#040F09" stroke-width="2.6" stroke-linecap="round"/><path d="M152 150c-18 0-30 8-35 23l-23 152-12 235h140l-12-235-23-152c-5-15-17-23-35-23z" fill="url(#p4_c)"/><path d="M152 150c-18 0-30 8-35 23l-23 152-12 235" fill="none" stroke="#2B5239" stroke-width="1.6"/><path d="M129 156l23 54 23-54" fill="#123023"/><path d="M129 156l23 54 23-54" fill="none" stroke="#3C7F55" stroke-width="1.6" stroke-linejoin="round"/><path d="M134 160l18 44 18-44" fill="none" stroke="#56BD78" stroke-width="1.2" opacity="0.7"/><path d="M152 210v300" stroke="#0A1B11" stroke-width="2.6"/><path d="M96 322l-11 234M208 322l11 234" stroke="#1E4430" stroke-width="1.4"/><ellipse cx="152" cy="98" rx="31" ry="41" fill="url(#p4_s)"/><ellipse cx="155" cy="98" rx="31" ry="41" fill="none" stroke="url(#p4_r)" stroke-width="2.6" filter="url(#p4_b3)"/><path d="M134 92c5-6 14-6 19 0-5 6-14 6-19 0zM153 92c5-6 14-6 19 0-5 6-14 6-19 0z" fill="#010604"/><path d="M134 92c5-6 14-6 19 0M153 92c5-6 14-6 19 0" stroke="#9BE9B8" stroke-width="1.1" fill="none" opacity="0.7"/><path d="M143 122h18" stroke="#040F09" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="136" cy="116" rx="12" ry="9" fill="#9BE9B8" opacity="0.08" filter="url(#p4_b8)"/></svg>
+          <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(96deg, rgba(var(--bg-rgb),0.92) 26%, transparent 66%);"></div>
+          <div style="position:absolute; z-index:4; left:32px; top:50%; transform:translateY(-50%);">
+            <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:10px;">Tercio libre para el titular</div>
+            <div class="dsp" style="font-weight:800; font-size:32px; line-height:0.98; color:var(--text-hi);">Deja de ser<br><span class="dsp-i" style="font-weight:600; padding-left:24px;">quien eras.</span></div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:7px;">
+            <span class="kicker" style="font-size:13px; color:var(--text-hi);">Portada y banners</span>
+            <span class="mono" style="font-size:11.5px; color:var(--accent);">16:9</span>
+          </div>
+          <p style="font-size:12.5px; color:var(--text-faint); line-height:1.65; margin:0;">Imagen 1 sin recortar. El degradado negro de la izquierda es de la web, no de la foto: por eso ese tercio tiene que llegar vacío.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ los dos pedidos a ChatGPT ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">Los dos pedidos a ChatGPT</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Uno por función. Súbele la foto del catálogo del proveedor y, en el segundo, también tu archivo de fondo fijo.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:24px;">
+
+      <div style="background:#040F09; border:1px solid var(--accent-deep); border-radius:12px; overflow:hidden;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 22px; border-bottom:1px solid var(--card);">
+          <span class="mono" style="font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent);">Pedido A · imagen de película 16:9</span>
+        </div>
+        <div class="mono" style="font-size:12.5px; line-height:1.85; color:var(--text-link); padding:24px 22px; white-space:pre-line;">Recorta la máscara de la imagen que subí, con borde limpio y sin halo blanco.
+
+Genera detrás una escena nocturna fotorrealista de {una carpa de circo abandonada entre niebla}, iluminada por una sola farola cenital, con neblina baja y grano de película fino.
+
+Gradúa el color a verde esmeralda profundo y negro casi puro (#020A06 y #0F241A), con una luz de contra verde suave (#56BD78) en el borde derecho de la máscara.
+
+Coloca la máscara en el tercio derecho del encuadre, a tamaño protagonista, y deja el tercio izquierdo completamente vacío y oscuro, sin objetos ni texto.
+
+Devuélvela en 1920 × 1080 px, nítida, sin texto, sin marca de agua y sin bordes añadidos.</div>
+      </div>
+
+      <div style="background:#040F09; border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:14px 22px; border-bottom:1px solid var(--card);">
+          <span class="mono" style="font-size:10.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-muted);">Pedido B · pieza real 4:5</span>
+        </div>
+        <div class="mono" style="font-size:12.5px; line-height:1.85; color:var(--text-link); padding:24px 22px; white-space:pre-line;">Toma la primera imagen (la máscara) y recórtala del fondo del catálogo con borde limpio, sin halo blanco ni restos de sombra.
+
+Componla sobre la segunda imagen (mi fondo fijo) centrada horizontalmente, ocupando el 78 % de la altura y apoyada en el tercio inferior, no flotando en el centro.
+
+Iguala la luz al fondo: principal desde arriba a la izquierda, contra verde suave (#56BD78) en el borde derecho, y sombra de apoyo elíptica y difusa debajo.
+
+Limpia la pieza: quita marcas de agua, logos, etiquetas, manos y maniquíes. No cambies su forma, color ni acabado real.
+
+Devuélvela en 1200 × 1500 px, nítida, sin ruido de compresión y sin texto.</div>
+      </div>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:14px; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin-top:20px;">
+      <span style="color:var(--accent); flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <p style="font-size:13.5px; color:var(--text-muted); line-height:1.7; margin:0;">En el pedido A, lo único que cambias entre productos es lo que va entre llaves: la escena. Para el payaso, una carpa de circo; para la muñeca, una casa victoriana con una ventana encendida; para el cazador, un bosque muerto con niebla; para el espectro, una columnata en ruinas; para la criatura, una nave industrial; para la bruja, un pantano con luna baja. Todo lo demás se queda igual y por eso todas las imágenes se ven de la misma familia.</p>
+    </div>
+  </div>
+
+  <!-- ============ nombres y sí/no ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+
+      <div style="border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+        <div style="padding:18px 24px; border-bottom:1px solid var(--card); background:#040F09;">
+          <span class="kicker" style="font-size:14px; color:var(--text-hi);">Cómo nombrar cada archivo</span>
+        </div>
+        <div style="padding:24px; display:flex; flex-direction:column; gap:16px;">
+          <div>
+            <div class="mono" style="font-size:12.5px; color:var(--accent-bright); margin-bottom:6px;">imagen-de-pelicula-mascara-1.webp</div>
+            <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">La panorámica de ambiente. Una sola por producto.</div>
+          </div>
+          <div>
+            <div class="mono" style="font-size:12.5px; color:var(--accent-bright); margin-bottom:6px;">mascara-silente-01-latex-2.webp</div>
+            <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Pieza real, vista frontal. Y así hasta la -5.</div>
+          </div>
+          <div style="border-top:1px solid var(--card); padding-top:16px;">
+            <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); margin-bottom:8px;">Texto alternativo</div>
+            <div style="font-size:12.5px; color:var(--text-muted); line-height:1.7;">«Máscara Silente 01 de látex con acabado mate, vista frontal». Es lo que te trae tráfico desde Google Imágenes y lo único que lee alguien con lector de pantalla.</div>
+          </div>
+          <div style="border-top:1px solid var(--card); padding-top:16px;">
+            <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); margin-bottom:8px;">Peso</div>
+            <div style="font-size:12.5px; color:var(--text-muted); line-height:1.7;">WebP por debajo de 150 KB. Una foto de 1,8 MB baja a unos 120 KB sin que se note, y es lo que más pesa en la velocidad en móvil.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:24px;">
+        <div style="border:1px solid var(--accent-deep); border-radius:14px; overflow:hidden;">
+          <div style="display:flex; align-items:center; gap:11px; padding:16px 24px; border-bottom:1px solid var(--card); background:rgba(var(--accent-rgb),0.05);">
+            <span style="width:22px; height:22px; border-radius:6px; background:var(--accent); color:var(--on-accent); display:flex; align-items:center; justify-content:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="kicker" style="font-size:14px; color:var(--text-hi);">Entra</span>
+          </div>
+          <div style="padding:22px 24px; display:flex; flex-direction:column; gap:12px; font-size:13px; color:var(--text-muted); line-height:1.65;">
+            <div>Todas las panorámicas con la misma graduación de color y la misma dirección de luz.</div>
+            <div>Todas las fotos de pieza con el mismo fondo, el mismo encuadre y la misma escala.</div>
+            <div>Sin texto, sin logo del proveedor, sin marca de agua.</div>
+            <div>Bordes de recorte limpios, sin halo blanco de un píxel.</div>
+          </div>
+        </div>
+
+        <div style="border:1px solid var(--border); border-radius:14px; overflow:hidden;">
+          <div style="display:flex; align-items:center; gap:11px; padding:16px 24px; border-bottom:1px solid var(--card); background:#040F09;">
+            <span style="width:22px; height:22px; border-radius:6px; border:1px solid var(--border); color:var(--text-faint); display:flex; align-items:center; justify-content:center; font-size:15px; line-height:1;">×</span>
+            <span class="kicker" style="font-size:14px; color:var(--text-muted);">Se devuelve a rehacer</span>
+          </div>
+          <div style="padding:22px 24px; display:flex; flex-direction:column; gap:12px; font-size:13px; color:var(--text-faint); line-height:1.65;">
+            <div>Una panorámica más clara o más azul que el resto: rompe la familia.</div>
+            <div>La pieza flotando sin sombra de apoyo: se ve pegoteada.</div>
+            <div>El tercio izquierdo ocupado en una 16:9: el titular queda ilegible.</div>
+            <div>Ruido de compresión o pixelado al ampliar al 100 %.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ mientras tanto ============ -->
+  <div style="padding:64px 64px 0 64px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; gap:48px; background:linear-gradient(120deg,var(--bg-raised-2),var(--bg-raised)); border:1px solid var(--border); border-radius:16px; padding:40px 44px;">
+      <div style="max-width:760px;">
+        <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Lo que estás viendo ahora en el prototipo</div>
+        <h2 class="dsp" style="font-weight:700; font-size:28px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 12px 0;">Las seis escenas y los maniquíes están dibujados, no son fotos</h2>
+        <p style="font-size:14.5px; color:var(--text-muted); line-height:1.7; margin:0;">Cada hueco trae ya su panorámica y su pieza, hechas en SVG y CSS: cero peso de hosting y suficiente para mostrar la tienda entera antes de tener una sola foto. Cuando llegue la imagen real se reemplaza el contenido del marco y ni el tamaño, ni el degradado, ni el titular se mueven.</p>
+      </div>
+      <div class="pbg" style="width:180px; height:225px; border:1px solid var(--accent-deep); border-radius:12px; flex-shrink:0;">
+        <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s4_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s4_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s4_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s4_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s4_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s4_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s4_k)"/><rect width="1600" height="900" fill="#03100A"/><g opacity="0.95"><rect x="980" y="120" width="440" height="300" fill="#061710"/><rect x="980" y="120" width="440" height="300" fill="none" stroke="#2E854D" stroke-width="2.4" opacity="0.5"/><path d="M1090 120v300M1200 120v300M1310 120v300M980 220h440M980 320h440" stroke="#0F2C1C" stroke-width="6"/><rect x="980" y="120" width="440" height="300" fill="#7BD497" opacity="0.13"/></g><ellipse cx="1200" cy="300" rx="420" ry="300" fill="url(#s4_m)" opacity="0.7"/><g fill="#020A06"><rect x="60" y="300" width="150" height="440" rx="14"/><rect x="230" y="380" width="110" height="360" rx="12"/><rect x="1440" y="420" width="120" height="320" rx="12"/></g><g stroke="#0B2116" stroke-width="22" fill="none" stroke-linecap="round"><path d="M0 240h420M0 300h300"/></g><g stroke="#193C28" stroke-width="3" fill="none" opacity="0.7"><path d="M60 340h150M60 400h150M230 420h110M230 470h110"/></g><ellipse cx="300" cy="230" rx="150" ry="90" fill="#9BE9B8" opacity="0.10" filter="url(#s4_bf)"/><path d="M0 740h1600v160H0z" fill="#010604"/><ellipse cx="800" cy="726" rx="1000" ry="46" fill="url(#s4_f)" filter="url(#s4_bf)" opacity="0.75"/><g transform="translate(700,782) scale(0.8244274809160306)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><g stroke="#0F2C1C" stroke-width="2" opacity="0.5"><path d="M0 800h1600M0 850h1600"/></g><rect y="330" width="1600" height="570" fill="url(#s4_v)"/></svg>
+        <svg height="200" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p5_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p5_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p5_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p5_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p5_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p5_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p5_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#p5_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#p5_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#p5_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#p5_r)" stroke-width="3.4" filter="url(#p5_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#p5_b8)"/><ellipse cx="76" cy="94" rx="20" ry="12" fill="url(#p5_o)" filter="url(#p5_b3)"/><ellipse cx="124" cy="94" rx="20" ry="12" fill="url(#p5_o)" filter="url(#p5_b3)"/><path d="M60 94h30M110 94h30" stroke="#010604" stroke-width="7" stroke-linecap="round"/><path d="M60 92h30M110 92h30" stroke="#9BE9B8" stroke-width="1.2" opacity="0.55"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M46 62h108" stroke="#0A1B11" stroke-width="2.4" opacity="0.85"/><path d="M56 56v12M72 56v12M88 56v12M104 56v12M120 56v12M136 56v12" stroke="#2B5239" stroke-width="1.8"/><path d="M74 150h52" stroke="#040F09" stroke-width="4.4" stroke-linecap="round"/><path d="M82 145v10M98 145v10M114 145v10" stroke="#2B5239" stroke-width="1.8"/></svg>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

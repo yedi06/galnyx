@@ -1,0 +1,207 @@
+GALNYX — CÓMO GENERAR EL FONDO Y QUE TODAS LAS IMÁGENES SE VEAN IGUALES
+========================================================================
+
+LA REGLA QUE LO RESUELVE TODO
+--------------------------------
+El fondo se genera UNA SOLA VEZ y se guarda como archivo. Nunca se vuelve a
+generar. Cada foto de producto se compone ENCIMA de ese archivo.
+
+Si le pides a la IA que invente el fondo en cada imagen, cada resultado sale
+con un verde distinto, otro centro de halo y otro grano. Con 30 productos
+tienes 30 fondos parecidos pero no iguales, y eso es exactamente lo que hace
+que una tienda se vea barata. Un archivo fijo elimina el problema de raíz.
+
+Vas a generar TRES archivos, una vez, y no los tocas más:
+
+   fondo-galnyx-4x5.png    1200 x 1500 px   → fotos de producto
+   fondo-galnyx-3x4.png    1200 x 1600 px   → tarjetas de colección
+   fondo-galnyx-16x9.png   1920 x 1080 px   → portada y banners
+
+
+PASO 1 — GENERAR EL FONDO BASE (una sola vez, tres veces)
+============================================================
+Pégale esto a ChatGPT tal cual. Cambia solo la última línea para cada formato.
+
+---------------------------- COPIAR DESDE AQUÍ ----------------------------
+Genera un fondo de estudio minimalista, completamente vacío, sin ningún
+objeto.
+
+Base de color verde casi negro (#020A06). Un halo radial suave centrado al
+50 % horizontal y 40 % vertical, que sube a verde oscuro (#143020) en el
+centro y cae a (#04100A) hacia los bordes.
+
+Encima, una retícula técnica apenas perceptible: líneas finas cada 44
+píxeles formando una cuadrícula, como un plano de ingeniería a un 2 % de
+opacidad. Tiene que insinuarse, no leerse.
+
+Viñeta suave en las cuatro esquinas. Grano de película fino y parejo en toda
+la imagen.
+
+En el borde inferior, una sombra elíptica difusa centrada, de unos dos
+tercios del ancho, como la sombra de apoyo de un objeto que todavía no está.
+
+Completamente vacío: sin texto, sin logos, sin objetos, sin figuras, sin
+marcos ni bordes. Degradado fotográfico limpio, sin bandas ni ruido de
+compresión.
+
+Formato: 1200 x 1500 px, relación 4:5 vertical.
+---------------------------- HASTA AQUÍ -----------------------------------
+
+Para los otros dos, repite el mismo texto cambiando la última línea:
+
+   3:4  →  Formato: 1200 x 1600 px, relación 3:4 vertical.
+   16:9 →  Formato: 1920 x 1080 px, relación 16:9 horizontal. La sombra de
+           apoyo va desplazada al tercio derecho, y el tercio izquierdo
+           queda más oscuro y completamente limpio.
+
+Guárdalos con esos nombres exactos. Son tus tres archivos maestros.
+
+
+PASO 2 — EL CANDADO DE ESTILO
+================================
+Este bloque se pega al FINAL de cualquier prompt de imagen que uses de aquí
+en adelante: fondos, fotos de producto, panorámicas de ambiente, anuncios,
+posts de Instagram. Es lo que hace que todo lo que genere la IA pertenezca a
+la misma marca.
+
+---------------------------- COPIAR DESDE AQUÍ ----------------------------
+— CANDADO DE ESTILO GALNYX (no modificar) —
+
+Color: verde esmeralda profundo sobre negro casi puro. Base #020A06,
+sombras #04100A, medios #143020, luz de acento #56BD78. Nada de azules,
+morados, naranjas, amarillos ni rojos saturados. Nada de fondos blancos,
+grises o claros.
+
+Luz: principal suave desde arriba a la izquierda. Luz de contra verde
+(#56BD78) marcando el borde derecho del sujeto. Ambiente oscuro, contraste
+alto, negros profundos que no se van a gris.
+
+Textura: grano de película fino, viñeta suave en las esquinas, acabado
+fotográfico realista. Nada de ilustración, render 3D obvio, cartoon ni
+estética de videojuego.
+
+Prohibido: texto de cualquier tipo, marcas de agua, logos, firmas, bordes,
+marcos, collages, mosaicos, varias imágenes en una.
+
+Salida: nítida, sin ruido de compresión, sin pixelado, sin artefactos en los
+bordes.
+---------------------------- HASTA AQUÍ -----------------------------------
+
+
+PASO 3 — LIMPIAR Y RECORTAR LA PIEZA
+=======================================
+Sube la foto del catálogo del proveedor y pide esto:
+
+---------------------------- COPIAR DESDE AQUÍ ----------------------------
+Recorta esta pieza de su fondo y devuélvemela en PNG con fondo transparente.
+
+Borde limpio, sin halo blanco ni restos del fondo original. Si el recorte
+toca pelo, correas o encaje, respétalos con detalle en lugar de cortarlos
+recto.
+
+Limpia la pieza sin cambiarla: quita marcas de agua, logos del proveedor,
+etiquetas de precio, manos, maniquíes, soportes, cartones y reglas. Corrige
+rayones, polvo y ruido de compresión.
+
+No cambies la forma, el color real, la textura ni el acabado de la pieza. No
+la estilices ni la reinventes: es un producto que voy a despachar y tiene
+que verse como el que llega a la casa del cliente.
+
+Devuélvela a la mayor resolución posible, mínimo 1600 px de alto.
+---------------------------- HASTA AQUÍ -----------------------------------
+
+Si tu plan de ChatGPT no exporta PNG transparente, sube el resultado a
+remove.bg y baja el PNG desde ahí.
+
+
+PASO 4 — MONTAR LA PIEZA SOBRE EL FONDO
+==========================================
+Acá está la decisión importante, y conviene entenderla:
+
+   Los modelos de imagen NO pegan una foto sobre otra: REGENERAN todo.
+   Aunque le adjuntes tu fondo y le digas "usa este", va a redibujarlo
+   parecido pero no idéntico. En una imagen no se nota. En treinta, sí.
+
+Por eso, para las fotos de producto —que son las que se ven una al lado de
+la otra en el catálogo— el montaje se hace a mano. Toma dos minutos y es
+gratis:
+
+   1. Entra a photopea.com (funciona en el navegador, no se instala nada,
+      y abre archivos de Photoshop).
+   2. Archivo → Abrir → fondo-galnyx-4x5.png
+   3. Archivo → Abrir y colocar → el PNG transparente de la pieza.
+   4. Escálala hasta que ocupe entre el 75 % y el 85 % de la altura, y
+      bájala hasta que se apoye en el tercio inferior, sobre la sombra que
+      ya trae el fondo. Nunca la dejes flotando en el centro.
+   5. Archivo → Exportar como → PNG.
+
+Hazlo una vez y las siguientes son treinta segundos, porque el archivo ya
+queda armado y solo cambias la capa de la pieza.
+
+Resultado: el fondo es EXACTAMENTE el mismo píxel a píxel en las treinta
+fotos. Eso es lo que hace que un catálogo se vea profesional.
+
+
+PASO 5 — LA IMAGEN 1, LA PANORÁMICA DE AMBIENTE
+==================================================
+Esta sí la genera la IA completa, y no hay problema: cada producto tiene su
+propia escena, así que no necesitan ser idénticas entre sí — solo de la
+misma familia, y de eso se encarga el candado de estilo.
+
+---------------------------- COPIAR DESDE AQUÍ ----------------------------
+Te adjunto la foto de una máscara.
+
+Recórtala de su fondo con borde limpio y colócala en el TERCIO DERECHO del
+encuadre, a tamaño protagonista, nítida y enfocada.
+
+Detrás genera una escena nocturna fotorrealista de {ESCENA}, con niebla baja
+y profundidad de campo suave: el fondo ligeramente desenfocado, la pieza en
+foco.
+
+Ilumínala con una sola fuente cenital y una luz de contra verde que recorte
+el borde derecho de la máscara contra la oscuridad.
+
+El TERCIO IZQUIERDO tiene que quedar completamente vacío y oscuro: sin
+objetos, sin figuras, sin detalle. Ahí va el titular después.
+
+Formato: 1920 x 1080 px, relación 16:9 horizontal.
+
+[y acá pegas el CANDADO DE ESTILO del paso 2]
+---------------------------- HASTA AQUÍ -----------------------------------
+
+Reemplaza {ESCENA} según el arquetipo. Estas son las seis que ya están
+maquetadas en la web, así que respétalas para que coincidan:
+
+   Payaso siniestro       una carpa de circo abandonada entre la niebla,
+                          con guirnaldas de luces apagadas
+   Muñeca poseída         una casa victoriana de noche con una sola ventana
+                          encendida en verde
+   Cazador enmascarado    un bosque de árboles muertos con niebla baja y
+                          luna llena detrás
+   Espectro victoriano    una columnata de mármol en ruinas, con el suelo
+                          encharcado reflejando la luz
+   Criatura de laboratorio  una nave industrial abandonada con tuberías y un
+                          ventanal reticulado iluminado
+   Bruja moderna          un pantano de noche con juncos, agua quieta y la
+                          luna baja reflejada
+
+
+ERRORES QUE OBLIGAN A REHACER LA IMAGEN
+==========================================
+   - El fondo salió más claro, más azul o más gris que el resto.
+   - La pieza flota en el centro sin sombra de apoyo: se ve pegoteada.
+   - Quedó halo blanco de un píxel alrededor del recorte.
+   - Asoma la foto original: una mano, un maniquí, un cartón, una regla.
+   - En una 16:9, el tercio izquierdo tiene objetos y el titular no se lee.
+   - Al ampliar al 100 % se ve pixelado o con ruido de compresión.
+
+
+ANTES DE SUBIRLA A LA WEB
+============================
+   - Conviértela a WebP: de 1,8 MB baja a unos 120 KB sin que se note.
+     (squoosh.app, gratis, en el navegador)
+   - Nómbrala bien:
+        imagen-de-pelicula-mascara-1.webp      → la panorámica
+        mascara-silente-01-latex-2.webp        → la pieza real, frontal
+   - Escribe el texto alternativo:
+        "Máscara Silente 01 de látex con acabado mate, vista frontal"

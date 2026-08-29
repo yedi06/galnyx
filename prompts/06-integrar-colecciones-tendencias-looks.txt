@@ -1,0 +1,89 @@
+GALNYX — PROMPT PARA CLAUDE CODE: INTEGRAR COLECCIONES, TENDENCIAS Y LOOKS
+====================================================================================
+Pega este texto completo en la sesión de Claude Code que tiene el
+repositorio de la web de GALNYX abierto (la misma que ya usaste para el
+prompt de reemplazo de contenido de producto).
+
+
+CONTEXTO DEL MODELO DE NEGOCIO — LEE ESTO PRIMERO
+------------------------------------------------------
+GALNYX opera bajo un modelo de dropshipping/catálogo: no hay estudio de
+fotografía propio, no hay sesiones con múltiples ángulos por producto,
+no hay video de producto ni de marca. Esto ya está reflejado en cómo
+está armado el contenido de producto (una sola imagen "imagen_principal"
+por modelo, sin galería de ángulos), y tiene que seguir así en TODO lo
+demás que construyas: no diseñes ni dejes espacios pensados para una
+galería de fotos por producto, un carrusel de ángulos, o un video —
+esos huecos se van a ver vacíos porque esas fotos no van a existir.
+Cualquier sensación de "producción premium" tiene que venir de la
+dirección de arte (tipografía, composición, movimiento, las imágenes de
+Colecciones/Tendencias/Looks que sí son reales) y no de fotografía de
+producto que no vamos a poder generar.
+
+
+FUENTE DE DATOS — NUEVAS 13 IMÁGENES
+----------------------------------------
+Ya generé y coloqué las imágenes reales de Colecciones, Tendencias y
+Looks (con IA, dirección de arte propia) en tres carpetas dentro de
+imagenes/:
+
+  imagenes/PARTE-1-COLECCIONES-INSPIRADO-EN-EL-CINE-DE-TERROR/
+  imagenes/PARTE-2-LÍNEAS-DE-TENDENCIAS/
+  imagenes/PARTE-3-LOOKS-DESTACADOS/
+
+Contenido esperado de cada carpeta:
+
+  PARTE-1 (6 imágenes, horizontal 16:9) — una por cada arquetipo de la
+  columna "Inspirado en el cine de terror" del mega-menú Colecciones:
+  Payaso siniestro, Muñeca poseída, Cazador enmascarado, Espectro
+  victoriano, Criatura de laboratorio, Bruja moderna.
+
+  PARTE-2 (3 imágenes, horizontal 16:9) — una por cada línea de
+  Tendencias: Vintage/Clásico de terror, Moderno/Tech-horror,
+  Elegante/Editorial.
+
+  PARTE-3 (4 imágenes, vertical 3:4) — Looks completos armados:
+  "Payaso siniestro completo", "Muñeca poseída, look entero", "Cazador
+  nocturno completo", "Bruja editorial completa".
+
+No asumas que los nombres de archivo dentro de cada carpeta coinciden
+exactamente con estos nombres — revísalos tú mismo (abre/lista cada
+carpeta) y empareja cada imagen con su arquetipo/tendencia/look por el
+nombre de archivo más parecido o por el orden en que están. Si alguna
+imagen no puedes emparejarla con confianza, NO la uses adivinando:
+repórtamela como pendiente en vez de asignarla mal a la categoría
+equivocada — esto es contenido de producción, un error de asignación
+aquí es un error de marca visible.
+
+
+TAREA
+-----
+1. Reemplaza el placeholder de fondo que hoy usan las páginas de
+   Colección, las páginas de Tendencia y la sección/tarjetas de Looks
+   (el tratamiento de halo radial verde + silueta de máscara que se
+   definió como placeholder temporal mientras no había fotos reales)
+   por la imagen real correspondiente de estas 13, como banner/imagen
+   principal de cada página o tarjeta.
+2. Colecciones y Tendencias: usa la imagen horizontal como banner de
+   cabecera de su página (donde ya está reservado el espacio negativo
+   para el titular — pon el nombre del arquetipo/tendencia ahí, con la
+   tipografía y jerarquía ya definidas en el sistema, Instrument Serif
+   para el titular).
+3. Looks: usa la imagen vertical como imagen principal de la tarjeta de
+   ese Look en el listado, y también como imagen de cabecera en su
+   página de detalle.
+4. Optimiza cada imagen para web (mismo criterio que ya usaste con las
+   fotos de producto: formato moderno si el proyecto ya tiene ese
+   pipeline, sin perder calidad visible) y verifica que cargue
+   correctamente en cada lugar antes de darlo por terminado.
+5. Cierra con un reporte: cuáles de las 13 quedaron bien asignadas,
+   cuáles quedaron pendientes por no poder emparejarlas con confianza,
+   y si alguna carpeta tiene menos o más de las imágenes esperadas.
+
+
+LO QUE NO DEBES TOCAR
+--------------------------
+No toques las carpetas Mascaras/ ni Disfraces/ ni lo que ya construiste
+a partir del prompt de reemplazo de contenido de producto — eso ya está
+resuelto. Esta tarea es solo sobre las tres carpetas nuevas (PARTE-1,
+PARTE-2, PARTE-3).

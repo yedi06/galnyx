@@ -1,0 +1,272 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+    <style>
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  src: url(data:font/woff2;base64,__B64__) format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  src: url(data:font/woff2;base64,__B64__) format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url(data:font/woff2;base64,__B64__) format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url(data:font/woff2;base64,__B64__) format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url(data:font/woff2;base64,__B64__) format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url(data:font/woff2;base64,__B64__) format("woff2");
+  font-display: swap;
+}
+
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Instrument Sans", ui-sans-serif, sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:#56BD78; text-decoration:none; }
+    a:hover { color:#7BD497; }
+
+    /* --- sistema tipografico GALNYX ---
+       Instrument Serif  -> titulares editoriales, nombres de producto, precios (registro "lujo")
+       Big Shoulders      -> wordmark + kickers/etiquetas condensadas (registro "tecnico/alarma")
+       Instrument Sans    -> cuerpo, nav, botones (registro neutro)
+       JetBrains Mono     -> SKU, stock, descuentos, ratings (registro "sistema/datos") */
+    .dsp   { font-family:"Instrument Serif", Georgia, serif; font-style:normal; letter-spacing:-0.01em; }
+    .dsp-i { font-family:"Instrument Serif", Georgia, serif; font-style:italic; letter-spacing:-0.005em; }
+    .kicker {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 75;
+      text-transform:uppercase; font-weight:650; letter-spacing:0.1em;
+    }
+    .wordmark {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 100;
+      text-transform:uppercase; font-weight:700;
+    }
+    .mono { font-family:"JetBrains Mono", ui-monospace, monospace; }
+
+    /* --- movimiento sutil, tono "producido" --- */
+    @keyframes pulse-glow {
+      0%, 100% { opacity:0.55; transform:translate(-50%,-50%) scale(1); }
+      50%      { opacity:1;    transform:translate(-50%,-50%) scale(1.07); }
+    }
+    @keyframes pulse-glow-corner {
+      0%, 100% { opacity:0.6; transform:scale(1); }
+      50%      { opacity:1;   transform:scale(1.05); }
+    }
+    @keyframes ember-float {
+      0%   { transform:translateY(0) scale(1); opacity:0; }
+      12%  { opacity:0.9; }
+      100% { transform:translateY(-140px) scale(0.4); opacity:0; }
+    }
+    .glow-pulse-corner { animation: pulse-glow-corner 7s ease-in-out infinite; }
+    .glow-pulse-center { animation: pulse-glow 6s ease-in-out infinite; }
+    .ember { position:absolute; bottom:20px; width:4px; height:4px; border-radius:50%; background:#7BD497; box-shadow:0 0 8px 2px rgba(123,212,151,0.7); animation: ember-float 5.5s ease-in infinite; pointer-events:none; }
+    .card-hov { transition: transform .35s ease, border-color .35s ease; }
+    .card-hov:hover { transform:translateY(-5px); border-color:#2E854D; }
+
+    </style>
+</helmet>
+
+<div style="width:1440px; background:#020A06; color:#DFE7E2;">
+
+  <!-- nav -->
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 64px; border-bottom:1px solid #14211B;">
+    <div style="display:flex; align-items:center; gap:44px;">
+      <div style="display:flex; align-items:center; gap:11px;">
+        <svg width="28" height="28" viewBox="0 0 32 32" fill="none"><path d="M16 3C9.4 3 4 8.4 4 15c0 6.1 4.6 11.2 10.5 11.9V29h3v-2.1C23.4 26.2 28 21.1 28 15 28 8.4 22.6 3 16 3z" stroke="#56BD78" stroke-width="1.8"/><path d="M11 14.5c1.2-1.6 3.4-1.6 4.6 0M16.4 14.5c1.2-1.6 3.4-1.6 4.6 0" stroke="#56BD78" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span class="wordmark" style="font-size:23px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:28px; font-size:14px; color:#B9C6BF;">
+        <span style="color:#DFE7E2;">Máscaras</span><span>Trajes</span><span>Accesorios</span><span>Efectos FX</span><span>Blog</span>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:8px; background:#06150F; border:1px solid #25312B; border-radius:6px; padding:9px 13px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5h2l2.2 11.1a1.6 1.6 0 0 0 1.6 1.3h7.4a1.6 1.6 0 0 0 1.6-1.3L20 8.5H6.4" stroke="#DFE7E2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="mono" style="font-size:12px;">2</span>
+    </div>
+  </div>
+
+  <!-- breadcrumb -->
+  <div style="padding:20px 64px 0 64px;">
+    <div style="font-size:12.5px; color:#5E6E66;">Inicio &nbsp;/&nbsp; Máscaras &nbsp;/&nbsp; <span style="color:#9FB0A7;">Silente 01</span></div>
+  </div>
+
+  <!-- PDP -->
+  <div style="display:grid; grid-template-columns: 1fr 480px; gap:56px; padding:28px 64px 72px 64px;">
+
+    <!-- galería -->
+    <div>
+      <div style="position:relative; background:radial-gradient(circle at 50% 42%, #143020, #04100A 68%); border:1px solid #1A2620; border-radius:16px; height:560px; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        <div style="position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size:44px 44px;"></div>
+        <div style="position:absolute; bottom:0; left:50%; transform:translateX(-50%); width:340px; height:60px; background:radial-gradient(ellipse, rgba(0,0,0,0.75), transparent 70%);"></div>
+        <svg width="230" height="286" viewBox="0 0 120 150" fill="none" style="position:relative;">
+          <path d="M60 8C33 8 14 27 14 55c0 30 18 58 46 78 28-20 46-48 46-78 0-28-19-47-46-47z" fill="#0C2317" stroke="#2E854D" stroke-width="2"/>
+          <path d="M32 54c6-7 16-7 22 0-6 7-16 7-22 0zM66 54c6-7 16-7 22 0-6 7-16 7-22 0z" fill="#020A06" stroke="#56BD78" stroke-width="2"/>
+          <path d="M60 70v18M48 106c8 5 16 5 24 0" stroke="#56BD78" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M38 120l6-9M82 120l-6-9" stroke="#2E854D" stroke-width="1.8" stroke-linecap="round"/>
+        </svg>
+        <div style="position:absolute; top:18px; left:18px;" class="mono">
+          <span class="kicker" style="font-size:10px; background:#56BD78; color:#02160A; padding:5px 10px; border-radius:4px;">MÁS VENDIDA</span>
+        </div>
+      </div>
+      <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:12px; margin-top:12px;">
+        <div style="height:92px; border:1.5px solid #56BD78; border-radius:10px; background:radial-gradient(circle at 50% 45%, #143020, #04100A);"></div>
+        <div style="height:92px; border:1px solid #1A2620; border-radius:10px; background:radial-gradient(circle at 50% 45%, #0F241A, #04100A);"></div>
+        <div style="height:92px; border:1px solid #1A2620; border-radius:10px; background:radial-gradient(circle at 50% 45%, #0F241A, #04100A);"></div>
+        <div style="height:92px; border:1px solid #1A2620; border-radius:10px; background:radial-gradient(circle at 50% 45%, #0F241A, #04100A);"></div>
+        <div style="height:92px; border:1px solid #1A2620; border-radius:10px; background:#06150F; display:flex; align-items:center; justify-content:center;">
+          <span class="mono" style="font-size:11px; color:#7C8B83;">▶ video</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- info -->
+    <div>
+      <div class="kicker" style="font-size:11px; color:#56BD78; margin-bottom:12px;">Látex hiperrealista</div>
+      <h1 class="dsp" style="font-weight:800; font-size:42px; line-height:1.05; letter-spacing:-0.025em; color:#F5FAF7; margin:0 0 14px 0;">Silente 01</h1>
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:24px;">
+        <span class="mono" style="font-size:13px; color:#56BD78;">★★★★★</span>
+        <span style="font-size:13px; color:#7C8B83;">4.9 · 87 reseñas</span>
+      </div>
+
+      <div style="display:flex; align-items:baseline; gap:12px; margin-bottom:8px;">
+        <span class="dsp" style="font-weight:800; font-size:38px; color:#F5FAF7;">S/ 129</span>
+        <span style="font-size:16px; color:#5E6E66; text-decoration:line-through;">S/ 165</span>
+        <span class="mono" style="font-size:11px; background:rgba(86,189,120,0.14); color:#56BD78; padding:5px 9px; border-radius:4px;">AHORRAS S/ 36</span>
+      </div>
+      <div style="font-size:13px; color:#7C8B83; margin-bottom:28px;">o 3 cuotas de S/ 43 sin interés</div>
+
+      <div style="border-top:1px solid #14211B; padding-top:24px; margin-bottom:24px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+          <span style="font-size:14px; font-weight:600; color:#DFE7E2;">Acabado</span>
+          <span style="font-size:12.5px; color:#7C8B83;">Guía de acabados</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <div style="flex-grow:1; border:1.5px solid #56BD78; background:rgba(86,189,120,0.07); border-radius:8px; padding:12px; text-align:center;">
+            <div style="font-size:13.5px; font-weight:600; color:#F5FAF7;">Mate</div>
+            <div style="font-size:11.5px; color:#7C8B83; margin-top:3px;">Realista</div>
+          </div>
+          <div style="flex-grow:1; border:1px solid #25312B; border-radius:8px; padding:12px; text-align:center;">
+            <div style="font-size:13.5px; font-weight:600; color:#DFE7E2;">Húmedo</div>
+            <div style="font-size:11.5px; color:#7C8B83; margin-top:3px;">+ S/ 20</div>
+          </div>
+          <div style="flex-grow:1; border:1px solid #1A2620; border-radius:8px; padding:12px; text-align:center; opacity:0.45;">
+            <div style="font-size:13.5px; font-weight:600; color:#9FB0A7;">Fosfo</div>
+            <div style="font-size:11.5px; color:#7C8B83; margin-top:3px;">Agotado</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-bottom:14px;">
+        <div style="display:flex; align-items:center; gap:16px; border:1px solid #25312B; border-radius:8px; padding:0 16px;">
+          <span style="font-size:18px; color:#7C8B83;">−</span>
+          <span class="mono" style="font-size:14px; color:#F5FAF7;">1</span>
+          <span style="font-size:18px; color:#DFE7E2;">+</span>
+        </div>
+        <div style="flex-grow:1; background:#56BD78; color:#02160A; font-weight:600; font-size:15.5px; padding:17px; border-radius:8px; text-align:center;">Agregar al carrito</div>
+      </div>
+      <div style="border:1px solid #25312B; color:#DFE7E2; font-weight:600; font-size:15px; padding:16px; border-radius:8px; text-align:center; margin-bottom:24px;">Comprar ahora</div>
+
+      <div style="background:#06150F; border:1px solid #1A2620; border-radius:10px; padding:16px 18px; margin-bottom:28px;">
+        <div style="display:flex; align-items:center; gap:9px; margin-bottom:9px;">
+          <span style="width:7px; height:7px; border-radius:50%; background:#56BD78; display:inline-block;"></span>
+          <span style="font-size:13.5px; color:#DFE7E2;"><strong style="font-weight:600;">7 unidades</strong> disponibles ahora</span>
+        </div>
+        <div style="font-size:12.5px; color:#7C8B83; line-height:1.55;">Pide antes del <strong style="color:#9FB0A7; font-weight:600;">28 de octubre</strong> para recibirla antes del 31.</div>
+      </div>
+
+      <!-- accordion -->
+      <div style="border-top:1px solid #14211B;">
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid #14211B;">
+          <span style="font-size:14.5px; font-weight:600; color:#F5FAF7;">Descripción</span>
+          <span style="font-size:16px; color:#7C8B83;">−</span>
+        </div>
+        <p style="font-size:13.5px; color:#9FB0A7; line-height:1.7; padding:16px 0; margin:0; border-bottom:1px solid #14211B;">
+          Máscara de cabeza completa en látex vulcanizado, pintada a mano capa por capa para lograr el tono de piel apagado que la hace ver real en foto y video. Interior forrado en tela suave, con ventilación en nariz y boca para uso prolongado. Talla única con banda elástica ajustable.
+        </p>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid #14211B;">
+          <span style="font-size:14.5px; font-weight:600; color:#DFE7E2;">Materiales y cuidado</span>
+          <span style="font-size:16px; color:#7C8B83;">+</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid #14211B;">
+          <span style="font-size:14.5px; font-weight:600; color:#DFE7E2;">Envíos y entregas</span>
+          <span style="font-size:16px; color:#7C8B83;">+</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 0; border-bottom:1px solid #14211B;">
+          <span style="font-size:14.5px; font-weight:600; color:#DFE7E2;">Cambios y devoluciones</span>
+          <span style="font-size:16px; color:#7C8B83;">+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- relacionados -->
+  <div style="padding:0 64px 80px 64px; border-top:1px solid #14211B; padding-top:56px;">
+    <h2 class="dsp" style="font-weight:700; font-size:28px; letter-spacing:-0.02em; color:#F5FAF7; margin:0 0 24px 0;">Combina bien con</h2>
+    <div style="display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:20px;">
+      <div class="card-hov" style="background:#06150F; border:1px solid #1A2620; border-radius:12px; overflow:hidden;">
+        <div style="height:180px; background:radial-gradient(circle at 50% 45%, #12291D, #050F0A);"></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:#F5FAF7;">Túnica Penumbra</div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:#F5FAF7; margin-top:8px;">S/ 189</div>
+        </div>
+      </div>
+      <div class="card-hov" style="background:#06150F; border:1px solid #1A2620; border-radius:12px; overflow:hidden;">
+        <div style="height:180px; background:radial-gradient(circle at 50% 45%, #12291D, #050F0A);"></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:#F5FAF7;">Guantes de látex</div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:#F5FAF7; margin-top:8px;">S/ 45</div>
+        </div>
+      </div>
+      <div class="card-hov" style="background:#06150F; border:1px solid #1A2620; border-radius:12px; overflow:hidden;">
+        <div style="height:180px; background:radial-gradient(circle at 50% 45%, #12291D, #050F0A);"></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:#F5FAF7;">Sangre escénica</div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:#F5FAF7; margin-top:8px;">S/ 25</div>
+        </div>
+      </div>
+      <div class="card-hov" style="background:#06150F; border:1px solid #1A2620; border-radius:12px; overflow:hidden;">
+        <div style="height:180px; background:radial-gradient(circle at 50% 45%, #12291D, #050F0A);"></div>
+        <div style="padding:16px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; color:#F5FAF7;">Lentes de contacto FX</div>
+          <div class="dsp" style="font-weight:700; font-size:16px; color:#F5FAF7; margin-top:8px;">S/ 60</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,505 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 7131,
+      "title": "Home — GALNYX",
+      "page": "page-tienda"
+    },
+    {
+      "file": "Producto.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 1641,
+      "title": "Ficha de producto",
+      "page": "page-tienda"
+    },
+    {
+      "file": "MovilHome.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 5572,
+      "title": "Móvil · Home",
+      "page": "page-movil"
+    },
+    {
+      "file": "MovilMenu.dc.html",
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 864,
+      "title": "Móvil · Menú",
+      "page": "page-movil"
+    },
+    {
+      "file": "MovilCatalogo.dc.html",
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 1911,
+      "title": "Móvil · Catálogo",
+      "page": "page-movil"
+    },
+    {
+      "file": "MovilProducto.dc.html",
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 2297,
+      "title": "Móvil · Ficha",
+      "page": "page-movil"
+    },
+    {
+      "file": "MovilPago.dc.html",
+      "x": 1880,
+      "y": 0,
+      "w": 390,
+      "h": 1798,
+      "title": "Móvil · Carrito y pago",
+      "page": "page-movil"
+    },
+    {
+      "file": "Menus.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 757,
+      "title": "Mega-menú — árbol real de catálogo",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Catalogo.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 2346,
+      "title": "Catálogo con filtros — Máscaras",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Coleccion.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 2225,
+      "title": "Colección — plantilla de arquetipo",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Pareja.dc.html",
+      "x": 4680,
+      "y": 0,
+      "w": 1440,
+      "h": 2480,
+      "title": "Colección — Trajes de pareja",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Looks.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 3450,
+      "title": "Conjuntos — listado",
+      "page": "page-looks"
+    },
+    {
+      "file": "LookDetalle.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 2292,
+      "title": "Detalle de conjunto",
+      "page": "page-looks",
+      "is_interactive": true
+    },
+    {
+      "file": "Carrito.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1020,
+      "title": "Carrito — drawer",
+      "page": "page-compra",
+      "is_interactive": true
+    },
+    {
+      "file": "Checkout.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 1224,
+      "title": "Checkout 1 — envío",
+      "page": "page-compra"
+    },
+    {
+      "file": "CheckoutPago.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 1826,
+      "title": "Checkout 2 — pago",
+      "page": "page-compra",
+      "is_interactive": true
+    },
+    {
+      "file": "Confirmacion.dc.html",
+      "x": 4680,
+      "y": 0,
+      "w": 1440,
+      "h": 1161,
+      "title": "Checkout 3 — confirmación",
+      "page": "page-compra"
+    },
+    {
+      "file": "Nosotros.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 3062,
+      "title": "Nosotros / Cómo trabajamos",
+      "page": "page-marca"
+    },
+    {
+      "file": "Contacto.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 1718,
+      "title": "Contacto y WhatsApp",
+      "page": "page-marca"
+    },
+    {
+      "file": "Error404.dc.html",
+      "x": 4680,
+      "y": 0,
+      "w": 1440,
+      "h": 1560,
+      "title": "404",
+      "page": "page-marca"
+    },
+    {
+      "file": "Vacio.dc.html",
+      "x": 6240,
+      "y": 0,
+      "w": 1440,
+      "h": 1415,
+      "title": "Estados vacíos",
+      "page": "page-marca"
+    },
+    {
+      "file": "Foto.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 4700,
+      "title": "Sistema de imagen",
+      "page": "page-sistema"
+    },
+    {
+      "file": "SEO.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 4125,
+      "title": "Plan de SEO",
+      "page": "page-sistema"
+    },
+    {
+      "file": "Tipografia.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1320,
+      "h": 1600,
+      "title": "Sistema tipográfico",
+      "page": "page-tipografia"
+    },
+    {
+      "file": "Gamas.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1707,
+      "title": "Seis gamas de color",
+      "page": "page-gamas"
+    },
+    {
+      "file": "Fondos.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 2250,
+      "title": "Fondos para foto de producto",
+      "page": "page-fondos"
+    },
+    {
+      "file": "TemaPlay.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 3066,
+      "title": "Demo — tema GALNYX Play",
+      "page": "page-sistema"
+    },
+    {
+      "file": "ColeccionCazador.dc.html",
+      "x": 6240,
+      "y": 0,
+      "w": 1440,
+      "h": 2291,
+      "title": "Colección — Cazador enmascarado",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "ColeccionGlamour.dc.html",
+      "x": 7800,
+      "y": 0,
+      "w": 1440,
+      "h": 2536,
+      "title": "Colección — Glamour adulto",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "ColeccionHadas.dc.html",
+      "x": 9360,
+      "y": 0,
+      "w": 1440,
+      "h": 1651,
+      "title": "Colección — Cuentos de hadas",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Disfraces.dc.html",
+      "x": 10920,
+      "y": 0,
+      "w": 1440,
+      "h": 8147,
+      "title": "Disfraces — catálogo completo",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Mascaras.dc.html",
+      "x": 12480,
+      "y": 0,
+      "w": 1440,
+      "h": 6536,
+      "title": "Máscaras — catálogo completo",
+      "page": "page-catalogo"
+    },
+    {
+      "file": "Historias.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 3012,
+      "title": "Historias — índice",
+      "page": "page-tienda"
+    },
+    {
+      "file": "Historia.dc.html",
+      "x": 4680,
+      "y": 0,
+      "w": 1440,
+      "h": 2580,
+      "title": "Historia — una pieza, una historia",
+      "page": "page-tienda"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "nota-tienda",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "SISTEMA DE IMAGEN NUEVO, y es el cambio más grande.\nCada producto tiene ahora dos tipos de foto: la IMAGEN 1 es tu panorámica de ambiente (imagen-de-pelicula-mascara-1) con la pieza recortada encima, y es lo único que se ve en la tarjeta; de la 2 en adelante van las fotos reales de la pieza sobre el fondo fijo, que es lo que ve el usuario al entrar. Todos los huecos de la web ya están construidos así.\nLa home además abre con esa panorámica a 720 px y el orden ahora es: portada, conjuntos, colecciones, banner de pareja, lo más pedido, guía, preguntas y enlaces internos.",
+      "page": "page-tienda"
+    },
+    {
+      "id": "nota-movil",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "MÓVIL, que antes no existía. Cinco pantallas a 390 px: home, menú desplegado, catálogo, ficha y el flujo de carrito y pago.\nNavegación limpia: barra de 56 px con hamburguesa, buscar y carrito; el menú se abre a pantalla completa con Catálogo desplegado y los chips de género; el catálogo lleva una barra de filtros pegajosa con scroll horizontal; la ficha tiene barra de compra fija abajo. Todo objetivo táctil mide 44 px o más.\nSin barra de estado falsa ni teclado dibujado: eso lo pone el teléfono encima.",
+      "page": "page-movil"
+    },
+    {
+      "id": "nota-catalogo",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "El mega-menú ahora es UNO solo, con el árbol real verificado contra imagenes/ (Máscaras 43 + Disfraces 60 = 103). El catálogo con filtros y la plantilla de colección genérica siguen igual.\nA la derecha, tres colecciones REALES completas -- no plantillas con productos de relleno -- una por cada tema de color. Deliberadamente distintas entre sí: Cazador enmascarado mantiene el tono técnico/cinematográfico ya establecido; Glamour adulto cambia la retícula dura por luz cálida difusa y más espacio negativo; Cuentos de hadas usa el dorado como filo de corona o vitral roto, nunca como brillo dulce.",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-pareja",
+      "x": 4680,
+      "y": -250,
+      "w": 700,
+      "text": "La portada de pareja en 16:9 con el tercio izquierdo libre para el titular, tal como pide tu prompt A.\nCuando generes la imagen real, se reemplaza dentro del marco y ni el encuadre ni el titular se mueven.",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-looks",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "CORREGIDO SEGÚN LO QUE SÍ PUEDES VENDER. Antes los presenté como cuatro piezas separadas (máscara, traje, accesorio y efecto), y eso no encaja con cómo compras al proveedor.\nAhora un conjunto son DOS o TRES productos completos que ya existen en el catálogo —máscara + traje, y un tercero solo cuando el proveedor lo vende suelto, como el arnés—. Nunca fragmentos tipo brazos o falda.\nEn el detalle puedes destildar una pieza y el total se recalcula solo. Los precios de conjunto son ejemplo: dime tu margen y los ajusto.",
+      "page": "page-looks"
+    },
+    {
+      "id": "nota-compra",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "Flujo de compra en 3 pasos con barra de progreso. En el carrito los contadores funcionan y recalculan el total; en el paso de pago, elegir Yape / Plin / Tarjeta / Contra entrega cambia el panel de abajo de verdad.\nYa está tu número real de Yape (904 817 248). El campo de titular quedó como [TU NOMBRE COMPLETO] porque Yape muestra el nombre de la persona, y sin RUC todavía no hay razón social que poner. Cuando saques el RUC, ahí entra el nombre comercial y recién tiene sentido activar el libro de reclamaciones y la boleta electrónica.",
+      "page": "page-compra"
+    },
+    {
+      "id": "nota-marca",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "Cómo trabajamos, con la banda de proceso en imagen y la tabla de materiales que justifica el precio. Contacto con WhatsApp como canal principal y tu número real. El artículo de blog con figura comparativa y bloque de dudas al cierre. El 404 y los dos estados vacíos.",
+      "page": "page-marca"
+    },
+    {
+      "id": "nota-sistema",
+      "x": 0,
+      "y": -250,
+      "w": 800,
+      "text": "SISTEMA DE IMAGEN: las dos funciones por producto, cómo se recorta la misma foto para las tres proporciones, y los DOS pedidos para ChatGPT listos para copiar — el A genera la panorámica de ambiente con la pieza encima, el B compone la pieza sobre tu fondo fijo. Incluye cómo nombrar cada archivo y el texto alternativo.\nPLAN DE SEO: qué bloque de la home trabaja para Google, direcciones, títulos y descripciones, datos estructurados, palabras clave y ocho artículos de blog. Los volúmenes hay que confirmarlos en Keyword Planner: no invento cifras.",
+      "page": "page-sistema"
+    },
+    {
+      "id": "nota-tipo",
+      "x": 0,
+      "y": -160,
+      "w": 700,
+      "text": "Sistema de 4 familias reales: Instrument Serif (titulares/precios) + Big Shoulders (marca/etiquetas) + Instrument Sans (cuerpo) + JetBrains Mono (datos).\nLas 6 fuentes .woff2 van incrustadas: no depende de internet ni de Google Fonts para verse así.",
+      "page": "page-tipografia"
+    },
+    {
+      "id": "nota-gamas",
+      "x": 0,
+      "y": -150,
+      "w": 720,
+      "text": "Limpia: ya no son seis exploraciones, son las TRES paletas reales en producción (Horror, Play, Glamour), con data-collection puesto de verdad en las tarjetas 02 y 03 -- no son capturas. Migrada a /src, con header y footer reales y todos sus colores tokenizados. Las cinco paletas descartadas (Ámbar, Violeta, Cian, Sangre Seca, Hueso) se sacaron de la vista.",
+      "page": "page-gamas"
+    },
+    {
+      "id": "nota-fondos",
+      "x": 0,
+      "y": -150,
+      "w": 720,
+      "text": "Corregido: no son seis tratamientos para elegir uno. Son tres capas (halo radial + retícula técnica/viñeta + grano) que van SIEMPRE juntas, apiladas, en la clase .pbg de build.mjs -- nunca se usaron por separado en ninguna página. La vista de abajo ya lo muestra así: el resultado combinado primero, y cada capa aislada al lado para que se entienda qué aporta cada una.",
+      "page": "page-fondos"
+    },
+    {
+      "id": "nota-play",
+      "x": 3120,
+      "y": -250,
+      "w": 720,
+      "text": "Demo del segundo tema (GALNYX Play), pedido para futuras colecciones que no encajan con terror -- princesas, Barbie, autos de carrera. Nada de esto es catálogo real: son datos de relleno.\nUna tarjeta idéntica en ambos temas para comparar, la tabla de los 18 tokens con sus dos valores, y una sección de colección Play completa. Al final, qué se retematiza solo y qué se queda en verde a propósito (header, footer, nav, WhatsApp y checkout).",
+      "page": "page-sistema"
+    },
+    {
+      "id": "nota-coleccion-cazador",
+      "x": 6240,
+      "y": -220,
+      "w": 680,
+      "text": "Colección real, sin data-collection -- verde por defecto. Los cinco productos (Michael Myers, Leatherface, Conejo asesino, Killer, Pigsaw) son nombres reales de imagenes/Mascaras/. Los precios son de referencia: Máscaras todavía no tiene producto.txt con precio confirmado como sí tiene Disfraces.",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-coleccion-glamour",
+      "x": 7800,
+      "y": -220,
+      "w": 680,
+      "text": "data-collection=\"glamour\" real, con los 5 productos y precios exactos de sus producto.txt (Diosa Griega, Cleopatra, Enfermera, Vaquera, Animadora Glam). Ojo: esta última era \"Megan Fox\" en el inventario -- se renombró junto con \"Sabrina Carpenter\" por el mismo motivo (nombre de persona real, no de personaje), aunque solo la segunda estaba pedida explícitamente.",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-coleccion-hadas",
+      "x": 9360,
+      "y": -220,
+      "w": 680,
+      "text": "data-collection=\"play\" real, con los 4 productos y precios exactos de sus producto.txt (Blanca Nieves, Cenicienta, Rapunzel, Barbie Escuela de Princesas).",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-disfraces",
+      "x": 10920,
+      "y": -220,
+      "w": 700,
+      "text": "Catálogo de Disfraces COMPLETO: las 58 fichas, verde por defecto. Nombre, precio, descripción e imagen salen del inventario validado, nada escrito a mano.\nOjo con dos textos que traen una nota entre corchetes del catálogo original y hoy se ven en la tarjeta: 18 Freddy Krueger (descripción cortada) y 39 Arabe (dice que el texto es del disfraz de Jazmín). Y el nombre de 12 Leatherface trae el typo \"mascacre\" tal como está en su producto.txt.",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-mascaras",
+      "x": 12480,
+      "y": -220,
+      "w": 700,
+      "text": "Catálogo de Máscaras COMPLETO: 28 de goma + 13 de plástico, cada una con su imagen_principal recortada y con nombre, precio y descripción de su producto.txt. Ya no queda ningún dato provisional en esta página.\nCinco descripciones venían de una sola línea en el archivo del proveedor y se reescribieron describiendo solo lo que se ve en la foto (Pigsaw, Twisted Metal, Chimpance, Joker pelicula, Tyson Rios): están aisladas en scripts/descripciones-ampliadas.json.\nPendiente de foto: Chimpance sale con las manos del modelo en el recorte y Condenator no es recorte sino una foto rectangular.",
+      "page": "page-catalogo"
+    },
+    {
+      "id": "nota-producto-migrado",
+      "x": 1560,
+      "y": -190,
+      "w": 680,
+      "text": "Ya no es un caso especial. Antes vivía congelada en orig/ y se reconstruía por parche de texto en cada build -- ahora es src/Producto.dc.html, un artboard más, con header/footer reales por marcador (antes no tenía footer) y sus colores tokenizados. orig/Producto.dc.html y la lógica que la generaba se borraron de patch.mjs.",
+      "page": "page-tienda"
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-tienda"
+  },
+  "pages": [
+    {
+      "id": "page-tienda",
+      "name": "Tienda"
+    },
+    {
+      "id": "page-movil",
+      "name": "Móvil"
+    },
+    {
+      "id": "page-catalogo",
+      "name": "Catálogo y colecciones"
+    },
+    {
+      "id": "page-looks",
+      "name": "Conjuntos"
+    },
+    {
+      "id": "page-compra",
+      "name": "Compra"
+    },
+    {
+      "id": "page-marca",
+      "name": "Marca y contenido"
+    },
+    {
+      "id": "page-sistema",
+      "name": "SEO y sistema de imagen"
+    },
+    {
+      "id": "page-tipografia",
+      "name": "Tipografía"
+    },
+    {
+      "id": "page-gamas",
+      "name": "Gamas de color"
+    },
+    {
+      "id": "page-fondos",
+      "name": "Fondos de producto"
+    }
+  ]
+}

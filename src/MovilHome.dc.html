@@ -1,0 +1,264 @@
+<div style="position:relative; width:390px; background:var(--bg); color:var(--text);">
+<!--@MHEADER:2@-->
+
+  <!-- ============ portada ============
+       Mismo video que el hero de escritorio, recortado para vertical.
+       preload="metadata" a propósito: en celular con datos no se baja el video
+       entero de golpe -- se pinta el poster y el video entra cuando puede. -->
+  <div style="position:relative; height:530px; overflow:hidden; background:var(--photo-shadow);">
+    <video autoplay loop muted playsinline preload="metadata" poster="<!--@MEDIA:hero-poster.webp@-->" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:52% 42%;"><source src="<!--@MEDIA:hero.mp4@-->" type="video/mp4"></video>
+    <div class="ember" style="left:56%; animation-delay:0s;"></div>
+    <div class="ember" style="left:68%; animation-delay:2.2s;"></div>
+    <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.97) 34%, rgba(var(--bg-rgb),0.35) 72%, transparent);"></div>
+
+    <div class="rise" style="position:absolute; z-index:4; left:20px; right:20px; bottom:26px;">
+      <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Máscaras y trajes de terror · Lima</div>
+      <h1 class="dsp" style="font-weight:800; font-size:52px; line-height:0.94; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 14px 0;">
+        Deja de ser<br><span class="dsp-i" style="font-weight:600; padding-left:34px;">quien eras.</span>
+      </h1>
+      <p style="font-size:14.5px; line-height:1.6; color:var(--text-muted); margin:0 0 20px 0;">Látex, resina y silicona con el material a la vista y el stock contado en unidades.</p>
+      <div class="btn-p" style="padding:16px; font-size:15px; margin-bottom:10px;">Ver el catálogo</div>
+      <div class="btn-s" style="padding:15px; font-size:14.5px;">Ver los arquetipos</div>
+    </div>
+  </div>
+
+  <!-- ============ datos ============ -->
+  <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1px; background:var(--card); border-bottom:1px solid var(--card);">
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Lima</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">Entrega 24–48 h</div>
+    </div>
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Provincias</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">Por Shalom</div>
+    </div>
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Pago</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">Yape · Plin · contra entrega</div>
+    </div>
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Stock</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;"><!--@N:todo@--> productos</div>
+    </div>
+  </div>
+
+  <!-- ============ el arquetipo, pieza por pieza ============
+       Antes: una tarjeta de "conjunto" con S/286 tachado -> S/249 y AHORRAS
+       S/37, sobre dos productos que no existen. No hay conjunto: hay dos
+       productos reales, cada uno con su precio y su botón. -->
+  <div style="padding:40px 20px 0 20px;">
+    <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">La foto, en dos productos</div>
+    <h2 class="dsp" style="font-weight:800; font-size:36px; line-height:1.0; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 14px 0;">
+      Máscara y disfraz<br><span class="dsp-i" style="font-weight:600; padding-left:26px;">que se entienden.</span>
+    </h2>
+    <p style="font-size:14.5px; line-height:1.65; color:var(--text-muted); margin:0 0 20px 0;">Los elegimos para que funcionen juntos y los fotografiamos en la misma escena. Se venden por separado.</p>
+
+    <div style="position:relative; height:300px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--photo-shadow); margin-bottom:16px;"><img src="<!--@ARTE:look-payaso:look@-->" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 38%;">
+      <span class="kicker" style="position:absolute; top:12px; left:12px; z-index:4; font-size:9.5px; background:rgba(var(--bg-rgb),0.8); border:1px solid var(--accent-deep); color:var(--accent); padding:5px 9px; border-radius:4px;">PAYASO SINIESTRO</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;">
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:150px;"><!--@IMG:mascara-goma-24-payaso-robber:126@--></div>
+        <div style="padding:13px;">
+          <div class="dsp" style="font-weight:700; font-size:14.5px; line-height:1.2; color:var(--text-hi); min-height:35px;"><!--@P:mascara-goma-24-payaso-robber:nombre@--></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:10px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);"><!--@P:mascara-goma-24-payaso-robber:precio@--></span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:150px;"><!--@IMG:44-harley-quinn:126@--></div>
+        <div style="padding:13px;">
+          <div class="dsp" style="font-weight:700; font-size:14.5px; line-height:1.2; color:var(--text-hi); min-height:35px;"><!--@P:44-harley-quinn:nombre@--></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:10px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);"><!--@P:44-harley-quinn:precio@--></span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="btn-s" style="padding:15px; font-size:14px; margin-top:14px;">Ver los cuatro arquetipos</div>
+  </div>
+
+  <!-- ============ arquetipos ============ -->
+  <div style="padding:44px 20px 0 20px;">
+    <h2 class="dsp" style="font-weight:700; font-size:30px; line-height:1.05; letter-spacing:-0.025em; color:var(--text-hi); margin:0 0 6px 0;">Elige a quién quieres ser</h2>
+    <p style="font-size:13.5px; color:var(--text-faint); margin:0 0 20px 0; line-height:1.6;">Seis arquetipos del cine de terror, con sus máscaras y trajes ya reunidos.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;">
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><!--@SCENE:circo@--><!--@PHOTO:payaso:196@--></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Payaso siniestro</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">11 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><!--@SCENE:casa@--><!--@PHOTO:muneca:196@--></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Muñeca poseída</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">9 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><!--@SCENE:bosque@--><!--@PHOTO:cazador:196@--></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Cazador</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">12 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><!--@SCENE:mansion@--><!--@PHOTO:espectro:196@--></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Espectro</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">8 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><!--@SCENE:laboratorio@--><!--@PHOTO:criatura:196@--></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Criatura</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">10 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><!--@SCENE:pantano@--><!--@PHOTO:bruja:196@--></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Bruja moderna</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">7 piezas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ banner pareja ============ -->
+  <div style="padding:44px 0 0 0;">
+    <div class="pbg" style="height:420px; border-top:1px solid var(--card); border-bottom:1px solid var(--card);">
+      <!--@SCENE:bosque@-->
+      <!--@PHOTO:duo:330@-->
+      <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.96) 32%, rgba(var(--bg-rgb),0.3) 70%, transparent);"></div>
+      <div style="position:absolute; z-index:4; left:20px; right:20px; bottom:24px;">
+        <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:12px;">Trajes de pareja</div>
+        <h2 class="dsp" style="font-weight:800; font-size:40px; line-height:0.98; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 14px 0;">
+          Dos que<br><span class="dsp-i" style="font-weight:600; padding-left:28px;">no explican nada.</span>
+        </h2>
+        <div class="btn-p" style="padding:15px; font-size:14.5px;">Ver los 9 pares</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ del catálogo ============
+       Mismos cuatro productos inventados que en el home de escritorio, con el
+       mismo precio tachado falso. Reemplazados por producto real. -->
+  <div style="padding:44px 20px 0 20px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;">
+      <h2 class="dsp" style="font-weight:700; font-size:26px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">Del catálogo</h2>
+      <span style="font-size:13px; color:var(--accent);">Ver los <!--@N:todo@--></span>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;">
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><!--@IMG:mascara-goma-17-michael-myers:160@--></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;"><!--@P:mascara-goma-17-michael-myers:nombre@--></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);"><!--@P:mascara-goma-17-michael-myers:precio@--></span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><!--@IMG:mascara-goma-23-payaso-it:160@--></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;"><!--@P:mascara-goma-23-payaso-it:nombre@--></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);"><!--@P:mascara-goma-23-payaso-it:precio@--></span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><!--@IMG:44-harley-quinn:160@--></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;"><!--@P:44-harley-quinn:nombre@--></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);"><!--@P:44-harley-quinn:precio@--></span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><!--@IMG:29-gatubela:160@--></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;"><!--@P:29-gatubela:nombre@--></div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);"><!--@P:29-gatubela:precio@--></span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ preguntas ============ -->
+  <div style="padding:44px 20px 0 20px;">
+    <h2 class="dsp" style="font-weight:700; font-size:28px; letter-spacing:-0.025em; color:var(--text-hi); margin:0 0 18px 0;">Preguntas frecuentes</h2>
+    <div>
+      <div style="border-top:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿Cuánto demora el envío en Lima?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">Entre 24 y 48 horas desde que confirmamos el pago, con aviso por WhatsApp antes de salir.</p>
+      </div>
+      <div style="border-top:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿Envían a provincias?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">Sí, por agencia Shalom. Sale el mismo día y el flete lo pagas al recoger.</p>
+      </div>
+      <div style="border-top:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿Puedo pagar contra entrega?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">En Lima Metropolitana sí. Revisas la pieza antes de pagar, en efectivo o por Yape.</p>
+      </div>
+      <div style="border-top:1px solid var(--card); border-bottom:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿El stock que muestran es real?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">Sí. Confirmamos unidades cada mañana y publicamos el número exacto. Si dice 3, quedan 3.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ historias ============ -->
+  <div style="padding:44px 20px 40px 20px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;">
+      <h2 class="dsp" style="font-weight:700; font-size:26px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">Historias</h2>
+      <span style="font-size:13px; color:var(--accent);">Ver las <!--@N:historias@--></span>
+    </div>
+    <a class="card-hov" style="display:block; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--bg-raised); margin-bottom:12px;">
+      <div class="pbg" style="height:170px; border-bottom:1px solid var(--line);"><!--@IMG:mascara-goma-17-michael-myers:142@--></div>
+      <div style="padding:18px;">
+        <span class="kicker" style="font-size:9.5px; color:var(--accent);"><!--@H:mascara-goma-17-michael-myers:kicker@--> · <!--@H:mascara-goma-17-michael-myers:lectura@--> min</span>
+        <h3 class="dsp" style="font-weight:700; font-size:19px; color:var(--text-hi); margin:10px 0 8px 0; line-height:1.25;"><!--@H:mascara-goma-17-michael-myers:titulo@--></h3>
+        <p style="font-size:13px; color:var(--text-faint); margin:0 0 14px 0; line-height:1.6;"><!--@H:mascara-goma-17-michael-myers:entrada@--></p>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--card);">
+          <span class="mono" style="font-size:12px; color:var(--text-muted);"><!--@P:mascara-goma-17-michael-myers:nombre@--> · <!--@P:mascara-goma-17-michael-myers:precio@--></span>
+          <span class="btn-p" style="padding:8px 12px; font-size:11.5px;">Leer</span>
+        </div>
+      </div>
+    </a>
+    <a class="card-hov" style="display:block; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--bg-raised); margin-bottom:12px;">
+      <div class="pbg" style="height:170px; border-bottom:1px solid var(--line);"><!--@IMG:mascara-goma-23-payaso-it:142@--></div>
+      <div style="padding:18px;">
+        <span class="kicker" style="font-size:9.5px; color:var(--accent);"><!--@H:mascara-goma-23-payaso-it:kicker@--> · <!--@H:mascara-goma-23-payaso-it:lectura@--> min</span>
+        <h3 class="dsp" style="font-weight:700; font-size:19px; color:var(--text-hi); margin:10px 0 8px 0; line-height:1.25;"><!--@H:mascara-goma-23-payaso-it:titulo@--></h3>
+        <p style="font-size:13px; color:var(--text-faint); margin:0 0 14px 0; line-height:1.6;"><!--@H:mascara-goma-23-payaso-it:entrada@--></p>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--card);">
+          <span class="mono" style="font-size:12px; color:var(--text-muted);"><!--@P:mascara-goma-23-payaso-it:nombre@--> · <!--@P:mascara-goma-23-payaso-it:precio@--></span>
+          <span class="btn-p" style="padding:8px 12px; font-size:11.5px;">Leer</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+<!--@MFOOTER@-->
+
+  <div style="position:relative; height:0; z-index:30;">
+    <div class="fab" style="right:16px; bottom:20px; width:48px; height:48px;"><!--@ICON:waBig@--></div>
+  </div>
+</div>

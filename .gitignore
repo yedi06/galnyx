@@ -1,0 +1,22 @@
+# ---- Fotos CRUDAS del proveedor -------------------------------------------
+# Decisión del cliente: al repo solo van las derivadas de imagenes/_web/, que
+# son las que el sitio publica. Las carpetas de origen (varias fotos sin editar
+# por producto) se quedan en local. Por eso el repo NO puede regenerar
+# scripts/_inventario.json ni imagenes/_web/ desde cero: ambos van versionados
+# ya derivados, y el build funciona con ellos sin necesitar las carpetas fuente.
+imagenes/Mascaras/
+imagenes/Disfraces/
+
+# ---- Respaldos locales ----------------------------------------------------
+_respaldo/
+
+# ---- Derivado: se regenera con `node scripts/empaquetar.mjs` --------------
+# 9 MB que cambian en cada build; versionarlo inflaría el historial sin aportar
+# nada, porque su contenido es exactamente galnyx-canvas/.
+galnyx-tienda.html
+
+# ---- Sistema --------------------------------------------------------------
+node_modules/
+Thumbs.db
+desktop.ini
+.DS_Store

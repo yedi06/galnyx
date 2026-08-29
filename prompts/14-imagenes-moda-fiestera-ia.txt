@@ -1,0 +1,92 @@
+GALNYX — PROMPTS DE IMAGEN: LÍNEA "MODA FIESTERA" (máscaras/disfraces + estilo urbano joven)
+====================================================================================
+Genera estas imágenes en Gemini (u otro generador de imagen con IA) igual
+que las 13 anteriores de Colecciones/Tendencias/Looks.
+
+REGLA DE CHATS: una imagen por chat nuevo — no generes dos de esta lista
+en la misma conversación, para que el generador no repita cara ni pose
+de la imagen anterior.
+
+Objetivo de esta línea: mostrar que tus máscaras y disfraces combinan
+con la moda urbana joven que se usa en fiestas en Perú (vintage, boxy
+fit, baggy) — SIN vender esa ropa. La ropa/accesorios en la foto son
+solo ambientación de estilo, el producto real que se compra es la
+máscara o el disfraz.
+
+
+IMAGEN 1 — "Payaso siniestro fiestero"
+-------------------------------------------
+Hyperrealistic editorial nightlife photography, vertical 3:4
+composition, shot on 50mm lens, shallow depth of field. A young person
+wearing a flawless, pristine handcrafted clown horror mask (original
+design, no blood, no gore, subtle unsettling expression, clean matte
+finish) paired with oversized boxy-fit black bomber jacket, baggy cargo
+pants, chunky sneakers, and sunglasses pushed up on the hooded mask.
+Rooftop party setting at night in a Latin American city skyline
+(string lights, neon signs blurred in the background, a few out-of-focus
+party guests), confident relaxed pose, one hand in pocket, body angled
+three-quarters to camera. Lighting: warm string-light glow mixed with
+cool neon rim light, shallow depth of field blurring the background
+into bokeh. Mood: youthful, confident, stylish, a little unsettling but
+fun — party culture meets premium horror design. The mask must be an
+entirely original design, not based on any copyrighted character.
+Ultra-detailed, film grain, 8k.
+
+
+IMAGEN 2 — "Bruja moderna fiestera"
+-------------------------------------------
+Hyperrealistic editorial nightlife photography, vertical 3:4
+composition, shot on 35mm lens. A young person wearing a flawless,
+pristine handcrafted modern witch horror mask (elegant feminine
+features, original design, no gore) paired with an oversized vintage
+windbreaker in a faded color, baggy wide-leg jeans, thick platform
+sneakers. Standing mid-stride crossing a busy nightlife street in a
+Latin American city, motion blur on passing car lights, neon signage
+reflected on wet pavement. Lighting: cool blue-green ambient light from
+signage mixed with warm headlight streaks, cinematic long exposure feel.
+Mood: bold, independent, urban-cool. The mask must be an entirely
+original design, not based on any copyrighted character. Ultra-detailed,
+film grain, 8k.
+
+
+IMAGEN 3 — "Cazador nocturno fiestero"
+-------------------------------------------
+Hyperrealistic editorial nightlife photography, vertical 3:4
+composition, shot on 85mm lens, shallow depth of field. A young person
+wearing a flawless, pristine handcrafted masked-hunter horror mask
+(original design, no gore, weathered leather-like texture) paired with
+an oversized boxy-fit graphic tee, baggy cargo joggers, and a
+crossbody bag. Standing at the entrance of a warehouse-style party venue
+at night, queue of blurred figures behind, a doorway glowing with warm
+light spilling into the dark street. Lighting: single warm light source
+from the doorway creating strong rim light against the dark street,
+near-black shadows. Mood: mysterious, anticipatory, cool. The mask must
+be an entirely original design, not based on any copyrighted character.
+Ultra-detailed, film grain, 8k.
+
+
+IMAGEN 4 — "Bruja elegante fiestera" (línea vintage)
+-----------------------------------------------------------
+Hyperrealistic editorial nightlife photography, vertical 3:4
+composition, shot on 50mm lens. A young person wearing a flawless,
+pristine handcrafted elegant horror mask (refined, editorial, original
+design, no gore) paired with a cropped vintage-style boxy denim jacket,
+high-waisted baggy trousers, and gold hoop earrings. Leaning casually
+against a graffiti-covered wall lit by a single overhead string light,
+soft smoke/haze in the air, blurred silhouettes of a small street party
+in the background. Lighting: warm amber overhead light with deep shadow
+falloff, desaturated background tones with a single warm accent color.
+Mood: retro-cool, confident, effortlessly stylish. The mask must be an
+entirely original design, not based on any copyrighted character.
+Ultra-detailed, film grain, 8k.
+
+
+CUANDO LAS TENGAS
+---------------------
+Colócalas en una carpeta nueva, por ejemplo:
+
+  imagenes/PARTE-4-MODA-FIESTERA/
+
+Y avísame — te preparo el prompt para que Claude Code las integre, una
+vez que también me confirme cómo va a organizar esta sección dentro del
+sitio (eso ya se lo pedí en el prompt 13, punto 3).

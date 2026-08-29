@@ -1,0 +1,168 @@
+{
+  "_lee_esto": [
+    "Una historia por producto. La narrativa la escribimos nosotros -- el personaje,",
+    "de dónde viene, por qué funciona puesto. Es la ENTRADA: la salida es el producto",
+    "real al final de la página, con su foto, su precio y su botón.",
+    "",
+    "REGLA QUE SE SIGUIÓ AL ESCRIBIRLAS:",
+    "  - Libertad creativa TOTAL en la narrativa del personaje o del objeto.",
+    "  - CERO datos técnicos inventados. Ni material, ni peso, ni medidas, ni",
+    "    certificaciones, ni tiempos de duración. Eso solo puede salir del",
+    "    producto.txt, y el build lo saca de ahí por su cuenta.",
+    "  - Tono de marca: elegante, seguro de sí mismo, +14. Nunca infantil,",
+    "    nunca sensacionalista, nunca signos de exclamación.",
+    "",
+    "PARA AÑADIR UNA HISTORIA: copia el bloque de cualquiera, cambia el slug por el",
+    "del producto (el mismo que usa el inventario) y escribe. El build valida que el",
+    "slug exista: si te equivocas, falla antes de publicar en vez de dejar un hueco.",
+    "",
+    "El campo 'lectura' son minutos, redondeado. 'kicker' es la categoría corta que",
+    "sale sobre el titular."
+  ],
+  "historias": {
+    "mascara-goma-17-michael-myers": {
+      "kicker": "El origen",
+      "titulo": "La cara que no expresa nada",
+      "entrada": "La máscara más imitada del cine de terror empezó como una decisión de presupuesto.",
+      "parrafos": [
+        "En 1978 el equipo no tenía dinero para un diseño original. Compraron una máscara de plástico en una tienda de disfraces, le quitaron las patillas, le abrieron los ojos y la pintaron de blanco. Costó menos de dos dólares.",
+        "Lo que salió fue mejor que cualquier cosa que hubieran podido diseñar: una cara humana a la que le quitaron toda la expresión. No gruñe, no sonríe, no amenaza. Simplemente está. Y esa quietud es exactamente lo que da miedo.",
+        "Cuarenta años después sigue siendo la referencia de cómo se ve el terror en una habitación oscura. Un rostro pálido que te mira sin ninguna intención visible."
+      ],
+      "cierre": "Puesta, funciona por lo mismo: no tienes que hacer nada. Quédate quieto.",
+      "lectura": 2
+    },
+    "mascara-goma-23-payaso-it": {
+      "kicker": "El personaje",
+      "titulo": "Por qué el payaso funciona tan bien",
+      "entrada": "Un payaso es una cara que promete alegría. Ahí está la trampa.",
+      "parrafos": [
+        "El terror con payasos no inventó nada: aprovechó algo que ya estaba. Una cara pintada de blanco con la sonrisa dibujada encima es una máscara desde el principio, aunque no lo llamemos así. Sonríe pase lo que pase, incluso cuando debería estar haciendo otra cosa.",
+        "El payaso del alcantarillado llevó eso al extremo: cuello de gorguera, frente enorme, ojos que no acompañan la sonrisa. La sonrisa se queda quieta y el resto de la cara dice otra cosa.",
+        "Es de los pocos personajes que se leen a tres metros y en luz baja. En una fiesta llena de gente, la cabeza blanca se ve antes que nada."
+      ],
+      "cierre": "Si te la vas a poner, no hagas ruido. La sonrisa hace todo el trabajo.",
+      "lectura": 2
+    },
+    "mascara-goma-12-leatherface-mascacre-en-texas": {
+      "kicker": "El origen",
+      "titulo": "El delantal, la sierra y la cara prestada",
+      "entrada": "1974, presupuesto mínimo, calor de Texas y una idea que no se le había ocurrido a nadie.",
+      "parrafos": [
+        "La película se rodó en agosto, con el equipo trabajando dieciséis horas al día dentro de una casa cerrada llena de restos de utilería. El resultado tiene una textura sucia que no se puede fabricar en un estudio limpio.",
+        "El personaje no habla. Grita, gruñe y se mueve pesado, como alguien que hace un trabajo. Esa es la lectura que lo separa del resto: no es un cazador elegante, es un obrero.",
+        "La máscara cambia según la escena, y ese detalle —que la cara no sea siempre la misma— es lo que la volvió inolvidable."
+      ],
+      "cierre": "La pieza más incómoda de mirar del catálogo. Es exactamente el punto.",
+      "lectura": 2
+    },
+    "mascara-goma-16-mascara-venom": {
+      "kicker": "El personaje",
+      "titulo": "La sonrisa que no cabe en la cara",
+      "entrada": "Empezó como un traje de repuesto y terminó siendo el villano más pedido del cómic.",
+      "parrafos": [
+        "El diseño original era simple: el mismo traje, en negro. Funcionó tan bien que el personaje se quedó, y con él una silueta que ya no se puede confundir con ninguna otra.",
+        "La boca es lo que lo define. Demasiados dientes, demasiado abiertos, una lengua que no debería estar ahí. Es la única máscara del catálogo donde la parte de abajo de la cara importa más que los ojos.",
+        "Blanco sobre negro, sin colores intermedios. En una foto con poca luz se lee solo por el contraste."
+      ],
+      "cierre": "Funciona sola, y funciona todavía mejor con el enterizo del mismo personaje.",
+      "lectura": 2
+    },
+    "mascara-goma-20-monja": {
+      "kicker": "El personaje",
+      "titulo": "Lo que se supone que debería tranquilizarte",
+      "entrada": "El hábito es un símbolo de refugio. Por eso incomoda tanto cuando deja de serlo.",
+      "parrafos": [
+        "El terror religioso no funciona por lo sobrenatural: funciona porque toma algo asociado al cuidado y lo pone del otro lado. La misma tela, la misma silueta, la misma quietud, y una cara que no corresponde.",
+        "La toca enmarca el rostro y lo aísla del resto del cuerpo. Todo lo que ves es la cara, flotando sobre negro. No hay pelo, no hay orejas, no hay contexto.",
+        "Es la pieza más quieta del catálogo. No necesita movimiento ni gesto: se queda mirando y ya."
+      ],
+      "cierre": "Para quien prefiere que lo miren de lejos y con calma.",
+      "lectura": 2
+    },
+    "mascara-goma-08-donnie-darko-conejo": {
+      "kicker": "El origen",
+      "titulo": "El conejo que no es tierno",
+      "entrada": "Un conejo de peluche estirado hasta que dejó de parecer un juguete.",
+      "parrafos": [
+        "El diseño de 2001 tomó la forma más inofensiva que existe —orejas largas, cara redonda— y la deformó apenas lo suficiente: el hocico demasiado adelantado, los ojos demasiado hundidos, los dientes visibles cuando no deberían estarlo.",
+        "No hay sangre, no hay heridas, no hay nada explícito. Todo el efecto viene de que algo familiar está mal por unos pocos milímetros.",
+        "Es la máscara más difícil de clasificar del catálogo y también la que más miradas se lleva. Nadie sabe muy bien por qué le molesta."
+      ],
+      "cierre": "Si te gusta el terror que no explica de qué va, es esta.",
+      "lectura": 2
+    },
+    "mascara-goma-27-pigsaw": {
+      "kicker": "El personaje",
+      "titulo": "Una cabeza de cerdo en una habitación sin salida",
+      "entrada": "La saga entera se construyó sobre una idea barata y una máscara de feria.",
+      "parrafos": [
+        "El primer largometraje se rodó en dieciocho días, casi todo en un baño. Sin dinero para efectos, el terror tenía que venir de lo que se veía en cámara: una figura con cabeza de cerdo, quieta en el marco de la puerta.",
+        "El cerdo no es casual. Es un animal asociado a la granja y al matadero al mismo tiempo, y esa doble lectura es la que hace que la imagen no se olvide.",
+        "El pelo negro largo cayendo a los lados termina de romperlo: la silueta deja de ser animal y deja de ser humana."
+      ],
+      "cierre": "La entrada, no la salida.",
+      "lectura": 2
+    },
+    "mascara-goma-25-payaso-terrifier": {
+      "kicker": "El personaje",
+      "titulo": "El payaso que no habla",
+      "entrada": "Blanco y negro, sin una sola palabra en toda la película.",
+      "parrafos": [
+        "El personaje se construyó en contra de la tendencia: nada de frases memorables, nada de explicación, nada de origen. Solo un mimo que hace gestos y sonríe mientras trabaja.",
+        "El diseño renuncia al color por completo. Sin rojo, sin verde, sin la paleta clásica de circo. Eso lo saca del terreno del payaso de fiesta y lo mete en el del payaso de teatro antiguo, que es mucho peor.",
+        "El gorro pequeño en la punta de la cabeza es el detalle que lo remata: una talla demasiado chica, como si se lo hubiera puesto un niño."
+      ],
+      "cierre": "Sin decir nada. Ese es el personaje entero.",
+      "lectura": 2
+    },
+    "mascara-plastico-08-mascara-dali-casa-de-papel": {
+      "kicker": "El símbolo",
+      "titulo": "Cómo un pintor terminó en un atraco",
+      "entrada": "El bigote más reconocible de la pintura española, convertido en uniforme.",
+      "parrafos": [
+        "La serie necesitaba una máscara que hiciera indistinguibles a los personajes y que al mismo tiempo dijera algo. Eligieron la cara de un pintor surrealista: el gesto exagerado, las cejas arqueadas, el bigote imposible.",
+        "El resultado dejó de pertenecer a la ficción muy rápido. La máscara salió a la calle en protestas de varios países antes de que terminara la serie.",
+        "Puesta en grupo es donde funciona: cinco caras iguales sonriendo de la misma forma. En solitario es un guiño; en fila es otra cosa."
+      ],
+      "cierre": "Compra una, o compra varias. Esta se diseñó para ir acompañada.",
+      "lectura": 2
+    },
+    "mascara-plastico-01-anonymous-vendetta": {
+      "kicker": "El símbolo",
+      "titulo": "Una cara de 1605 que sigue en la calle",
+      "entrada": "Cuatro siglos de historia condensados en una sonrisa fija.",
+      "parrafos": [
+        "El personaje histórico fue ejecutado en 1606 por intentar volar el Parlamento inglés. Durante trescientos años se le quemó en efigie cada noviembre, con caretas de cartón vendidas a los niños.",
+        "El cómic de los ochenta la rescató y le dio una sonrisa serena. La adaptación al cine la convirtió en imagen de manifestación, y de ahí saltó a internet sin permiso de nadie.",
+        "Es probablemente la máscara más usada del mundo fuera de Halloween, y la única del catálogo que significa algo antes de que te la pongas."
+      ],
+      "cierre": "La más barata del catálogo y la que más ha viajado.",
+      "lectura": 2
+    },
+    "mascara-goma-11-kaneki": {
+      "kicker": "El personaje",
+      "titulo": "El cuero que tapa la boca",
+      "entrada": "Un diseño que no oculta la cara: oculta lo que la cara hace.",
+      "parrafos": [
+        "En la historia original el personaje no se cubre para que no lo reconozcan. Se cubre porque lo que tiene debajo no puede mostrarse mientras come.",
+        "Por eso el diseño deja los ojos libres y cierra solo la mitad inferior. Las correas y la cremallera no son adorno: son un cierre, y se leen como tal.",
+        "Es la única pieza del catálogo que funciona con la cara descubierta. Se ve tu mirada, y esa es la idea."
+      ],
+      "cierre": "Media máscara, doble lectura.",
+      "lectura": 2
+    },
+    "44-harley-quinn": {
+      "kicker": "El personaje",
+      "titulo": "El personaje que se escapó de un capítulo",
+      "entrada": "Nació como secundaria de un solo episodio y terminó llevándose la franquicia.",
+      "parrafos": [
+        "Se creó en 1992 para una escena concreta de la serie animada. La idea era usarla una vez. Gustó tanto que se quedó, saltó al cómic, y de ahí a todo lo demás.",
+        "La paleta es lo que la hace inconfundible: rojo y azul divididos por la mitad, sin degradado, sin transición. Es un diseño pensado para leerse en una silueta pequeña.",
+        "Funciona sola y funciona en pareja. En pareja se lee como una respuesta al payaso que va al lado."
+      ],
+      "cierre": "Combina con la máscara del payaso del atraco. Cada pieza se compra por separado.",
+      "lectura": 2
+    }
+  }
+}

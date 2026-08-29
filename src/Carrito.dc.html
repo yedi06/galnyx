@@ -1,0 +1,155 @@
+<div style="position:relative; width:1440px; height:1000px; background:var(--bg); color:var(--text); overflow:hidden;">
+
+  <!-- ============ página detrás, atenuada ============ -->
+  <div style="filter:saturate(0.7);">
+<!--@HEADER:catalogo:3:plain@-->
+    <div style="padding:34px 64px 0 64px;">
+      <div style="font-size:12.5px; color:var(--text-faintest); margin-bottom:16px;">Inicio &nbsp;/&nbsp; Catálogo &nbsp;/&nbsp; Máscaras</div>
+      <h1 class="dsp" style="font-weight:800; font-size:52px; line-height:1.02; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 30px 0;">Máscaras</h1>
+      <div style="display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:20px;">
+        <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+          <div class="pbg" style="height:236px;">
+            <!--@IMG:mascara-goma-24-payaso-robber:198@--></div>
+          <div style="padding:18px;"><div class="dsp" style="font-weight:700; font-size:16.5px; color:var(--text-hi);">Payaso Robber</div><div class="mono" style="font-size:10px; color:var(--text-faint); margin-top:8px;">GOMA</div></div>
+        </div>
+        <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+          <div class="pbg" style="height:236px;">
+            <!--@IMG:mascara-goma-23-payaso-it:198@--></div>
+          <div style="padding:18px;"><div class="dsp" style="font-weight:700; font-size:16.5px; color:var(--text-hi);">Payaso It</div><div class="mono" style="font-size:10px; color:var(--text-faint); margin-top:8px;">GOMA</div></div>
+        </div>
+        <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+          <div class="pbg" style="height:236px;">
+            <!--@IMG:mascara-goma-17-michael-myers:198@--></div>
+          <div style="padding:18px;"><div class="dsp" style="font-weight:700; font-size:16.5px; color:var(--text-hi);">Michael Myers</div><div class="mono" style="font-size:10px; color:var(--text-faint); margin-top:8px;">GOMA</div></div>
+        </div>
+        <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+          <div class="pbg" style="height:236px;">
+            <!--@IMG:mascara-goma-20-monja:198@--></div>
+          <div style="padding:18px;"><div class="dsp" style="font-weight:700; font-size:16.5px; color:var(--text-hi);">Monja</div><div class="mono" style="font-size:10px; color:var(--text-faint); margin-top:8px;">SILICONA · MATE</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- velo -->
+  <div style="position:absolute; inset:0; background:rgba(var(--bg-rgb),0.74);"></div>
+
+  <!-- ============ drawer ============ -->
+  <div style="position:absolute; top:0; right:0; bottom:0; width:472px; background:#040F09; border-left:1px solid var(--border); display:flex; flex-direction:column;">
+
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 30px; border-bottom:1px solid var(--card);">
+      <div style="display:flex; align-items:baseline; gap:11px;">
+        <span class="dsp" style="font-weight:700; font-size:24px; color:var(--text-hi);">Tu carrito</span>
+        <span class="mono" style="font-size:12px; color:var(--text-faint);">{{count}}</span>
+      </div>
+      <span style="font-size:22px; color:var(--text-faint); line-height:1; cursor:pointer;">×</span>
+    </div>
+
+    <!-- líneas -->
+    <div style="flex-grow:1; padding:22px 30px; display:flex; flex-direction:column; gap:16px; overflow:hidden;">
+      <sc-for list="{{lines}}" as="l" hint-placeholder-count="3">
+        <div style="display:flex; gap:16px; padding-bottom:16px; border-bottom:1px solid var(--card);">
+          <div class="pbg" style="width:82px; height:98px; border:1px solid var(--line); border-radius:9px; flex-shrink:0;">
+            <img src="{{l.foto}}" alt="" style="position:relative; z-index:2; height:80px; width:auto; display:block;">
+          </div>
+          <div style="flex-grow:1;">
+            <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px;">
+              <div class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi);">{{l.name}}</div>
+              <span class="dsp" style="font-weight:700; font-size:16px; color:var(--text-hi); white-space:nowrap;">{{l.total}}</span>
+            </div>
+            <div class="mono" style="font-size:9.5px; letter-spacing:0.09em; color:var(--text-faint); margin-top:7px;">{{l.mat}}</div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-top:12px;">
+              <div style="display:flex; align-items:center; gap:10px; border:1px solid var(--border); border-radius:7px; padding:0 9px;">
+                <button class="qty" onClick="{{l.dec}}" style="width:24px; height:26px; border:none;">−</button>
+                <span class="mono" style="font-size:12.5px; color:var(--text-hi); width:14px; text-align:center;">{{l.qty}}</span>
+                <button class="qty" onClick="{{l.inc}}" style="width:24px; height:26px; border:none;">+</button>
+              </div>
+              <span onClick="{{l.del}}" style="font-size:12.5px; color:var(--text-faint); cursor:pointer;">Quitar</span>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+
+      <div style="display:flex; align-items:center; gap:11px; background:var(--bg-raised); border:1px solid var(--line); border-radius:10px; padding:15px 17px;">
+        <span style="width:7px; height:7px; border-radius:50%; background:var(--accent); display:inline-block; flex-shrink:0;"></span>
+        <span style="font-size:12.5px; color:var(--text-muted); line-height:1.5;">Cambios en 7 días si la pieza no ha sido usada.</span>
+      </div>
+    </div>
+
+    <!-- totales + pago -->
+    <div style="border-top:1px solid var(--card); padding:24px 30px 28px 30px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <span style="font-size:13.5px; color:var(--text-muted);">Subtotal</span>
+        <span class="mono" style="font-size:13.5px; color:var(--text);">{{subtotal}}</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <span style="font-size:13.5px; color:var(--text-muted);">Envío · Lima Metropolitana</span>
+        <span class="mono" style="font-size:13.5px; color:var(--text);">S/ 12</span>
+      </div>
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; padding-top:14px; border-top:1px solid var(--card); margin-bottom:18px;">
+        <div>
+          <div style="font-size:14px; font-weight:600; color:var(--text-hi);">Total</div>
+          <div class="mono" style="font-size:10.5px; color:var(--text-faintest); margin-top:5px;">Entrega en 24–48 h en Lima Metropolitana</div>
+        </div>
+        <span class="dsp" style="font-weight:800; font-size:32px; color:var(--text-hi);">{{total}}</span>
+      </div>
+
+      <div class="btn-p" style="padding:17px; font-size:15.5px; margin-bottom:12px;">Ir a pagar</div>
+      <div class="btn-s" style="padding:14px; font-size:14px; margin-bottom:18px;">Seguir viendo el catálogo</div>
+
+      <div style="display:flex; align-items:center; gap:8px; justify-content:center;">
+        <span class="kicker" style="font-size:9.5px; color:var(--text-faintest); border:1px solid var(--line); border-radius:4px; padding:4px 9px;">Yape</span>
+        <span class="kicker" style="font-size:9.5px; color:var(--text-faintest); border:1px solid var(--line); border-radius:4px; padding:4px 9px;">Plin</span>
+        <span class="kicker" style="font-size:9.5px; color:var(--text-faintest); border:1px solid var(--line); border-radius:4px; padding:4px 9px;">Tarjeta</span>
+        <span class="kicker" style="font-size:9.5px; color:var(--text-faintest); border:1px solid var(--line); border-radius:4px; padding:4px 9px;">Contra entrega</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!--@SCRIPT@-->
+<script data-dc-script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { qty: [1, 1, 2], gone: [false, false, false] };
+  }
+  renderVals() {
+    var st = this.state || {};
+    var qty = st.qty || [1, 1, 2];
+    var gone = st.gone || [false, false, false];
+    var self = this;
+
+    var ITEMS = [
+      { slug: 'mascara-goma-24-payaso-robber', name: 'Payaso Robber', mat: 'GOMA', price: 130 },
+      { slug: '44-harley-quinn', name: 'Disfraz de Harley Quinn', mat: 'DISFRAZ', price: 95 },
+      { slug: 'mascara-plastico-01-anonymous-vendetta', name: 'Anonymous Vendetta', mat: 'PLÁSTICO', price: 15 }
+    ];
+
+    var lines = [];
+    var subtotal = 0;
+    var count = 0;
+    ITEMS.forEach(function (x, i) {
+      if (gone[i]) return;
+      var q = qty[i];
+      subtotal += x.price * q;
+      count += q;
+      lines.push({
+        name: x.name, mat: x.mat, foto: x.slug + '.webp',
+        qty: String(q),
+        total: 'S/ ' + x.price * q,
+        dec: function () { var n = qty.slice(); n[i] = Math.max(1, n[i] - 1); self.setState({ qty: n }); },
+        inc: function () { var n = qty.slice(); n[i] = Math.min(9, n[i] + 1); self.setState({ qty: n }); },
+        del: function () { var g = gone.slice(); g[i] = true; self.setState({ gone: g }); }
+      });
+    });
+
+    return {
+      lines: lines,
+      count: count === 1 ? '1 artículo' : count + ' artículos',
+      subtotal: 'S/ ' + subtotal,
+      total: 'S/ ' + (subtotal === 0 ? 0 : subtotal + 12)
+    };
+  }
+}
+</script>

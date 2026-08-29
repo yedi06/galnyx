@@ -1,0 +1,152 @@
+GALNYX — GUÍA: CÓMO GENERAR UN VIDEO DE HOME CON IA (SIN FOTOGRAFÍA PROPIA)
+====================================================================================
+Este archivo tiene dos partes: PARTE A es para ti (cómo y dónde generarlo),
+PARTE B es el prompt listo para pegar en la herramienta de video con IA que
+elijas. No hace falta ningún material nuevo que no tengas ya — se genera a
+partir de las mismas imágenes que ya creaste.
+
+
+PARTE A — CÓMO HACERLO
+====================================================================================
+
+¿ESTO ROMPE TU MODELO DE DROPSHIPPING? NO.
+-------------------------------------------------
+Un video de "hero" (el fondo animado detrás del titular del Home) es
+contenido de AMBIENTE/marca, no fotografía de producto — no necesitas
+filmar tus máscaras reales ni contratar a nadie. Se genera con IA de
+"imagen a video": tomas una imagen fija que ya tienes (o una nueva
+generada igual que las 13 anteriores) y la IA le agrega movimiento sutil
+(niebla que se mueve, luz que parpadea, el personaje respirando/parpadeando,
+cámara que avanza lento). Es exactamente el mismo tipo de dirección de arte
+que ya usaste para Colecciones/Tendencias/Looks, solo que ahora se mueve.
+Esto SÍ es coherente con "no tengo estudio ni sesiones de fotos" — el video
+no muestra tus productos reales en movimiento, muestra la ATMÓSFERA de
+marca.
+
+
+DÓNDE USARLO (no lo pongas en todo el sitio)
+-------------------------------------------------
+Úsalo en UN solo lugar por ahora: el fondo del hero del Home (donde hoy
+está el titular "Deja de ser quien eras."). Es el lugar de mayor impacto y
+el que más costo/beneficio te da. No lo repitas en cada página de colección
+— eso pesa mucho en celular (la mayoría de tu tráfico) y pierde el efecto
+de "esto es especial" si está en todos lados.
+
+
+HERRAMIENTAS DE IA PARA VIDEO — cuál usar
+-------------------------------------------------
+Todas trabajan con el mismo flujo: subes una imagen fija (o describes la
+escena) y la IA genera un clip corto (normalmente 5–10 segundos) con
+movimiento de cámara y de la escena. Opciones más usadas en 2026:
+
+  - Kling AI (Kuaishou) — la más recomendada para este caso: muy buen
+    realismo de movimiento (niebla, tela, luz), función "imagen a video"
+    directa, precio accesible. Web: klingai.com
+  - Runway (Gen-4) — control de cámara más fino (puedes especificar
+    "dolly in", "paneo", etc.), calidad muy alta, algo más cara.
+    runwayml.com
+  - Luma Dream Machine — rápida y sencilla, buena para loops
+    atmosféricos. lumalabs.ai
+  - Google Veo (a través de Gemini/Flow) — si ya usas Gemini para
+    imágenes, es la opción más natural para mantenerte en el mismo
+    ecosistema.
+
+Cualquiera de las cuatro sirve. Te recomiendo Kling o Veo para empezar por
+costo/calidad.
+
+
+QUÉ IMAGEN USAR COMO PUNTO DE PARTIDA
+-------------------------------------------------
+Tienes dos caminos:
+
+  1. Reutilizar una imagen fuerte que ya tienes (por ejemplo la de
+     "Payaso siniestro" del pasillo, o la pareja de villanos del prompt
+     01) y animarla directo. Es lo más rápido y no gasta generaciones
+     nuevas.
+  2. Generar UNA imagen nueva dedicada para el hero, con la misma regla
+     de "un chat nuevo, dirección de arte propia" que ya usaste, pero
+     esta vez pensada específicamente como fondo de hero: composición
+     panorámica (16:9 o más ancha), con espacio negativo claro del lado
+     izquierdo o superior para que el titular y los botones se lean
+     encima sin taparse con la figura.
+
+Te recomiendo la opción 2 si quieres el mejor resultado — el hero es la
+primera impresión de toda la página, vale la pena una imagen pensada
+específicamente para eso en vez de reciclar una banner de colección.
+
+
+ESPECIFICACIONES TÉCNICAS PARA WEB (pásaselas a Claude Code)
+-------------------------------------------------------------------
+- Duración: 6–10 segundos, en loop perfecto (que no se note el corte al
+  repetir).
+- Sin audio (mute) — es fondo decorativo, nunca reproduzcas sonido
+  automático.
+- Formato: exporta en MP4 (H.264) y si puedes también WebM — más liviano
+  para celular.
+- Peso objetivo: menos de 3–4 MB para que cargue rápido en tráfico de
+  anuncios en celular. Comprime con Handbrake o similar si el archivo
+  sale más pesado.
+- Fallback: guarda también la imagen fija (el primer frame) como poster/
+  fallback para conexiones lentas o navegadores que no reproduzcan el
+  video — Claude Code debe usar esa imagen si el video no carga.
+- Overlay: pídele a Claude Code que mantenga un degradado oscuro sutil
+  encima del video (igual que ya usa sobre las fotos) para que el
+  titular en blanco/verde siga siendo legible.
+
+
+PARTE B — PROMPT LISTO PARA PEGAR EN KLING / RUNWAY / LUMA / VEO
+====================================================================================
+Si eliges generar una imagen nueva dedicada (opción 2 de arriba), primero
+genera la imagen fija con este prompt en Gemini/el generador de imágenes
+que ya usaste (chat nuevo):
+
+---
+Hyperrealistic cinematic horror photography, wide 16:9 composition, shot
+on a full-frame camera with a 35mm lens, shallow depth of field. A tall
+figure wearing a flawless, pristine handcrafted horror mask (no blood,
+no gore, no visible damage — a clean, expertly finished mask with subtle
+texture and realistic material sheen) stands in the right third of the
+frame, in a dark, atmospheric interior (an abandoned grand hallway with
+tall windows, faint moonlight, drifting fog low to the ground). The left
+two-thirds of the frame are darker and emptier — negative space reserved
+for text overlay, no important detail there. Lighting: single hard
+directional light from behind the figure creating rim light and long
+shadows, near-black shadows with a single cold desaturated green accent
+tone in the ambient light. Mood: premium, cinematic, unsettling but
+elegant — not gory, not campy. The mask must be an entirely original
+design, not based on any copyrighted character. Ultra-detailed, film
+grain, 8k.
+---
+
+Después, sube esa imagen (o la que elijas reutilizar) a la herramienta de
+video con este prompt de movimiento:
+
+---
+Animate this image into a seamless 8-second cinematic loop. Slow, subtle
+camera push-in (dolly forward), barely noticeable. Fog drifts slowly
+across the floor from left to right. The figure's cloak/fabric moves
+faintly as if in a light draft. A flickering, irregular light source
+causes subtle shifts in the rim lighting on the mask, like a distant
+lightning flash or a dying bulb — no strobing, very subtle. Add fine
+floating dust particles catching the light. Maintain the dark,
+desaturated, premium horror atmosphere — no fast motion, no camera
+shake, nothing jarring. The loop must start and end on nearly identical
+frames so it can repeat seamlessly.
+---
+
+Ajusta la descripción de la máscara/escena a la imagen que elijas usar —
+lo importante es mantener: movimiento LENTO Y SUTIL, loop sin corte
+notorio, y nada de gore ni movimiento brusco.
+
+
+QUÉ HACER DESPUÉS DE GENERARLO
+-------------------------------------------------
+1. Descarga el video final y el frame fijo (poster).
+2. Colócalos en la misma carpeta de imágenes que ya usas para el Home
+   (o una carpeta nueva "imagenes/hero-video/" si prefieres mantenerlo
+   separado).
+3. Pásale a Claude Code un mensaje corto: "Ya generé el video del hero
+   del Home con IA, está en [ruta]. Reemplaza el fondo del hero por este
+   video en loop, silencioso, con el degradado oscuro que ya usa el
+   sitio encima para que el titular se siga leyendo bien, y usa [ruta de
+   la imagen fija] como poster/fallback para conexiones lentas."

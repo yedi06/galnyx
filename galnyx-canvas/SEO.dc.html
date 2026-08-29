@@ -1,0 +1,469 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+    <style>
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  src: url("InstrumentSerif-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  src: url("InstrumentSerif-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url("InstrumentSans-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("BigShoulders-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("JetBrainsMono-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("JetBrainsMono-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+    /* ---------- tema GALNYX Horror (por defecto) + Play + Glamour ----------
+       [data-collection="play"|"glamour"] envuelven tarjetas/secciones de
+       producto que no encajan con la estética de terror -- Play para
+       Cuentos de hadas (dorado), Glamour para Glamour adulto (rosa). El
+       header, footer, nav móvil, logo y checkout NUNCA llevan ninguno de
+       estos atributos: son el ancla de marca y se quedan siempre en verde,
+       vengan de header()/footer()/mheader()/mfooter()/logo()/fab()/
+       chkheader()/qrSvg() -- ninguna de esas funciones fue tocada. */
+    :root {
+      --bg:#020A06; --bg-raised:#06150F; --bg-raised-2:#0B1D14;
+      --card:#14211B; --line:#1A2620; --border:#25312B;
+      --text-faintest:#5E6E66; --text-faint:#7C8B83; --text-muted:#9FB0A7;
+      --text-link:#B9C6BF; --text:#DFE7E2; --text-hi:#F5FAF7;
+      --accent-deep:#2E854D; --accent:#56BD78; --accent-bright:#7BD497;
+      --on-accent:#02160A; --photo-glow:#143020; --photo-shadow:#04100A;
+      --bg-rgb:2,10,6; --accent-rgb:86,189,120; --accent-deep-rgb:46,133,77;
+    }
+    [data-collection="play"] {
+      --bg:#0B0710; --bg-raised:#170D1E; --bg-raised-2:#1E1226;
+      --card:#291A33; --line:#35223F; --border:#4A2F58;
+      --text-faintest:#8C7A93; --text-faint:#A793AC; --text-muted:#C7B6CC;
+      --text-link:#D6C8DA; --text:#EDE3EF; --text-hi:#FAF6F5;
+      --accent-deep:#B5822A; --accent:#D9A441; --accent-bright:#E8C878;
+      --on-accent:#160D1D; --photo-glow:#432B4D; --photo-shadow:#110A17;
+      --bg-rgb:11,7,16; --accent-rgb:217,164,65; --accent-deep-rgb:181,130,42;
+    }
+    [data-collection="glamour"] {
+      --bg:#0F0509; --bg-raised:#1C0A11; --bg-raised-2:#24101A;
+      --card:#331521; --line:#3F1B2A; --border:#542339;
+      --text-faintest:#8F6572; --text-faint:#A8828F; --text-muted:#C9A8B5;
+      --text-link:#D7BDC7; --text:#EDDCE2; --text-hi:#FAF3F5;
+      --accent-deep:#A02D5C; --accent:#D6417B; --accent-bright:#F07FA8;
+      --on-accent:#1B0A11; --photo-glow:#4D2234; --photo-shadow:#16080D;
+      --bg-rgb:15,5,9; --accent-rgb:214,65,123; --accent-deep-rgb:160,45,92;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Instrument Sans", ui-sans-serif, sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { color:var(--accent-bright); }
+
+    .dsp   { font-family:"Instrument Serif", Georgia, serif; font-style:normal; letter-spacing:-0.01em; }
+    .dsp-i { font-family:"Instrument Serif", Georgia, serif; font-style:italic; letter-spacing:-0.005em; }
+    .kicker {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 75;
+      text-transform:uppercase; font-weight:650; letter-spacing:0.1em;
+    }
+    .wordmark {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 100;
+      text-transform:uppercase; font-weight:700;
+    }
+    .mono { font-family:"JetBrains Mono", ui-monospace, monospace; }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity:0.55; transform:translate(-50%,-50%) scale(1); }
+      50%      { opacity:1;    transform:translate(-50%,-50%) scale(1.07); }
+    }
+    @keyframes pulse-glow-corner {
+      0%, 100% { opacity:0.6; transform:scale(1); }
+      50%      { opacity:1;   transform:scale(1.05); }
+    }
+    @keyframes ember-float {
+      0%   { transform:translateY(0) scale(1); opacity:0; }
+      12%  { opacity:0.9; }
+      100% { transform:translateY(-140px) scale(0.4); opacity:0; }
+    }
+    @keyframes rise-in {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .glow-pulse-corner { animation: pulse-glow-corner 7s ease-in-out infinite; }
+    .glow-pulse-center { animation: pulse-glow 6s ease-in-out infinite; }
+    .ember { position:absolute; bottom:20px; width:4px; height:4px; border-radius:50%; background:var(--accent-bright); box-shadow:0 0 8px 2px rgba(123,212,151,0.7); animation: ember-float 5.5s ease-in infinite; pointer-events:none; }
+    .card-hov { transition: transform .35s ease, border-color .35s ease; }
+    .card-hov:hover { transform:translateY(-5px); border-color:var(--accent-deep); }
+    .rise { animation: rise-in .7s cubic-bezier(.2,.7,.3,1) both; }
+
+    /* marco de foto de producto: halo radial + retícula técnica + viñeta + grano */
+    .pbg { position:relative; background:radial-gradient(circle at 50% 40%, var(--photo-glow), var(--photo-shadow) 74%); display:flex; align-items:flex-end; justify-content:center; overflow:hidden; }
+    .pbg::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+      background-image:linear-gradient(0deg, rgba(2,10,6,0.78), transparent 24%), radial-gradient(ellipse at 50% 42%, transparent 32%, rgba(2,10,6,0.60) 100%), linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size:100% 100%, 100% 100%, 44px 44px, 44px 44px; }
+    .pbg::after { content:""; position:absolute; inset:0; z-index:3; pointer-events:none; opacity:0.5;
+      background-image:radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px); background-size:3px 3px; }
+    .pbg > svg, .pbg > div.pset { position:relative; z-index:1; }
+    /* La foto real del producto SIEMPRE por encima de la escena ilustrada. Sin
+       esto la <img> queda estática (z-index auto) debajo del <svg> de escena,
+       que sí lleva z-index:1 -- y la tarjeta muestra un fondo genérico en vez
+       del producto. Pasó en Colección y en Catálogo. */
+    .pbg > img { position:relative; z-index:2; }
+    .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+    .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+
+    .lnk { color:var(--text-link); transition:color .2s ease; }
+    .lnk:hover { color:var(--text-hi); }
+    .ico { width:38px; height:38px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-raised); transition:border-color .25s ease, background .25s ease; }
+    .ico:hover { border-color:var(--accent-deep); background:#081B12; }
+    .btn-p { background:var(--accent); color:var(--on-accent); font-weight:600; border-radius:8px; text-align:center; transition:filter .2s ease, transform .12s ease; cursor:pointer; border:none; font-family:inherit; }
+    .btn-p:hover { filter:brightness(1.07); }
+    .btn-p:active { transform:translateY(1px); }
+    .btn-s { border:1px solid var(--border); color:var(--text); font-weight:600; border-radius:8px; text-align:center; background:transparent; transition:border-color .2s ease, color .2s ease; cursor:pointer; font-family:inherit; }
+    .btn-s:hover { border-color:var(--accent-deep); color:var(--text-hi); }
+    .chip { border:1px solid var(--border); border-radius:100px; padding:8px 16px; font-size:13px; color:var(--text-link); background:transparent; cursor:pointer; font-family:inherit; transition:border-color .2s ease, color .2s ease, background .2s ease; }
+    .chip:hover { border-color:var(--accent-deep); color:var(--text-hi); }
+    .fab { position:absolute; right:26px; bottom:26px; width:52px; height:52px; border-radius:14px; background:#06150F; border:1px solid #2E854D; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 7px rgba(86,189,120,0.05); }
+    .qty { width:30px; height:30px; border:1px solid var(--border); border-radius:6px; background:transparent; color:var(--text); font-size:15px; cursor:pointer; font-family:inherit; transition:border-color .2s ease; }
+    .qty:hover { border-color:var(--accent-deep); }
+
+    </style>
+</helmet>
+<div style="position:relative; width:1440px; background:var(--bg); color:var(--text); padding-bottom:88px;">
+
+  <!-- ============ portada ============ -->
+  <div style="position:relative; padding:64px 64px 48px 64px; border-bottom:1px solid var(--card); overflow:hidden;">
+    <div class="glow-pulse-corner" style="position:absolute; top:-200px; right:-60px; width:560px; height:560px; border-radius:50%; background:radial-gradient(circle, rgba(var(--accent-deep-rgb),0.14), transparent 65%); pointer-events:none;"></div>
+    <div style="position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:60px;">
+      <div style="max-width:720px;">
+        <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:22px;">Documento interno · no es una página pública</div>
+        <h1 class="dsp" style="font-weight:800; font-size:60px; line-height:1.0; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 20px 0;">
+          Dónde vive el SEO<br><span class="dsp-i" style="font-weight:600; padding-left:52px;">en esta tienda.</span>
+        </h1>
+        <p style="font-size:16.5px; line-height:1.75; color:var(--text-muted); margin:0;">El SEO no es una sección aparte: son bloques que ya están en el diseño (la guía de compra, las preguntas frecuentes, los enlaces internos, el blog) más una capa técnica que se configura una vez. Acá está todo junto, listo para pasarle al desarrollador.</p>
+      </div>
+      <div style="border:1px solid var(--line); border-radius:12px; padding:22px 26px; flex-shrink:0;">
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); margin-bottom:14px;">Prioridad</div>
+        <div style="display:flex; flex-direction:column; gap:11px; font-size:13.5px;">
+          <div style="display:flex; align-items:center; gap:12px;"><span class="mono" style="font-size:11px; color:var(--accent);">01</span><span style="color:var(--text);">Técnico base</span></div>
+          <div style="display:flex; align-items:center; gap:12px;"><span class="mono" style="font-size:11px; color:var(--accent);">02</span><span style="color:var(--text);">Fichas y categorías</span></div>
+          <div style="display:flex; align-items:center; gap:12px;"><span class="mono" style="font-size:11px; color:var(--accent);">03</span><span style="color:var(--text);">Blog, uno por semana</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 1 · dónde está el SEO en la home ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">1 · Qué bloque de la home trabaja para Google</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Cada sección de la home tiene una función de negocio y una de posicionamiento. Ninguna está solo de adorno.</p>
+
+    <div style="border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+      <div style="display:grid; grid-template-columns: 60px 1fr 1.2fr 1.1fr; background:#040F09; border-bottom:1px solid var(--line);">
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 20px;">#</div>
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 12px;">Sección</div>
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 12px;">Encabezado</div>
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 20px;">Para qué sirve en buscadores</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 60px 1fr 1.2fr 1.1fr; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div class="mono" style="font-size:12px; color:var(--accent); padding:16px 20px;">01</div>
+        <div style="padding:16px 12px; font-size:13.5px; color:var(--text);">Portada</div>
+        <div style="padding:16px 12px;"><span class="mono" style="font-size:11px; color:var(--accent);">H1</span> <span style="font-size:13px; color:var(--text-muted);">Deja de ser quien eras.</span></div>
+        <div style="padding:16px 20px; font-size:13px; color:var(--text-muted); line-height:1.55;">Marca. El kicker de arriba lleva las palabras clave: máscaras y trajes de terror, Lima.</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 60px 1fr 1.2fr 1.1fr; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div class="mono" style="font-size:12px; color:var(--accent); padding:16px 20px;">04</div>
+        <div style="padding:16px 12px; font-size:13.5px; color:var(--text);">Colecciones por arquetipo</div>
+        <div style="padding:16px 12px;"><span class="mono" style="font-size:11px; color:var(--accent);">H2 + 6 H3</span></div>
+        <div style="padding:16px 20px; font-size:13px; color:var(--text-muted); line-height:1.55;">Seis enlaces internos con texto descriptivo: reparte autoridad a las colecciones.</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 60px 1fr 1.2fr 1.1fr; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div class="mono" style="font-size:12px; color:var(--accent); padding:16px 20px;">10</div>
+        <div style="padding:16px 12px; font-size:13.5px; color:var(--text);">Preguntas frecuentes</div>
+        <div style="padding:16px 12px;"><span class="mono" style="font-size:11px; color:var(--accent);">H2 + 6 H3</span></div>
+        <div style="padding:16px 20px; font-size:13px; color:var(--text-muted); line-height:1.55;">Con marcado FAQPage puede salir desplegable en el resultado de Google.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 2 · URLs ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">2 · Estructura de direcciones</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Cortas, en minúsculas, sin fechas ni números de producto. Una vez publicadas no se cambian: si hay que cambiarlas, redirección 301.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px;">
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); margin-bottom:16px;">Catálogo</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/mascaras</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Categoría principal</div></div>
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/mascaras/latex</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Filtro de material, indexable</div></div>
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/mascaras/silente-01</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Ficha de producto</div></div>
+          <div><div class="mono" style="font-size:12.5px; color:var(--text-faintest);">/mascaras?orden=precio</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Orden y paginación: canonical a la categoría</div></div>
+        </div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); margin-bottom:16px;">Colecciones, looks y blog</div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/colecciones/payaso-siniestro</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Arquetipo</div></div>
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/colecciones/trajes-de-pareja</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">La que más se busca en octubre</div></div>
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/looks/payaso-siniestro-completo</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Set armado</div></div>
+          <div><div class="mono" style="font-size:12.5px; color:var(--accent-bright);">/blog/latex-resina-o-silicona</div><div style="font-size:12.5px; color:var(--text-faint); margin-top:4px;">Artículo, sin fecha en la ruta</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 3 · títulos y descripciones ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">3 · Título y descripción, plantilla por tipo de página</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">El número en mono es la cuenta de caracteres. Título hasta 60, descripción hasta 155: pasado eso Google lo corta.</p>
+
+    <div style="display:flex; flex-direction:column; gap:14px;">
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px 26px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <span class="kicker" style="font-size:12px; color:var(--accent);">Home</span>
+          <span class="mono" style="font-size:11px; color:var(--text-faintest);">título 58 · descripción 148</span>
+        </div>
+        <div class="mono" style="font-size:14px; color:var(--text); margin-bottom:9px;">Máscaras de terror hiperrealistas en Lima | GALNYX</div>
+        <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">Máscaras y trajes de terror de látex, resina y silicona con stock real y envío en 24–48 h en Lima. Yape, Plin, tarjeta y contra entrega.</div>
+      </div>
+
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px 26px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <span class="kicker" style="font-size:12px; color:var(--accent);">Categoría</span>
+          <span class="mono" style="font-size:11px; color:var(--text-faintest);">patrón reutilizable</span>
+        </div>
+        <div class="mono" style="font-size:14px; color:var(--text); margin-bottom:9px;">{Categoría} de terror en Lima · {n} modelos con stock | GALNYX</div>
+        <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">{n} {categoría} hiperrealistas de látex, resina y silicona. Material y acabado a la vista, stock verificado a diario y envío en 24–48 h.</div>
+      </div>
+
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px 26px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <span class="kicker" style="font-size:12px; color:var(--accent);">Ficha de producto</span>
+          <span class="mono" style="font-size:11px; color:var(--text-faintest);">patrón reutilizable</span>
+        </div>
+        <div class="mono" style="font-size:14px; color:var(--text); margin-bottom:9px;">{Nombre} · máscara de {material} {acabado} | GALNYX</div>
+        <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">{Nombre}, máscara de {material} con acabado {acabado}. S/ {precio}, {stock} unidades disponibles hoy. Envío 24–48 h en Lima y cambios en 7 días.</div>
+      </div>
+
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px 26px;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <span class="kicker" style="font-size:12px; color:var(--accent);">Artículo de blog</span>
+          <span class="mono" style="font-size:11px; color:var(--text-faintest);">ejemplo real</span>
+        </div>
+        <div class="mono" style="font-size:14px; color:var(--text); margin-bottom:9px;">Látex, resina o silicona: cuál máscara aguanta más</div>
+        <div style="font-size:13.5px; color:var(--text-muted); line-height:1.6;">Cómo se siente, cuánto dura y cuánto cuesta cada material de máscara de terror, explicado con precios reales del mercado peruano.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 4 · datos estructurados ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">4 · Datos estructurados</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Es lo que hace que tu resultado en Google se vea distinto al del resto: precio, estrellas y disponibilidad dentro del propio resultado.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;">
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:12px; color:var(--accent-bright); margin-bottom:12px;">Product + Offer</div>
+        <div style="font-size:13.5px; color:var(--text); margin-bottom:8px;">En cada ficha</div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.65; margin:0;">Muestra precio, moneda (PEN) y disponibilidad en el resultado. Es lo que más sube el clic frente a un competidor sin marcado.</p>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:12px; color:var(--accent-bright); margin-bottom:12px;">AggregateRating</div>
+        <div style="font-size:13.5px; color:var(--text); margin-bottom:8px;">En fichas con reseñas</div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.65; margin:0;">Pone las estrellas amarillas. Solo con reseñas reales de compradores: inventarlas es motivo de penalización.</p>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:12px; color:var(--accent-bright); margin-bottom:12px;">FAQPage</div>
+        <div style="font-size:13.5px; color:var(--text); margin-bottom:8px;">Home y contacto</div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.65; margin:0;">Las seis preguntas de la home pueden aparecer desplegables bajo el resultado, ocupando más pantalla.</p>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:12px; color:var(--accent-bright); margin-bottom:12px;">BreadcrumbList</div>
+        <div style="font-size:13.5px; color:var(--text); margin-bottom:8px;">Todas las páginas internas</div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.65; margin:0;">Cambia la URL fea del resultado por la ruta Inicio › Máscaras › Silente 01.</p>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:12px; color:var(--accent-bright); margin-bottom:12px;">Article</div>
+        <div style="font-size:13.5px; color:var(--text); margin-bottom:8px;">Cada entrada del blog</div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.65; margin:0;">Autor, fecha de publicación y de actualización. Ayuda a que los artículos entren en Google Discover.</p>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:24px;">
+        <div class="mono" style="font-size:12px; color:var(--accent-bright); margin-bottom:12px;">Organization</div>
+        <div style="font-size:13.5px; color:var(--text); margin-bottom:8px;">Una sola vez, en la home</div>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.65; margin:0;">Nombre, logo, WhatsApp y redes. Alimenta el panel de marca a la derecha del resultado.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 5 · palabras clave ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">5 · Mapa de palabras clave</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Una página por intención, sin que dos peleen por lo mismo. El volumen exacto hay que confirmarlo en Keyword Planner antes de escribir: acá va la prioridad de negocio, no un dato inventado.</p>
+
+    <div style="border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:#040F09; border-bottom:1px solid var(--line);">
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 20px;">Búsqueda</div>
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 12px;">Intención</div>
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 12px;">Página que responde</div>
+        <div class="mono" style="font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest); padding:15px 20px; text-align:right;">Prioridad</div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div style="padding:15px 20px; font-size:13.5px; color:var(--text);">máscaras de terror lima</div>
+        <div style="padding:15px 12px; font-size:13px; color:var(--text-muted);">Comprar</div>
+        <div style="padding:15px 12px;"><span class="mono" style="font-size:12px; color:var(--accent-bright);">/mascaras</span></div>
+        <div style="padding:15px 20px; text-align:right;"><span class="mono" style="font-size:12px; color:var(--accent);">Alta</span></div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div style="padding:15px 20px; font-size:13.5px; color:var(--text);">disfraces de halloween para pareja</div>
+        <div style="padding:15px 12px; font-size:13px; color:var(--text-muted);">Comprar</div>
+        <div style="padding:15px 12px;"><span class="mono" style="font-size:12px; color:var(--accent-bright);">/colecciones/trajes-de-pareja</span></div>
+        <div style="padding:15px 20px; text-align:right;"><span class="mono" style="font-size:12px; color:var(--accent);">Alta</span></div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div style="padding:15px 20px; font-size:13.5px; color:var(--text);">máscara de látex realista precio</div>
+        <div style="padding:15px 12px; font-size:13px; color:var(--text-muted);">Comparar</div>
+        <div style="padding:15px 12px;"><span class="mono" style="font-size:12px; color:var(--accent-bright);">/mascaras/latex</span></div>
+        <div style="padding:15px 20px; text-align:right;"><span class="mono" style="font-size:12px; color:var(--accent);">Alta</span></div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div style="padding:15px 20px; font-size:13.5px; color:var(--text);">disfraz de payaso siniestro</div>
+        <div style="padding:15px 12px; font-size:13px; color:var(--text-muted);">Comprar</div>
+        <div style="padding:15px 12px;"><span class="mono" style="font-size:12px; color:var(--accent-bright);">/colecciones/payaso-siniestro</span></div>
+        <div style="padding:15px 20px; text-align:right;"><span class="mono" style="font-size:12px; color:var(--text-muted);">Media</span></div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:var(--bg-raised); border-bottom:1px solid var(--card);">
+        <div style="padding:15px 20px; font-size:13.5px; color:var(--text);">qué máscara de halloween dura más</div>
+        <div style="padding:15px 12px; font-size:13px; color:var(--text-muted);">Informarse</div>
+        <div style="padding:15px 12px;"><span class="mono" style="font-size:12px; color:var(--accent-bright);">/blog/latex-resina-o-silicona</span></div>
+        <div style="padding:15px 20px; text-align:right;"><span class="mono" style="font-size:12px; color:var(--text-muted);">Media</span></div>
+      </div>
+      <div style="display:grid; grid-template-columns: 1.4fr 1fr 1.3fr 110px; background:var(--bg-raised);">
+        <div style="padding:15px 20px; font-size:13.5px; color:var(--text);">cómo cuidar una máscara de látex</div>
+        <div style="padding:15px 12px; font-size:13px; color:var(--text-muted);">Informarse</div>
+        <div style="padding:15px 12px;"><span class="mono" style="font-size:12px; color:var(--accent-bright);">/blog/como-guardar-tu-mascara</span></div>
+        <div style="padding:15px 20px; text-align:right;"><span class="mono" style="font-size:12px; color:var(--text-faint);">Baja</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 6 · blog ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">6 · El blog es el motor, no el adorno</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Las páginas de producto rankean para «comprar»; el blog rankea para todo lo que la gente busca dos semanas antes de comprar. Un artículo por semana entre julio y octubre, cada uno enlazando a dos categorías.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap:16px;">
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 01</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Látex, resina o silicona: cuál aguanta toda la noche</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Enlaza a máscaras por material. Ya está escrito.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 02</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Cómo medir tu cabeza antes de comprar una máscara</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Corta devoluciones y enlaza a la guía de tallas.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 03</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Diez disfraces de pareja que no son los de siempre</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">La búsqueda que más sube en octubre en Perú.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 04</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Dónde comprar disfraces de terror en Lima sin que te estafen</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Búsqueda con intención local y mucha desconfianza.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 05</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Cómo maquillarte alrededor de una máscara</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Enlaza a efectos FX, la categoría de menor ticket.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 06</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Cómo guardar tu máscara para que dure años</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Tráfico todo el año, no solo en octubre.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 07</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Disfraces de grupo: seis ideas para seis personas</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Sube el ticket: seis piezas en un solo pedido.</div>
+      </div>
+      <div style="background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; padding:22px;">
+        <div class="mono" style="font-size:11px; color:var(--accent); margin-bottom:14px;">Semana 08</div>
+        <div style="font-size:14.5px; color:var(--text-hi); line-height:1.4; margin-bottom:10px;">Qué ponerte si la fiesta es de luz negra</div>
+        <div style="font-size:12.5px; color:var(--text-faint); line-height:1.6;">Empuja lo fosforescente, que casi nadie trabaja.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 7 · técnico ============ -->
+  <div style="padding:60px 64px 0 64px;">
+    <h2 class="dsp" style="font-weight:700; font-size:34px; letter-spacing:-0.02em; color:var(--text-hi); margin:0 0 10px 0;">7 · Lo técnico, una sola vez</h2>
+    <p style="font-size:15px; color:var(--text-faint); margin:0 0 28px 0;">Se configura al lanzar y casi no se vuelve a tocar. Sin esto, todo lo de arriba rinde la mitad.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:16px 40px;">
+      <div style="display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--card); padding-top:18px;">
+        <span style="color:var(--accent); margin-top:3px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div style="font-size:14.5px; color:var(--text-hi); margin-bottom:6px;">Sitemap.xml y robots.txt</div><p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">Enviados desde Google Search Console el día uno. Sin esto Google tarda semanas en encontrarte.</p></div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--card); padding-top:18px;">
+        <span style="color:var(--accent); margin-top:3px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div style="font-size:14.5px; color:var(--text-hi); margin-bottom:6px;">Peso de imagen bajo 150 KB</div><p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">WebP a 1200 px de ancho, carga diferida salvo la primera. Es el factor que más pesa en móvil.</p></div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--card); padding-top:18px;">
+        <span style="color:var(--accent); margin-top:3px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div style="font-size:14.5px; color:var(--text-hi); margin-bottom:6px;">Texto alternativo en cada foto</div><p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">Patrón: «Máscara {nombre} de {material} con acabado {acabado}, vista frontal». Trae tráfico desde Google Imágenes.</p></div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--card); padding-top:18px;">
+        <span style="color:var(--accent); margin-top:3px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div style="font-size:14.5px; color:var(--text-hi); margin-bottom:6px;">Canonical en filtros y orden</div><p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">Evita que quince variantes de la misma categoría compitan entre ellas y diluyan la fuerza.</p></div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--card); padding-top:18px;">
+        <span style="color:var(--accent); margin-top:3px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div style="font-size:14.5px; color:var(--text-hi); margin-bottom:6px;">Ficha de Google Business</div><p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">Aunque no haya local: como área de servicio en Lima. Es lo que te mete en las búsquedas con «cerca de mí».</p></div>
+      </div>
+      <div style="display:flex; gap:14px; align-items:flex-start; border-top:1px solid var(--card); padding-top:18px;">
+        <span style="color:var(--accent); margin-top:3px; flex-shrink:0;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div><div style="font-size:14.5px; color:var(--text-hi); margin-bottom:6px;">Producto agotado: nunca 404</div><p style="font-size:13px; color:var(--text-muted); line-height:1.6; margin:0;">Se deja la página viva con aviso de reposición y enlaces a similares. Borrarla tira a la basura todo lo que ya rankeaba.</p></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "_lee_esto": [
+    "Descripciones REDACTADAS POR NOSOTROS para los productos cuyo producto.txt trae",
+    "un texto demasiado corto para publicar (una frase de 15-40 caracteres del tipo",
+    "'Máscara Pigsaw.'). Todo lo demás del sitio sale literal del producto.txt.",
+    "",
+    "Regla que se siguió al escribirlas: describir SOLO lo que se ve en la",
+    "imagen_principal del producto. Cero materiales, certificaciones, medidas o",
+    "specs técnicas inventadas: si no se puede confirmar el material, se usa",
+    "lenguaje honesto genérico ('acabado realista, lista para sorprender') en vez",
+    "de afirmar algo que podría ser falso.",
+    "",
+    "Para retirar una: borra su entrada y vuelve el texto original del producto.txt.",
+    "Cuando el proveedor mande la descripción real, esta capa deja de hacer falta."
+  ],
+  "descripciones": {
+    "mascara-goma-05-chimpance": "Chimpancé de cabeza completa, con orejas grandes, pelaje oscuro alrededor del rostro y mirada expresiva. Acabado realista, lista para sorprender.",
+    "mascara-goma-27-pigsaw": "La cabeza de cerdo de Saw: hocico alargado, piel curtida y pelo negro largo cayendo a los lados. Acabado realista, lista para sorprender.",
+    "mascara-goma-30-twisted-metal": "El payaso de Twisted Metal, con la cara agrietada, la sonrisa amarilla de oreja a oreja y mechones rojos a los costados. Acabado realista, lista para sorprender.",
+    "mascara-plastico-05-joker-pelicula": "El payaso de la película: sonrisa roja de lado a lado, triángulos azules sobre y bajo los ojos y mechones verdes a los costados. Cubre el rostro, con anclajes laterales.",
+    "mascara-plastico-13-tyson-rios": "Calavera negra de cara completa, con rejilla metálica en los ojos y correas laterales ajustables. Acabado mate, lista para sorprender."
+  }
+}

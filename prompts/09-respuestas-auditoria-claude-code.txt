@@ -1,0 +1,90 @@
+GALNYX — RESPUESTAS A LA AUDITORÍA
+====================================================================================
+Copia y pega este texto completo como respuesta en la misma sesión de
+Claude Code que te mandó la auditoría (el "INVENTARIO DE AUDITORÍA — GALNYX").
+
+
+5 · CANDIDATOS A ELIMINAR — mis respuestas
+-------------------------------------------------
+
+1. Documentación interna (SEO, Foto, Fondos, Gamas, Tipografía)
+   → MANTENER, pero como referencia interna, fuera del sitio público que
+   ve el cliente.
+
+2. "Trajes de pareja" (nueve combinaciones)
+   → SÍ es una línea real. Pero arma los combos SOLO con lo que ya existe
+   en las carpetas de Máscaras y Disfraces — no tengo más productos que
+   esos. No inventes productos nuevos (nada tipo "Silente 01",
+   "Penumbra", etc.). Combina una máscara real + un disfraz real que
+   tengan sentido temático entre sí para armar cada "combo de pareja", y
+   usa como precio del combo la suma de los dos productos reales que lo
+   componen (o si tienes otra lógica de precio más razonable, dime cuál
+   antes de aplicarla). Si de verdad no alcanzan los productos para
+   armar combos que tengan sentido, dime cuántos combos reales sí se
+   pueden armar en vez de forzarlo a 9.
+
+3. Looks / LookDetalle
+   → Hazlo SOLO si se puede armar con los datos reales que ya tenemos en
+   el catálogo (imagen, nombre, precio, descripción de los productos
+   existentes). Si no alcanza el contenido real para armar una
+   curaduría honesta, NO lo hagas — no quiero trabajo extra sobre datos
+   que no existen. Prioriza esto más abajo en tu lista, no es urgente.
+
+4. Blog + Artículo
+   → Cambio de enfoque, no lo canceles: en vez de un artículo genérico
+   sobre materiales (látex/resina/silicona), quiero que CADA PRODUCTO
+   que vendo tenga su propia página tipo blog/historia dentro de la
+   web — cada máscara/disfraz tiene una historia y quiero contarla. La
+   página tiene que estar armada para que, cuando el usuario termine de
+   leer la historia, pueda seguir bajando y encontrarse con el producto
+   real (imagen, precio, botón de compra) ahí mismo, sin tener que
+   navegar a otra página — la lectura tiene que terminar en la
+   posibilidad de comprar. Dime si esto lo puedes armar con la
+   descripción real que ya tenemos de cada producto o si necesitas que
+   te pase más contenido por producto.
+
+5. TemaPlay / Glamour / Hadas (temas rosa y dorado)
+   → SÍ, se usan. La idea original es que no todos los productos van
+   con la misma atmósfera/tono visual — quiero que TÚ organices y
+   propongas qué productos reales del catálogo calzan mejor con cada
+   tema (cuáles se sienten "Glamour", cuáles "Hadas", etc.) en vez de
+   dejarlos vacíos o genéricos. Muéstrame esa propuesta de agrupación
+   antes de aplicarla al diseño final.
+
+
+7 · DATOS QUE NECESITABAS DE MÍ
+-----------------------------------
+
+- Costo de envío Lima: S/12 es correcto, mantenlo.
+- Envío a provincia: Shalom es el método correcto, pero provincia va a
+  ser SECUNDARIO por ahora — las campañas de publicidad se van a enfocar
+  primero en Lima. No lo ocultes, pero no le des el mismo protagonismo
+  visual que a Lima en checkout/FAQ.
+- Pasarela de tarjeta: NO tengo una integrada todavía. Quita la opción
+  de pago con tarjeta del checkout por ahora — dejar solo Yape/Plin y
+  contra entrega.
+- Cuotas sin interés: NO existen. Elimina esa promesa de todo el sitio.
+- Política de cambios: 7 días es correcto, confirmado, mantenlo.
+- Datos de contacto: WhatsApp +51 904 817 248, hola@galnyx.pe y
+  @galnyx.pe son reales y activos — mantenlos tal cual en todo el sitio.
+- Stock: NO lo quites del todo — lo voy a llevar YO a mano por producto.
+  Necesito poder escribir manualmente la cantidad disponible de cada
+  producto en el archivo/fuente de datos que ya usamos (el mismo de
+  producto.txt), en vez de que el sitio muestre un número inventado o
+  que desaparezca el campo por completo. Dime cómo prefieres que yo
+  cargue ese dato para que no se pierda cuando actualices otras cosas.
+
+
+SOBRE EL RESTO DE LA AUDITORÍA
+-----------------------------------
+No hace falta que publiques la auditoría como artifact navegable aparte
+— con este texto y el reporte que ya me diste es suficiente. Avanza
+directo con las correcciones en el orden que tú mismo propusiste:
+(1) MovilProducto, (2) purga de dato fabricado en las 19 páginas,
+(3) CTAs en catálogo y colecciones, (4) recorte de texto — y todo lo
+demás de esta respuesta (Pareja, Looks, Blog por producto, temas de
+color) como siguiente bloque de trabajo.
+
+Recuerda: al cerrar cada bloque de esta corrección, dame el link del
+artifact/preview actualizado para poder ver los cambios en vivo, como ya
+quedó acordado en los prompts anteriores.

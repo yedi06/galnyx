@@ -1,0 +1,101 @@
+GALNYX — VIDEO DEL HERO + BLOG DE HISTORIAS REAL + NUEVA CAPA: MODA FIESTERA JOVEN
+====================================================================================
+Pega este texto en la misma sesión de Claude Code. Son tres cosas distintas
+en un solo mensaje — trátalas por separado, no las mezcles.
+
+
+1 · VIDEO DEL HERO — YA ESTÁ EN EL REPO, FALTA CONECTARLO
+------------------------------------------------------------
+Ya generé y coloqué el video del fondo del hero del Home en:
+
+  imagenes/Video-Banner.mp4
+
+Reemplaza el fondo actual del hero del Home (donde está el titular "Deja
+de ser quien eras.") por este video:
+
+- En loop, sin sonido (muted, autoplay solo si está en loop y sin audio),
+  sin controles visibles.
+- Mantén encima el degradado oscuro que ya usa el sitio para que el
+  titular en blanco/verde se siga leyendo bien.
+- Usa el primer frame del video como poster/fallback para conexiones
+  lentas o navegadores que no reproduzcan video — si no tienes ya ese
+  frame como imagen, extráelo tú del video.
+- Optimiza el peso del archivo para web si hace falta (que cargue rápido
+  en celular, que es la mayoría del tráfico) sin perder calidad visible.
+- Confirma visualmente que se ve bien en escritorio y en celular antes de
+  dar esto por cerrado.
+
+
+2 · BLOG — RECORDATORIO: ESTO TODAVÍA NO SE APLICÓ
+-------------------------------------------------------
+Ya te pedí esto antes (ver 09-respuestas-auditoria-claude-code.txt, punto
+4) y en la última revisión el blog seguía mostrando artículos genéricos
+("Látex, resina o silicona", "Cómo guardar tu máscara"). Lo repito acá
+más claro porque es importante:
+
+Quiero que CADA PRODUCTO real que vendo (cada máscara, cada disfraz)
+tenga su propia página de blog contando SU historia — no un artículo
+genérico de la categoría, uno por producto individual. Usa el nombre y
+la descripción real que ya tenemos en cada producto.txt como base, y
+redacta la historia en el mismo tono de marca ya definido (elegante,
+seguro de sí mismo, +14, nunca infantil) — sin inventar datos técnicos
+falsos, pero sí con libertad creativa para la narrativa/historia del
+personaje o el objeto.
+
+Esto tiene que ser COMERCIAL, no solo contenido bonito: cada página de
+historia tiene que terminar (al bajar en la lectura) mostrando el
+producto real con su imagen, precio y botón de compra — la historia es
+la entrada, la compra es la salida. El objetivo es que alguien que llega
+por curiosidad a leer la historia termine viendo el producto listo para
+comprar, sin tener que navegar a otra página.
+
+No hace falta que hagas las 99 historias en una sola pasada si es mucho
+trabajo — dime cuántas puedes hacer bien en esta ronda y con cuáles
+empezarías (sugiero: los productos con mejor descripción real en
+producto.txt, para no tener que inventar de la nada).
+
+
+3 · NUEVA CAPA DE CONTENIDO: MODA FIESTERA JOVEN — SOLO CONTENIDO, NO PRODUCTOS NUEVOS
+-------------------------------------------------------------------------------------------
+Quiero sumar un ángulo nuevo a la marca, sin cambiar lo que ya vendemos.
+Además del público que compra por la máscara/disfraz en sí (colección,
+terror, cine), quiero atraer a jóvenes en Perú que van a salir a fiestas
+disfrazados y quieren que su outfit combine con la máscara o el disfraz
+— moda urbana joven: vintage, boxy fit, fit, baggy.
+
+IMPORTANTE — LÍMITE CLARO: esto es para TRANSMITIR que la máscara/disfraz
+combina con ese estilo de vida, no para vender ropa. Sí quiero imágenes
+que muestren esto visualmente (modelo con la máscara puesta + lentes de
+sol, pantalón baggy, polo boxy fit, en un ambiente de fiesta/salida
+nocturna) — pero la ropa y accesorios que aparecen en esas fotos son
+solo dirección de arte/ambientación, NUNCA un producto con botón de
+comprar. Lo único comprable en el sitio sigue siendo lo que ya existe en
+imagenes/Mascaras/ e imagenes/Disfraces/ — dejar clarísimo en el diseño
+que lo que se compra ahí es la máscara/el disfraz, no el outfit
+completo.
+
+Estas imágenes nuevas las voy a generar yo con IA (te aviso cuando las
+tenga, igual que hice con las 13 de Colecciones/Tendencias/Looks) — tú
+todavía no tienes ese material. Mientras tanto:
+- Proponme cómo organizarías esta nueva capa dentro de la arquitectura
+  que ya existe (¿nueva sección "Moda fiestera"/"Combina tu look"?
+  ¿dentro de Tendencias? ¿como categoría del blog del punto 2?) y por
+  qué, para que te confirme antes de que construyas nada.
+- Revisa si las imágenes reales que ya tenemos de Tendencias (Vintage,
+  Moderno, Elegante) sirven como punto de partida visual para esta idea,
+  o si de verdad se necesita una línea de imágenes nueva y separada.
+- Cuando yo te pase las imágenes nuevas, la tarea será la misma que ya
+  conoces: integrarlas donde corresponda, sin inventar productos nuevos
+  ni botones de compra sobre la ropa.
+
+Dame tu propuesta de organización para este punto 3 antes de construirlo
+— los puntos 1 y 2 sí puedes aplicarlos directo.
+
+
+LO QUE NO DEBES TOCAR
+--------------------------
+No toques las carpetas Mascaras/, Disfraces/, PARTE-1/2/3 (fuente de
+verdad, solo lectura). No agregues ningún producto ni categoría de ropa
+al catálogo. No publiques a producción sin que yo revise primero — deja
+el cambio listo en el repo y avísame para el ok final. Como siempre,
+ciérralo dándome el link del artifact/preview actualizado.

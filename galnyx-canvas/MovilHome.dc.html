@@ -1,0 +1,468 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+    <style>
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  src: url("InstrumentSerif-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  src: url("InstrumentSerif-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  font-style: normal;
+  font-weight: 400 700;
+  src: url("InstrumentSans-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-weight: 100 900;
+  src: url("BigShoulders-Variable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("JetBrainsMono-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("JetBrainsMono-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+
+    /* ---------- tema GALNYX Horror (por defecto) + Play + Glamour ----------
+       [data-collection="play"|"glamour"] envuelven tarjetas/secciones de
+       producto que no encajan con la estética de terror -- Play para
+       Cuentos de hadas (dorado), Glamour para Glamour adulto (rosa). El
+       header, footer, nav móvil, logo y checkout NUNCA llevan ninguno de
+       estos atributos: son el ancla de marca y se quedan siempre en verde,
+       vengan de header()/footer()/mheader()/mfooter()/logo()/fab()/
+       chkheader()/qrSvg() -- ninguna de esas funciones fue tocada. */
+    :root {
+      --bg:#020A06; --bg-raised:#06150F; --bg-raised-2:#0B1D14;
+      --card:#14211B; --line:#1A2620; --border:#25312B;
+      --text-faintest:#5E6E66; --text-faint:#7C8B83; --text-muted:#9FB0A7;
+      --text-link:#B9C6BF; --text:#DFE7E2; --text-hi:#F5FAF7;
+      --accent-deep:#2E854D; --accent:#56BD78; --accent-bright:#7BD497;
+      --on-accent:#02160A; --photo-glow:#143020; --photo-shadow:#04100A;
+      --bg-rgb:2,10,6; --accent-rgb:86,189,120; --accent-deep-rgb:46,133,77;
+    }
+    [data-collection="play"] {
+      --bg:#0B0710; --bg-raised:#170D1E; --bg-raised-2:#1E1226;
+      --card:#291A33; --line:#35223F; --border:#4A2F58;
+      --text-faintest:#8C7A93; --text-faint:#A793AC; --text-muted:#C7B6CC;
+      --text-link:#D6C8DA; --text:#EDE3EF; --text-hi:#FAF6F5;
+      --accent-deep:#B5822A; --accent:#D9A441; --accent-bright:#E8C878;
+      --on-accent:#160D1D; --photo-glow:#432B4D; --photo-shadow:#110A17;
+      --bg-rgb:11,7,16; --accent-rgb:217,164,65; --accent-deep-rgb:181,130,42;
+    }
+    [data-collection="glamour"] {
+      --bg:#0F0509; --bg-raised:#1C0A11; --bg-raised-2:#24101A;
+      --card:#331521; --line:#3F1B2A; --border:#542339;
+      --text-faintest:#8F6572; --text-faint:#A8828F; --text-muted:#C9A8B5;
+      --text-link:#D7BDC7; --text:#EDDCE2; --text-hi:#FAF3F5;
+      --accent-deep:#A02D5C; --accent:#D6417B; --accent-bright:#F07FA8;
+      --on-accent:#1B0A11; --photo-glow:#4D2234; --photo-shadow:#16080D;
+      --bg-rgb:15,5,9; --accent-rgb:214,65,123; --accent-deep-rgb:160,45,92;
+    }
+
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:"Instrument Sans", ui-sans-serif, sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { color:var(--accent-bright); }
+
+    .dsp   { font-family:"Instrument Serif", Georgia, serif; font-style:normal; letter-spacing:-0.01em; }
+    .dsp-i { font-family:"Instrument Serif", Georgia, serif; font-style:italic; letter-spacing:-0.005em; }
+    .kicker {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 75;
+      text-transform:uppercase; font-weight:650; letter-spacing:0.1em;
+    }
+    .wordmark {
+      font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;
+      font-variation-settings:"wdth" 100;
+      text-transform:uppercase; font-weight:700;
+    }
+    .mono { font-family:"JetBrains Mono", ui-monospace, monospace; }
+
+    @keyframes pulse-glow {
+      0%, 100% { opacity:0.55; transform:translate(-50%,-50%) scale(1); }
+      50%      { opacity:1;    transform:translate(-50%,-50%) scale(1.07); }
+    }
+    @keyframes pulse-glow-corner {
+      0%, 100% { opacity:0.6; transform:scale(1); }
+      50%      { opacity:1;   transform:scale(1.05); }
+    }
+    @keyframes ember-float {
+      0%   { transform:translateY(0) scale(1); opacity:0; }
+      12%  { opacity:0.9; }
+      100% { transform:translateY(-140px) scale(0.4); opacity:0; }
+    }
+    @keyframes rise-in {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .glow-pulse-corner { animation: pulse-glow-corner 7s ease-in-out infinite; }
+    .glow-pulse-center { animation: pulse-glow 6s ease-in-out infinite; }
+    .ember { position:absolute; bottom:20px; width:4px; height:4px; border-radius:50%; background:var(--accent-bright); box-shadow:0 0 8px 2px rgba(123,212,151,0.7); animation: ember-float 5.5s ease-in infinite; pointer-events:none; }
+    .card-hov { transition: transform .35s ease, border-color .35s ease; }
+    .card-hov:hover { transform:translateY(-5px); border-color:var(--accent-deep); }
+    .rise { animation: rise-in .7s cubic-bezier(.2,.7,.3,1) both; }
+
+    /* marco de foto de producto: halo radial + retícula técnica + viñeta + grano */
+    .pbg { position:relative; background:radial-gradient(circle at 50% 40%, var(--photo-glow), var(--photo-shadow) 74%); display:flex; align-items:flex-end; justify-content:center; overflow:hidden; }
+    .pbg::before { content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+      background-image:linear-gradient(0deg, rgba(2,10,6,0.78), transparent 24%), radial-gradient(ellipse at 50% 42%, transparent 32%, rgba(2,10,6,0.60) 100%), linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size:100% 100%, 100% 100%, 44px 44px, 44px 44px; }
+    .pbg::after { content:""; position:absolute; inset:0; z-index:3; pointer-events:none; opacity:0.5;
+      background-image:radial-gradient(rgba(255,255,255,0.045) 1px, transparent 1px); background-size:3px 3px; }
+    .pbg > svg, .pbg > div.pset { position:relative; z-index:1; }
+    /* La foto real del producto SIEMPRE por encima de la escena ilustrada. Sin
+       esto la <img> queda estática (z-index auto) debajo del <svg> de escena,
+       que sí lleva z-index:1 -- y la tarjeta muestra un fondo genérico en vez
+       del producto. Pasó en Colección y en Catálogo. */
+    .pbg > img { position:relative; z-index:2; }
+    .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+    .pset { display:flex; align-items:flex-end; justify-content:center; gap:22px; }
+
+    .lnk { color:var(--text-link); transition:color .2s ease; }
+    .lnk:hover { color:var(--text-hi); }
+    .ico { width:38px; height:38px; border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; background:var(--bg-raised); transition:border-color .25s ease, background .25s ease; }
+    .ico:hover { border-color:var(--accent-deep); background:#081B12; }
+    .btn-p { background:var(--accent); color:var(--on-accent); font-weight:600; border-radius:8px; text-align:center; transition:filter .2s ease, transform .12s ease; cursor:pointer; border:none; font-family:inherit; }
+    .btn-p:hover { filter:brightness(1.07); }
+    .btn-p:active { transform:translateY(1px); }
+    .btn-s { border:1px solid var(--border); color:var(--text); font-weight:600; border-radius:8px; text-align:center; background:transparent; transition:border-color .2s ease, color .2s ease; cursor:pointer; font-family:inherit; }
+    .btn-s:hover { border-color:var(--accent-deep); color:var(--text-hi); }
+    .chip { border:1px solid var(--border); border-radius:100px; padding:8px 16px; font-size:13px; color:var(--text-link); background:transparent; cursor:pointer; font-family:inherit; transition:border-color .2s ease, color .2s ease, background .2s ease; }
+    .chip:hover { border-color:var(--accent-deep); color:var(--text-hi); }
+    .fab { position:absolute; right:26px; bottom:26px; width:52px; height:52px; border-radius:14px; background:#06150F; border:1px solid #2E854D; display:flex; align-items:center; justify-content:center; box-shadow:0 0 0 7px rgba(86,189,120,0.05); }
+    .qty { width:30px; height:30px; border:1px solid var(--border); border-radius:6px; background:transparent; color:var(--text); font-size:15px; cursor:pointer; font-family:inherit; transition:border-color .2s ease; }
+    .qty:hover { border-color:var(--accent-deep); }
+
+    </style>
+</helmet>
+<div style="position:relative; width:390px; background:var(--bg); color:var(--text);">
+
+  <div style="background:#06150F; border-bottom:1px solid #14211B; padding:8px 0; text-align:center;">
+    <span class="mono" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:#7C8B83;">Envío 24–48 h en Lima · Cambios en 7 días</span>
+  </div>
+  <div style="position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:0 8px 0 4px; height:56px; background:rgba(2,10,6,0.95); border-bottom:1px solid #14211B;">
+    <div style="display:flex; align-items:center;">
+      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#DFE7E2" stroke-width="1.9" stroke-linecap="round"/></svg>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <svg width="18" height="24" viewBox="250.8 120.4 752.4 1015.7" aria-label="GALNYX"><g transform="translate(0,1254) scale(0.1,-0.1)" fill="#56BD78" stroke="none"><path d="M7203 11305 c-40 -17 -73 -69 -73 -115 0 -62 29 -94 141 -151 431 -221 797 -604 1034 -1080 124 -251 204 -518 235 -784 15 -134 12 -398 -6 -526 -18 -134 -69 -340 -115 -464 -45 -125 -161 -350 -243 -473 -278 -416 -714 -735 -1225 -896 -379 -120 -851 -134 -1228 -37 -262 68 -549 196 -766 343 -176 119 -390 321 -516 487 -221 290 -378 666 -433 1036 -17 116 -17 452 1 570 64 437 236 835 512 1188 83 106 273 297 374 377 113 90 264 187 383 249 92 47 105 57 124 95 39 81 -5 172 -89 183 -80 11 -492 -135 -743 -263 -586 -297 -1108 -776 -1461 -1341 -238 -380 -417 -831 -509 -1280 -77 -375 -95 -875 -45 -1268 71 -552 270 -1090 570 -1540 134 -201 247 -339 425 -515 l157 -155 6 -140 c15 -316 127 -787 282 -1186 398 -1023 1149 -1874 2054 -2331 218 -110 217 -110 385 -30 640 306 1228 829 1654 1468 385 578 650 1271 732 1910 11 85 20 182 20 216 l0 61 138 141 c497 507 826 1136 966 1846 123 624 87 1305 -103 1910 -375 1200 -1286 2120 -2445 2470 -148 45 -148 45 -193 25z m1277 -940 c478 -395 852 -936 1056 -1530 364 -1057 223 -2217 -379 -3125 -39 -58 -103 -148 -143 -200 -69 -90 -219 -262 -233 -268 -3 -1 -218 211 -477 470 l-471 473 3 185 c1 102 3 277 3 390 l1 205 78 60 c113 87 336 315 423 431 264 352 432 772 478 1196 25 230 8 560 -40 787 -74 348 -235 719 -442 1021 l-31 45 44 -35 c25 -19 83 -66 130 -105z m-4256 103 c-4 -7 -33 -51 -64 -98 -283 -425 -450 -961 -450 -1445 0 -444 126 -891 357 -1269 142 -231 361 -478 570 -641 l89 -70 -2 -379 -3 -380 -119 -120 c-65 -67 -273 -280 -463 -475 l-344 -353 -79 83 c-222 237 -393 477 -530 749 -228 449 -353 913 -374 1395 -28 618 89 1204 347 1740 242 501 567 895 1031 1248 40 30 44 32 34 15z m3346 -4042 l0 -354 138 -133 c76 -74 155 -153 176 -177 l39 -43 -222 -223 -221 -224 0 -222 c0 -168 -3 -222 -12 -225 -7 -2 -56 -15 -108 -30 -130 -35 -297 -119 -397 -199 -145 -115 -265 -293 -327 -481 -25 -77 -57 -217 -52 -223 17 -16 314 -85 424 -97 l62 -7 0 -903 0 -902 -147 -110 c-82 -61 -191 -137 -243 -170 -96 -60 -262 -153 -274 -153 -3 0 -6 764 -6 1698 l0 1697 210 210 c177 177 210 214 210 239 0 24 -32 60 -210 233 l-210 205 0 303 0 302 83 7 c345 29 727 142 1002 295 39 22 73 40 78 40 4 1 7 -158 7 -353z m-2447 283 c281 -142 578 -228 897 -261 l125 -13 3 -296 2 -295 -215 -213 c-170 -170 -215 -219 -215 -240 0 -21 45 -71 215 -241 l215 -215 0 -1687 c0 -928 -4 -1689 -8 -1692 -21 -13 -318 172 -519 323 l-143 106 0 901 0 901 88 12 c97 13 220 41 324 72 l69 21 -7 42 c-48 290 -210 554 -431 704 -114 77 -262 143 -388 172 l-70 16 -3 224 -3 225 -224 219 c-124 120 -225 223 -225 230 0 6 83 94 185 196 l185 185 0 332 c0 219 3 333 10 333 6 0 65 -28 133 -61z m1262 -1209 l110 -110 -113 -113 -112 -112 -112 112 -113 113 110 110 c60 60 112 110 115 110 3 0 55 -50 115 -110z m-1769 -162 l194 -192 0 -146 0 -147 -197 -7 c-185 -6 -308 -17 -320 -30 -9 -9 18 -196 42 -292 101 -397 403 -668 808 -725 l85 -12 6 -66 c7 -89 6 -671 -1 -671 -4 0 -41 27 -82 59 -187 145 -456 296 -702 397 -63 25 -117 49 -122 53 -24 23 -174 439 -220 611 -71 267 -136 675 -137 865 l0 50 222 222 c123 123 225 223 227 223 2 0 91 -86 197 -192z m3736 -45 l226 -228 -4 -75 c-28 -454 -134 -916 -302 -1318 l-47 -114 -105 -41 c-231 -91 -490 -237 -700 -393 l-110 -82 0 372 0 372 86 12 c403 59 705 325 809 714 26 97 53 293 42 304 -12 13 -243 33 -374 34 l-133 0 0 147 0 148 187 187 c103 104 190 188 193 188 3 0 107 -102 232 -227z m-3312 -728 c97 -22 209 -65 289 -112 86 -51 201 -160 250 -237 45 -72 73 -134 63 -140 -10 -6 -144 -24 -232 -32 -175 -14 -402 39 -531 125 -93 62 -116 82 -172 152 -63 80 -137 245 -118 265 12 13 374 -4 451 -21z m2916 0 c-31 -123 -118 -261 -215 -342 -189 -156 -446 -210 -769 -161 -72 11 -73 11 -67 37 15 62 82 160 164 241 73 73 102 94 191 138 170 83 295 109 544 111 l158 1 -6 -25z m-3248 -1472 c160 -88 407 -274 502 -377 l25 -28 1 -234 c1 -129 0 -234 -2 -234 -6 0 -179 183 -241 256 -99 115 -212 265 -297 396 -75 116 -186 302 -186 312 0 7 118 -46 198 -91z m3297 21 c-142 -259 -369 -564 -614 -824 l-80 -85 -1 241 0 241 73 69 c92 89 176 154 302 237 96 62 327 187 347 187 5 0 -7 -30 -27 -66z"/></g></svg>
+        <span class="wordmark" style="font-size:19px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center;">
+      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#B9C6BF" stroke-width="1.8"/><path d="M20 20l-3.8-3.8" stroke="#B9C6BF" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; position:relative;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 5h2l2.2 11.1a1.6 1.6 0 0 0 1.6 1.3h7.4a1.6 1.6 0 0 0 1.6-1.3L20 8.5H6.4" stroke="#DFE7E2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20.5" r="1.3" fill="#DFE7E2"/><circle cx="17.5" cy="20.5" r="1.3" fill="#DFE7E2"/></svg>
+        <span class="mono" style="position:absolute; top:6px; right:4px; min-width:16px; height:16px; border-radius:8px; background:#56BD78; color:#02160A; font-size:9.5px; display:flex; align-items:center; justify-content:center; padding:0 4px;">2</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ portada ============
+       Mismo video que el hero de escritorio, recortado para vertical.
+       preload="metadata" a propósito: en celular con datos no se baja el video
+       entero de golpe -- se pinta el poster y el video entra cuando puede. -->
+  <div style="position:relative; height:530px; overflow:hidden; background:var(--photo-shadow);">
+    <video autoplay loop muted playsinline preload="metadata" poster="hero-poster.webp" aria-hidden="true" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:52% 42%;"><source src="hero.mp4" type="video/mp4"></video>
+    <div class="ember" style="left:56%; animation-delay:0s;"></div>
+    <div class="ember" style="left:68%; animation-delay:2.2s;"></div>
+    <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.97) 34%, rgba(var(--bg-rgb),0.35) 72%, transparent);"></div>
+
+    <div class="rise" style="position:absolute; z-index:4; left:20px; right:20px; bottom:26px;">
+      <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">Máscaras y trajes de terror · Lima</div>
+      <h1 class="dsp" style="font-weight:800; font-size:52px; line-height:0.94; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 14px 0;">
+        Deja de ser<br><span class="dsp-i" style="font-weight:600; padding-left:34px;">quien eras.</span>
+      </h1>
+      <p style="font-size:14.5px; line-height:1.6; color:var(--text-muted); margin:0 0 20px 0;">Látex, resina y silicona con el material a la vista y el stock contado en unidades.</p>
+      <div class="btn-p" style="padding:16px; font-size:15px; margin-bottom:10px;">Ver el catálogo</div>
+      <div class="btn-s" style="padding:15px; font-size:14.5px;">Ver los arquetipos</div>
+    </div>
+  </div>
+
+  <!-- ============ datos ============ -->
+  <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1px; background:var(--card); border-bottom:1px solid var(--card);">
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Lima</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">Entrega 24–48 h</div>
+    </div>
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Provincias</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">Por Shalom</div>
+    </div>
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Pago</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">Yape · Plin · contra entrega</div>
+    </div>
+    <div style="background:#040F09; padding:16px 20px;">
+      <span class="mono" style="font-size:9.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-faintest);">Stock</span>
+      <div style="font-size:13px; color:var(--text); margin-top:5px;">99 productos</div>
+    </div>
+  </div>
+
+  <!-- ============ el arquetipo, pieza por pieza ============
+       Antes: una tarjeta de "conjunto" con S/286 tachado -> S/249 y AHORRAS
+       S/37, sobre dos productos que no existen. No hay conjunto: hay dos
+       productos reales, cada uno con su precio y su botón. -->
+  <div style="padding:40px 20px 0 20px;">
+    <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:14px;">La foto, en dos productos</div>
+    <h2 class="dsp" style="font-weight:800; font-size:36px; line-height:1.0; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 14px 0;">
+      Máscara y disfraz<br><span class="dsp-i" style="font-weight:600; padding-left:26px;">que se entienden.</span>
+    </h2>
+    <p style="font-size:14.5px; line-height:1.65; color:var(--text-muted); margin:0 0 20px 0;">Los elegimos para que funcionen juntos y los fotografiamos en la misma escena. Se venden por separado.</p>
+
+    <div style="position:relative; height:300px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--photo-shadow); margin-bottom:16px;"><img src="look-payaso-look.webp" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 38%;">
+      <span class="kicker" style="position:absolute; top:12px; left:12px; z-index:4; font-size:9.5px; background:rgba(var(--bg-rgb),0.8); border:1px solid var(--accent-deep); color:var(--accent); padding:5px 9px; border-radius:4px;">PAYASO SINIESTRO</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;">
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:150px;"><img src="mascara-goma-24-payaso-robber.webp" height="126" alt="" style="height:126px; width:auto; display:block;"></div>
+        <div style="padding:13px;">
+          <div class="dsp" style="font-weight:700; font-size:14.5px; line-height:1.2; color:var(--text-hi); min-height:35px;">Payaso Robber</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:10px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);">S/130</span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:150px;"><img src="44-harley-quinn.webp" height="126" alt="" style="height:126px; width:auto; display:block;"></div>
+        <div style="padding:13px;">
+          <div class="dsp" style="font-weight:700; font-size:14.5px; line-height:1.2; color:var(--text-hi); min-height:35px;">Disfraz de Harley Quinn</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:10px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);">S/95</span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="btn-s" style="padding:15px; font-size:14px; margin-top:14px;">Ver los cuatro arquetipos</div>
+  </div>
+
+  <!-- ============ arquetipos ============ -->
+  <div style="padding:44px 20px 0 20px;">
+    <h2 class="dsp" style="font-weight:700; font-size:30px; line-height:1.05; letter-spacing:-0.025em; color:var(--text-hi); margin:0 0 6px 0;">Elige a quién quieres ser</h2>
+    <p style="font-size:13.5px; color:var(--text-faint); margin:0 0 20px 0; line-height:1.6;">Seis arquetipos del cine de terror, con sus máscaras y trajes ya reunidos.</p>
+
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;">
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s5_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s5_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s5_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s5_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s5_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s5_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s5_k)"/><ellipse cx="1240" cy="190" rx="237.60000000000002" ry="237.60000000000002" fill="url(#s5_m)"/><circle cx="1240" cy="190" r="54" fill="#DFF3E6" opacity="0.30"/><circle cx="1240" cy="190" r="54" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 700h1600v200H0z" fill="#020A06"/><path d="M760 120 400 706h720z" fill="#061710"/><path d="M760 120 400 706h720z" fill="none" stroke="#2E854D" stroke-width="2" opacity="0.45"/><path d="M760 120 560 706M760 120 660 706M760 120 860 706M760 120 960 706" stroke="#0C2417" stroke-width="8"/><path d="M400 706c24-22 48-22 72 0s48 22 72 0 48-22 72 0 48 22 72 0 48-22 72 0 48 22 72 0 48-22 72 0 48 22 72 0" fill="none" stroke="#0F2C1C" stroke-width="9"/><path d="M760 120v-56h74l-22 20 22 20h-74" fill="#0F2C1C"/><path d="M150 470c180-90 420-120 610-96" fill="none" stroke="#193C28" stroke-width="2.4" opacity="0.7"/><g fill="#9BE9B8" opacity="0.55"><circle cx="200" cy="464" r="5"/><circle cx="300" cy="440" r="5"/><circle cx="400" cy="422" r="5"/><circle cx="500" cy="404" r="5"/><circle cx="600" cy="390" r="5"/><circle cx="700" cy="380" r="5"/></g><path d="M0 640c120-30 220-18 300 24l-40 60H0z" fill="#020A06"/><ellipse cx="800" cy="690" rx="1000" ry="58" fill="url(#s5_f)" filter="url(#s5_bf)" opacity="0.9"/><g transform="translate(980,760) scale(0.8015267175572519)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="780" rx="1000" ry="46" fill="url(#s5_f)" filter="url(#s5_bf)" opacity="0.55"/><path d="M0 762c260-26 520-26 800 0s540 26 800 0v138H0z" fill="#010604"/><rect y="330" width="1600" height="570" fill="url(#s5_v)"/></svg><svg height="196" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="p9_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="p9_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="p9_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="p9_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="p9_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="p9_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="p9_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#p9_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#p9_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#p9_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#p9_r)" stroke-width="3.4" filter="url(#p9_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#p9_b8)"/><ellipse cx="74" cy="92" rx="22" ry="16" fill="url(#p9_o)" filter="url(#p9_b3)"/><ellipse cx="126" cy="92" rx="22" ry="16" fill="url(#p9_o)" filter="url(#p9_b3)"/><path d="M58 82l22 14-22 12z" fill="#010604"/><path d="M142 82l-22 14 22 12z" fill="#010604"/><path d="M58 82l22 14M142 82l-22 14" stroke="#9BE9B8" stroke-width="1.2" opacity="0.6"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M64 138c14 26 58 26 72 0" stroke="#030D07" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M64 141c14 26 58 26 72 0" stroke="#9BE9B8" stroke-width="1.1" fill="none" opacity="0.25"/><path d="M76 148v9M90 154v10M110 154v10M124 148v9" stroke="#0A1B11" stroke-width="2.4" opacity="0.8"/></svg></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Payaso siniestro</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">11 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s6_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s6_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s6_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s6_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s6_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s6_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s6_k)"/><ellipse cx="300" cy="170" rx="264" ry="264" fill="url(#s6_m)"/><circle cx="300" cy="170" r="60" fill="#DFF3E6" opacity="0.30"/><circle cx="300" cy="170" r="60" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 720h1600v180H0z" fill="#020A06"/><path d="M860 720V400l180-140 180 140v320z" fill="#04120B"/><path d="M1000 400 1040 250l40 150z" fill="#061710"/><path d="M840 400 1040 244l200 156" fill="none" stroke="#2E854D" stroke-width="2.4" opacity="0.5"/><path d="M1220 720V330l70-70 70 70v390z" fill="#03100A"/><path d="M1210 330 1290 246l80 84" fill="none" stroke="#2E854D" stroke-width="2" opacity="0.4"/><rect x="1108" y="60" width="26" height="130" fill="#061710"/><g opacity="0.9"><rect x="930" y="470" width="52" height="76" rx="26" fill="#2E854D" opacity="0.32"/><rect x="1098" y="470" width="52" height="76" rx="26" fill="#7BD497" opacity="0.42" filter="url(#s6_bs)"/><rect x="1098" y="470" width="52" height="76" rx="26" fill="#9BE9B8" opacity="0.30"/><rect x="1264" y="452" width="42" height="62" rx="21" fill="#2E854D" opacity="0.26"/></g><path d="M930 546h52M1098 546h52" stroke="#0B2116" stroke-width="3"/><ellipse cx="800" cy="706" rx="1000" ry="54" fill="url(#s6_f)" filter="url(#s6_bf)" opacity="0.9"/><g stroke="#020A06" stroke-width="16" opacity="0.95"><path d="M40 790v-96M140 790v-96M240 790v-96M340 790v-96M440 790v-96M540 790v-96M640 790v-96"/></g><path d="M0 700h700" stroke="#020A06" stroke-width="14"/><g transform="translate(560,782) scale(0.7633587786259542)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><path d="M0 784c300-24 600-24 900 0s400 22 700 0v116H0z" fill="#010604"/><rect y="330" width="1600" height="570" fill="url(#s6_v)"/></svg><svg height="196" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="pa_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="pa_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="pa_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="pa_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="pa_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="pa_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="pa_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#pa_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#pa_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#pa_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#pa_r)" stroke-width="3.4" filter="url(#pa_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#pa_b8)"/><ellipse cx="76" cy="96" rx="21" ry="18" fill="url(#pa_o)" filter="url(#pa_b3)"/><ellipse cx="124" cy="96" rx="21" ry="18" fill="url(#pa_o)" filter="url(#pa_b3)"/><ellipse cx="76" cy="96" rx="13" ry="15" fill="#010604"/><ellipse cx="124" cy="96" rx="13" ry="15" fill="#010604"/><circle cx="80" cy="91" r="3.2" fill="#CFF7DE" opacity="0.85"/><circle cx="128" cy="91" r="3.2" fill="#CFF7DE" opacity="0.85"/><path d="M63 96a13 15 0 0 1 26 0M111 96a13 15 0 0 1 26 0" stroke="#9BE9B8" stroke-width="1.2" fill="none" opacity="0.55"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M92 150c5 5 11 5 16 0" stroke="#040F09" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M128 40l7 20-12 8 9 16" stroke="#0A1B11" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.9"/><path d="M128 40l7 20-12 8 9 16" stroke="#9BE9B8" stroke-width="0.8" fill="none" opacity="0.3"/></svg></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Muñeca poseída</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">9 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s7_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s7_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s7_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s7_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s7_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s7_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s7_k)"/><ellipse cx="1080" cy="200" rx="220.00000000000003" ry="220.00000000000003" fill="url(#s7_m)"/><circle cx="1080" cy="200" r="50" fill="#DFF3E6" opacity="0.30"/><circle cx="1080" cy="200" r="50" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 690c60-40 90-96 130-96s60 56 120 60 90-70 140-70 70 66 130 70 96-84 150-84 82 78 140 82 96-62 150-62 84 60 140 62 100-52 160-52 130 46 160 62v138H0z" fill="#03100A"/><ellipse cx="800" cy="664" rx="1000" ry="50" fill="url(#s7_f)" filter="url(#s7_bf)" opacity="0.85"/><g fill="#010604"><path d="M250 900V520c0-28-30-50-30-84 14 24 30 34 30 34V330c0-20 10-30 10-30s10 10 10 30v148s18-14 34-42c0 38-34 60-34 86v378z"/><path d="M1330 900V560c0-26-28-44-28-76 12 22 28 30 28 30V400c0-18 9-28 9-28s9 10 9 28v112s16-12 30-38c0 34-30 54-30 78v348z"/><path d="M620 900V620c0-20-22-36-22-60 10 18 22 24 22 24V468c0-16 8-24 8-24s8 8 8 24v112s14-10 26-32c0 28-26 46-26 66v286z"/></g><g transform="translate(880,800) scale(0.7251908396946565)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="800" rx="1000" ry="44" fill="url(#s7_f)" filter="url(#s7_bf)" opacity="0.6"/><path d="M0 806c280-30 560-30 840 0s480 28 760 0v94H0z" fill="#010604"/><path d="M0 0c130 40 200 120 236 190-70-40-160-56-236-52z" fill="#020A06" opacity="0.9"/><rect y="330" width="1600" height="570" fill="url(#s7_v)"/></svg><svg height="196" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="pb_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="pb_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="pb_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="pb_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="pb_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="pb_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="pb_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#pb_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#pb_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#pb_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#pb_r)" stroke-width="3.4" filter="url(#pb_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#pb_b8)"/><path d="M42 84h116v26H42z" fill="#0A1B11" opacity="0.92"/><path d="M42 84h116M42 110h116" stroke="#3C7F55" stroke-width="1.3" opacity="0.7"/><path d="M62 97h26M112 97h26" stroke="#9BE9B8" stroke-width="4" stroke-linecap="round" opacity="0.85"/><circle cx="48" cy="97" r="3.4" fill="#3C7F55"/><circle cx="152" cy="97" r="3.4" fill="#3C7F55"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M76 146h48" stroke="#040F09" stroke-width="5" stroke-linecap="round"/><path d="M84 141v11M100 141v11M116 141v11" stroke="#2B5239" stroke-width="2.2"/><path d="M76 143h48" stroke="#9BE9B8" stroke-width="1" opacity="0.25"/></svg></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Cazador</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">12 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s8_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s8_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s8_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s8_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s8_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s8_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s8_k)"/><ellipse cx="800" cy="150" rx="202.4" ry="202.4" fill="url(#s8_m)"/><circle cx="800" cy="150" r="46" fill="#DFF3E6" opacity="0.30"/><circle cx="800" cy="150" r="46" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 730h1600v170H0z" fill="#020A06"/><g fill="#04120B"><path d="M120 730V330h150v400zM120 330a75 90 0 0 1 150 0z"/><path d="M370 730V310h160v420zM370 310a80 96 0 0 1 160 0z"/><path d="M1070 730V310h160v420zM1070 310a80 96 0 0 1 160 0z"/><path d="M1330 730V330h150v400zM1330 330a75 90 0 0 1 150 0z"/></g><path d="M120 330a75 90 0 0 1 150 0M370 310a80 96 0 0 1 160 0M1070 310a80 96 0 0 1 160 0M1330 330a75 90 0 0 1 150 0" fill="none" stroke="#2E854D" stroke-width="2.2" opacity="0.5"/><path d="M0 130h1600v54H0z" fill="#03100A"/><path d="M0 184h1600v14H0z" fill="#0B2116" opacity="0.6"/><ellipse cx="800" cy="250" rx="46" ry="60" fill="#9BE9B8" opacity="0.22" filter="url(#s8_bs)"/><path d="M800 190v40M770 258h60M782 240l-14 26M818 240l14 26" stroke="#7BD497" stroke-width="2.4" opacity="0.6" fill="none"/><ellipse cx="800" cy="716" rx="1000" ry="48" fill="url(#s8_f)" filter="url(#s8_bf)" opacity="0.8"/><g transform="translate(800,792) scale(0.8396946564885496)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><path d="M0 792h1600v108H0z" fill="#010604"/><g stroke="#0B2116" stroke-width="2" opacity="0.55"><path d="M200 900l120-108M520 900l100-108M980 900l100-108M1300 900l120-108"/></g><path d="M770 900l30-108h20l30 108z" fill="#193C28" opacity="0.35"/><rect y="330" width="1600" height="570" fill="url(#s8_v)"/></svg><svg height="196" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="pc_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="pc_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="pc_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="pc_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="pc_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="pc_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="pc_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#pc_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#pc_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#pc_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#pc_r)" stroke-width="3.4" filter="url(#pc_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#pc_b8)"/><ellipse cx="76" cy="96" rx="20" ry="15" fill="url(#pc_o)" filter="url(#pc_b3)"/><ellipse cx="124" cy="96" rx="20" ry="15" fill="url(#pc_o)" filter="url(#pc_b3)"/><path d="M60 96c8-9 22-9 30 0-8 9-22 9-30 0zM110 96c8-9 22-9 30 0-8 9-22 9-30 0z" fill="#010604"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><ellipse cx="100" cy="150" rx="9" ry="13" fill="#010604"/><ellipse cx="100" cy="150" rx="9" ry="13" fill="none" stroke="#9BE9B8" stroke-width="1" opacity="0.35"/><path d="M41 96c0-46 26-74 59-74s59 28 59 74c0 18-4 34-11 47l6 30-14-10-10 14-9-12-9 12-10-14-14 10 6-30c-7-13-11-29-11-47z" fill="none" stroke="#3C7F55" stroke-width="1.4" opacity="0.55"/></svg></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Espectro</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">8 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="s9_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="s9_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="s9_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="s9_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="s9_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="s9_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#s9_k)"/><rect width="1600" height="900" fill="#03100A"/><g opacity="0.95"><rect x="980" y="120" width="440" height="300" fill="#061710"/><rect x="980" y="120" width="440" height="300" fill="none" stroke="#2E854D" stroke-width="2.4" opacity="0.5"/><path d="M1090 120v300M1200 120v300M1310 120v300M980 220h440M980 320h440" stroke="#0F2C1C" stroke-width="6"/><rect x="980" y="120" width="440" height="300" fill="#7BD497" opacity="0.13"/></g><ellipse cx="1200" cy="300" rx="420" ry="300" fill="url(#s9_m)" opacity="0.7"/><g fill="#020A06"><rect x="60" y="300" width="150" height="440" rx="14"/><rect x="230" y="380" width="110" height="360" rx="12"/><rect x="1440" y="420" width="120" height="320" rx="12"/></g><g stroke="#0B2116" stroke-width="22" fill="none" stroke-linecap="round"><path d="M0 240h420M0 300h300"/></g><g stroke="#193C28" stroke-width="3" fill="none" opacity="0.7"><path d="M60 340h150M60 400h150M230 420h110M230 470h110"/></g><ellipse cx="300" cy="230" rx="150" ry="90" fill="#9BE9B8" opacity="0.10" filter="url(#s9_bf)"/><path d="M0 740h1600v160H0z" fill="#010604"/><ellipse cx="800" cy="726" rx="1000" ry="46" fill="url(#s9_f)" filter="url(#s9_bf)" opacity="0.75"/><g transform="translate(700,782) scale(0.8244274809160306)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><g stroke="#0F2C1C" stroke-width="2" opacity="0.5"><path d="M0 800h1600M0 850h1600"/></g><rect y="330" width="1600" height="570" fill="url(#s9_v)"/></svg><svg height="196" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="pd_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="pd_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="pd_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="pd_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="pd_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="pd_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="pd_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#pd_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#pd_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#pd_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#pd_r)" stroke-width="3.4" filter="url(#pd_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#pd_b8)"/><ellipse cx="76" cy="94" rx="20" ry="12" fill="url(#pd_o)" filter="url(#pd_b3)"/><ellipse cx="124" cy="94" rx="20" ry="12" fill="url(#pd_o)" filter="url(#pd_b3)"/><path d="M60 94h30M110 94h30" stroke="#010604" stroke-width="7" stroke-linecap="round"/><path d="M60 92h30M110 92h30" stroke="#9BE9B8" stroke-width="1.2" opacity="0.55"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M46 62h108" stroke="#0A1B11" stroke-width="2.4" opacity="0.85"/><path d="M56 56v12M72 56v12M88 56v12M104 56v12M120 56v12M136 56v12" stroke="#2B5239" stroke-width="1.8"/><path d="M74 150h52" stroke="#040F09" stroke-width="4.4" stroke-linecap="round"/><path d="M82 145v10M98 145v10M114 145v10" stroke="#2B5239" stroke-width="1.8"/></svg></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Criatura</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">10 piezas</span>
+        </div>
+      </div>
+      <div style="position:relative; border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:220px;"><svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="sa_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="sa_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="sa_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="sa_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="sa_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="sa_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#sa_k)"/><ellipse cx="1120" cy="300" rx="316.8" ry="316.8" fill="url(#sa_m)"/><circle cx="1120" cy="300" r="72" fill="#DFF3E6" opacity="0.30"/><circle cx="1120" cy="300" r="72" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 620c140-16 280-6 420 8s280 22 420 14 280-30 420-32 200 6 340 14v276H0z" fill="#03100A"/><path d="M0 660h1600v240H0z" fill="#04140C"/><g opacity="0.35"><ellipse cx="1120" cy="740" rx="60" ry="14" fill="#9BE9B8"/><ellipse cx="1120" cy="790" rx="44" ry="9" fill="#7BD497"/><ellipse cx="1120" cy="836" rx="30" ry="6" fill="#56BD78"/></g><g fill="#010604"><path d="M240 900V520c0-30-40-52-40-92 18 26 40 38 40 38V330c0-18 9-26 9-26s9 8 9 26v146s24-16 44-48c0 44-44 66-44 94v378z"/><path d="M180 470c-40-24-70-16-96 12 34-6 62 2 96 22z"/><path d="M318 440c40-26 72-20 100 8-36-8-66 0-100 20z"/></g><g stroke="#020A06" stroke-width="5" stroke-linecap="round"><path d="M60 900V700M96 900V670M132 900V712M168 900V684M1400 900V706M1440 900V676M1480 900V716M1520 900V690M1560 900V702"/></g><ellipse cx="800" cy="646" rx="1000" ry="44" fill="url(#sa_f)" filter="url(#sa_bf)" opacity="0.9"/><g transform="translate(700,700) scale(0.7251908396946565)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="712" rx="1000" ry="34" fill="url(#sa_f)" filter="url(#sa_bf)" opacity="0.7"/><g stroke="#193C28" stroke-width="2" opacity="0.4"><path d="M420 780h360M380 830h440"/></g><rect y="330" width="1600" height="570" fill="url(#sa_v)"/></svg><svg height="196" viewBox="0 0 200 260" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="pe_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="pe_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="pe_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="pe_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="pe_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="pe_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="pe_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="100" cy="118" rx="86" ry="104" fill="#2E854D" opacity="0.20" filter="url(#pe_b18)"/><path d="M24 260c0-44 32-66 76-66s76 22 76 66z" fill="url(#pe_c)"/><path d="M24 260c2-42 32-64 76-64s74 22 76 64" fill="none" stroke="#3C7F55" stroke-width="1.3" opacity="0.45"/><path d="M86 166h28v36H86z" fill="#0D2014"/><ellipse cx="100" cy="102" rx="59" ry="76" fill="url(#pe_s)"/><ellipse cx="103" cy="102" rx="59" ry="76" fill="none" stroke="url(#pe_r)" stroke-width="3.4" filter="url(#pe_b3)"/><ellipse cx="70" cy="130" rx="19" ry="13" fill="#9BE9B8" opacity="0.08" filter="url(#pe_b8)"/><ellipse cx="76" cy="96" rx="19" ry="12" fill="url(#pe_o)" filter="url(#pe_b3)"/><ellipse cx="124" cy="96" rx="19" ry="12" fill="url(#pe_o)" filter="url(#pe_b3)"/><path d="M62 97c8-7 20-7 28 0-8 7-20 7-28 0zM110 97c8-7 20-7 28 0-8 7-20 7-28 0z" fill="#010604"/><path d="M62 97c8-7 20-7 28 0M110 97c8-7 20-7 28 0" stroke="#9BE9B8" stroke-width="1.2" fill="none" opacity="0.6"/><path d="M100 98v26l-8 6" stroke="#061309" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.85"/><path d="M102 100v24" stroke="#9BE9B8" stroke-width="1.1" opacity="0.26"/><path d="M84 152c10 5 22 5 32 0" stroke="#040F09" stroke-width="3.4" fill="none" stroke-linecap="round"/><path d="M44 40h112L104 2z" fill="url(#pe_c)" stroke="#3C7F55" stroke-width="1.4" stroke-linejoin="round"/><path d="M44 40h112" stroke="#9BE9B8" stroke-width="1.1" opacity="0.35"/></svg></div>
+        <div style="position:absolute; inset:auto 0 0 0; z-index:4; padding:14px; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.95), transparent);">
+          <h3 class="dsp" style="font-weight:700; font-size:17px; color:var(--text-hi); margin:0 0 4px 0;">Bruja moderna</h3>
+          <span class="mono" style="font-size:10px; color:var(--text-muted);">7 piezas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ banner pareja ============ -->
+  <div style="padding:44px 0 0 0;">
+    <div class="pbg" style="height:420px; border-top:1px solid var(--card); border-bottom:1px solid var(--card);">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" fill="none" role="presentation" style="position:absolute; inset:0; width:100%; height:100%; z-index:1; display:block;"><defs><linearGradient id="sb_k" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0E2A1B"/><stop offset="42%" stop-color="#071A11"/><stop offset="100%" stop-color="#020A06"/></linearGradient><radialGradient id="sb_m" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#D6F8E3" stop-opacity="0.50"/><stop offset="32%" stop-color="#7BD497" stop-opacity="0.20"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></radialGradient><linearGradient id="sb_f" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9BE9B8" stop-opacity="0"/><stop offset="50%" stop-color="#9BE9B8" stop-opacity="0.17"/><stop offset="100%" stop-color="#9BE9B8" stop-opacity="0"/></linearGradient><linearGradient id="sb_v" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#020A06" stop-opacity="0"/><stop offset="62%" stop-color="#020A06" stop-opacity="0.55"/><stop offset="100%" stop-color="#020A06" stop-opacity="0.96"/></linearGradient><filter id="sb_bf" x="-30%" y="-120%" width="160%" height="340%"><feGaussianBlur stdDeviation="24"/></filter><filter id="sb_bs" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="8"/></filter></defs><rect width="1600" height="900" fill="url(#sb_k)"/><ellipse cx="1080" cy="200" rx="220.00000000000003" ry="220.00000000000003" fill="url(#sb_m)"/><circle cx="1080" cy="200" r="50" fill="#DFF3E6" opacity="0.30"/><circle cx="1080" cy="200" r="50" fill="none" stroke="#CFF7DE" stroke-width="1.5" opacity="0.35"/><path d="M0 690c60-40 90-96 130-96s60 56 120 60 90-70 140-70 70 66 130 70 96-84 150-84 82 78 140 82 96-62 150-62 84 60 140 62 100-52 160-52 130 46 160 62v138H0z" fill="#03100A"/><ellipse cx="800" cy="664" rx="1000" ry="50" fill="url(#sb_f)" filter="url(#sb_bf)" opacity="0.85"/><g fill="#010604"><path d="M250 900V520c0-28-30-50-30-84 14 24 30 34 30 34V330c0-20 10-30 10-30s10 10 10 30v148s18-14 34-42c0 38-34 60-34 86v378z"/><path d="M1330 900V560c0-26-28-44-28-76 12 22 28 30 28 30V400c0-18 9-28 9-28s9 10 9 28v112s16-12 30-38c0 34-30 54-30 78v348z"/><path d="M620 900V620c0-20-22-36-22-60 10 18 22 24 22 24V468c0-16 8-24 8-24s8 8 8 24v112s14-10 26-32c0 28-26 46-26 66v286z"/></g><g transform="translate(880,800) scale(0.7251908396946565)"><path d="M-36 0c-3-98 6-152 10-178 3-21 13-32 26-32s23 11 26 32c4 26 13 80 10 178z" fill="#010604"/><ellipse cx="0" cy="-226" rx="27" ry="35" fill="#010604"/><path d="M22 0c3-98-5-152-9-178" fill="none" stroke="#56BD78" stroke-width="3.4" opacity="0.45"/><path d="M23 -204a27 35 0 0 0 0-44" fill="none" stroke="#7BD497" stroke-width="3" opacity="0.5"/><path d="M-13 -232c4-5 11-5 15 0-4 5-11 5-15 0zM3 -232c4-5 11-5 15 0-4 5-11 5-15 0z" fill="#0B2116"/></g><ellipse cx="800" cy="800" rx="1000" ry="44" fill="url(#sb_f)" filter="url(#sb_bf)" opacity="0.6"/><path d="M0 806c280-30 560-30 840 0s480 28 760 0v94H0z" fill="#010604"/><path d="M0 0c130 40 200 120 236 190-70-40-160-56-236-52z" fill="#020A06" opacity="0.9"/><rect y="330" width="1600" height="570" fill="url(#sb_v)"/></svg>
+      <svg height="330" viewBox="0 0 440 560" preserveAspectRatio="xMidYMax meet" fill="none" style="width:auto; display:block;" role="presentation"><defs><radialGradient id="pf_s" cx="36%" cy="24%" r="84%"><stop offset="0%" stop-color="#5C8A6D"/><stop offset="34%" stop-color="#2B5239"/><stop offset="74%" stop-color="#11261A"/><stop offset="100%" stop-color="#07130D"/></radialGradient><radialGradient id="pf_o" cx="50%" cy="42%" r="62%"><stop offset="0%" stop-color="#010804"/><stop offset="100%" stop-color="#0C1E14"/></radialGradient><linearGradient id="pf_r" x1="1" y1="0.08" x2="0.1" y2="1"><stop offset="0%" stop-color="#B4F5CB" stop-opacity="0.95"/><stop offset="40%" stop-color="#56BD78" stop-opacity="0.22"/><stop offset="100%" stop-color="#56BD78" stop-opacity="0"/></linearGradient><linearGradient id="pf_c" x1="0" y1="0" x2="0.2" y2="1"><stop offset="0%" stop-color="#183524"/><stop offset="100%" stop-color="#04100A"/></linearGradient><filter id="pf_b3" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="pf_b8" x="-45%" y="-45%" width="190%" height="190%"><feGaussianBlur stdDeviation="8"/></filter><filter id="pf_b18" x="-55%" y="-55%" width="210%" height="210%"><feGaussianBlur stdDeviation="18"/></filter></defs><ellipse cx="230" cy="300" rx="190" ry="240" fill="#2E854D" opacity="0.16" filter="url(#pf_b18)"/><path d="M300 168c-19 0-32 9-37 24l-22 148-11 220h140l-11-220-22-148c-5-15-18-24-37-24z" fill="url(#pf_c)"/><path d="M300 168c-19 0-32 9-37 24l-22 148-11 220" fill="none" stroke="#2B5239" stroke-width="1.6"/><path d="M370 340l11 220" fill="none" stroke="url(#pf_r)" stroke-width="3.4" filter="url(#pf_b3)"/><path d="M279 176l21 52 21-52" fill="#0A1B11"/><path d="M279 176l21 52 21-52" fill="none" stroke="#3C7F55" stroke-width="1.5" stroke-linejoin="round"/><path d="M300 228v300" stroke="#0A1B11" stroke-width="2.6"/><rect x="318" y="206" width="20" height="13" fill="#2E854D" opacity="0.75"/><ellipse cx="300" cy="118" rx="30" ry="40" fill="url(#pf_s)"/><ellipse cx="303" cy="118" rx="30" ry="40" fill="none" stroke="url(#pf_r)" stroke-width="2.4" filter="url(#pf_b3)"/><path d="M283 112c5-6 13-6 18 0-5 6-13 6-18 0zM301 112c5-6 13-6 18 0-5 6-13 6-18 0z" fill="#010604"/><path d="M283 112c5-6 13-6 18 0M301 112c5-6 13-6 18 0" stroke="#9BE9B8" stroke-width="1" fill="none" opacity="0.65"/><path d="M291 140h18" stroke="#040F09" stroke-width="2.6" stroke-linecap="round"/><path d="M152 150c-18 0-30 8-35 23l-23 152-12 235h140l-12-235-23-152c-5-15-17-23-35-23z" fill="url(#pf_c)"/><path d="M152 150c-18 0-30 8-35 23l-23 152-12 235" fill="none" stroke="#2B5239" stroke-width="1.6"/><path d="M129 156l23 54 23-54" fill="#123023"/><path d="M129 156l23 54 23-54" fill="none" stroke="#3C7F55" stroke-width="1.6" stroke-linejoin="round"/><path d="M134 160l18 44 18-44" fill="none" stroke="#56BD78" stroke-width="1.2" opacity="0.7"/><path d="M152 210v300" stroke="#0A1B11" stroke-width="2.6"/><path d="M96 322l-11 234M208 322l11 234" stroke="#1E4430" stroke-width="1.4"/><ellipse cx="152" cy="98" rx="31" ry="41" fill="url(#pf_s)"/><ellipse cx="155" cy="98" rx="31" ry="41" fill="none" stroke="url(#pf_r)" stroke-width="2.6" filter="url(#pf_b3)"/><path d="M134 92c5-6 14-6 19 0-5 6-14 6-19 0zM153 92c5-6 14-6 19 0-5 6-14 6-19 0z" fill="#010604"/><path d="M134 92c5-6 14-6 19 0M153 92c5-6 14-6 19 0" stroke="#9BE9B8" stroke-width="1.1" fill="none" opacity="0.7"/><path d="M143 122h18" stroke="#040F09" stroke-width="2.8" stroke-linecap="round"/><ellipse cx="136" cy="116" rx="12" ry="9" fill="#9BE9B8" opacity="0.08" filter="url(#pf_b8)"/></svg>
+      <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(0deg, rgba(var(--bg-rgb),0.96) 32%, rgba(var(--bg-rgb),0.3) 70%, transparent);"></div>
+      <div style="position:absolute; z-index:4; left:20px; right:20px; bottom:24px;">
+        <div class="kicker" style="font-size:10px; color:var(--accent); margin-bottom:12px;">Trajes de pareja</div>
+        <h2 class="dsp" style="font-weight:800; font-size:40px; line-height:0.98; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 14px 0;">
+          Dos que<br><span class="dsp-i" style="font-weight:600; padding-left:28px;">no explican nada.</span>
+        </h2>
+        <div class="btn-p" style="padding:15px; font-size:14.5px;">Ver los 9 pares</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ del catálogo ============
+       Mismos cuatro productos inventados que en el home de escritorio, con el
+       mismo precio tachado falso. Reemplazados por producto real. -->
+  <div style="padding:44px 20px 0 20px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;">
+      <h2 class="dsp" style="font-weight:700; font-size:26px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">Del catálogo</h2>
+      <span style="font-size:13px; color:var(--accent);">Ver los 99</span>
+    </div>
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;">
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><img src="mascara-goma-17-michael-myers.webp" height="160" alt="" style="height:160px; width:auto; display:block;"></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;">Michael Myers</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);">S/130</span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><img src="mascara-goma-23-payaso-it.webp" height="160" alt="" style="height:160px; width:auto; display:block;"></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;">Payaso It</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);">S/130</span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><img src="44-harley-quinn.webp" height="160" alt="" style="height:160px; width:auto; display:block;"></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;">Disfraz de Harley Quinn</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);">S/95</span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div class="pbg" style="height:190px;"><img src="29-gatubela.webp" height="160" alt="" style="height:160px; width:auto; display:block;"></div>
+        <div style="padding:14px;">
+          <div class="dsp" style="font-weight:700; font-size:15px; line-height:1.2; color:var(--text-hi); min-height:36px;">Disfraz de Gatubela</div>
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:11px;">
+            <span class="dsp" style="font-weight:700; font-size:18px; color:var(--text-hi);">S/90</span>
+            <span class="btn-p" style="padding:8px 11px; font-size:11.5px; white-space:nowrap;">Ver</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============ preguntas ============ -->
+  <div style="padding:44px 20px 0 20px;">
+    <h2 class="dsp" style="font-weight:700; font-size:28px; letter-spacing:-0.025em; color:var(--text-hi); margin:0 0 18px 0;">Preguntas frecuentes</h2>
+    <div>
+      <div style="border-top:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿Cuánto demora el envío en Lima?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">Entre 24 y 48 horas desde que confirmamos el pago, con aviso por WhatsApp antes de salir.</p>
+      </div>
+      <div style="border-top:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿Envían a provincias?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">Sí, por agencia Shalom. Sale el mismo día y el flete lo pagas al recoger.</p>
+      </div>
+      <div style="border-top:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿Puedo pagar contra entrega?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">En Lima Metropolitana sí. Revisas la pieza antes de pagar, en efectivo o por Yape.</p>
+      </div>
+      <div style="border-top:1px solid var(--card); border-bottom:1px solid var(--card); padding:18px 0;">
+        <h3 style="font-size:14.5px; font-weight:600; color:var(--text-hi); margin:0 0 8px 0;">¿El stock que muestran es real?</h3>
+        <p style="font-size:13px; color:var(--text-muted); line-height:1.7; margin:0;">Sí. Confirmamos unidades cada mañana y publicamos el número exacto. Si dice 3, quedan 3.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ historias ============ -->
+  <div style="padding:44px 20px 40px 20px;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px;">
+      <h2 class="dsp" style="font-weight:700; font-size:26px; letter-spacing:-0.02em; color:var(--text-hi); margin:0;">Historias</h2>
+      <span style="font-size:13px; color:var(--accent);">Ver las 12</span>
+    </div>
+    <a class="card-hov" style="display:block; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--bg-raised); margin-bottom:12px;">
+      <div class="pbg" style="height:170px; border-bottom:1px solid var(--line);"><img src="mascara-goma-17-michael-myers.webp" height="142" alt="" style="height:142px; width:auto; display:block;"></div>
+      <div style="padding:18px;">
+        <span class="kicker" style="font-size:9.5px; color:var(--accent);">El origen · 2 min</span>
+        <h3 class="dsp" style="font-weight:700; font-size:19px; color:var(--text-hi); margin:10px 0 8px 0; line-height:1.25;">La cara que no expresa nada</h3>
+        <p style="font-size:13px; color:var(--text-faint); margin:0 0 14px 0; line-height:1.6;">La máscara más imitada del cine de terror empezó como una decisión de presupuesto.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--card);">
+          <span class="mono" style="font-size:12px; color:var(--text-muted);">Michael Myers · S/130</span>
+          <span class="btn-p" style="padding:8px 12px; font-size:11.5px;">Leer</span>
+        </div>
+      </div>
+    </a>
+    <a class="card-hov" style="display:block; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--bg-raised); margin-bottom:12px;">
+      <div class="pbg" style="height:170px; border-bottom:1px solid var(--line);"><img src="mascara-goma-23-payaso-it.webp" height="142" alt="" style="height:142px; width:auto; display:block;"></div>
+      <div style="padding:18px;">
+        <span class="kicker" style="font-size:9.5px; color:var(--accent);">El personaje · 2 min</span>
+        <h3 class="dsp" style="font-weight:700; font-size:19px; color:var(--text-hi); margin:10px 0 8px 0; line-height:1.25;">Por qué el payaso funciona tan bien</h3>
+        <p style="font-size:13px; color:var(--text-faint); margin:0 0 14px 0; line-height:1.6;">Un payaso es una cara que promete alegría. Ahí está la trampa.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--card);">
+          <span class="mono" style="font-size:12px; color:var(--text-muted);">Payaso It · S/130</span>
+          <span class="btn-p" style="padding:8px 12px; font-size:11.5px;">Leer</span>
+        </div>
+      </div>
+    </a>
+  </div>
+
+
+  <div style="border-top:1px solid #14211B; padding:32px 20px 28px 20px;">
+    <div style="display:flex; align-items:center; gap:9px; margin-bottom:14px;">
+      <svg width="16" height="22" viewBox="250.8 120.4 752.4 1015.7" aria-label="GALNYX"><g transform="translate(0,1254) scale(0.1,-0.1)" fill="#56BD78" stroke="none"><path d="M7203 11305 c-40 -17 -73 -69 -73 -115 0 -62 29 -94 141 -151 431 -221 797 -604 1034 -1080 124 -251 204 -518 235 -784 15 -134 12 -398 -6 -526 -18 -134 -69 -340 -115 -464 -45 -125 -161 -350 -243 -473 -278 -416 -714 -735 -1225 -896 -379 -120 -851 -134 -1228 -37 -262 68 -549 196 -766 343 -176 119 -390 321 -516 487 -221 290 -378 666 -433 1036 -17 116 -17 452 1 570 64 437 236 835 512 1188 83 106 273 297 374 377 113 90 264 187 383 249 92 47 105 57 124 95 39 81 -5 172 -89 183 -80 11 -492 -135 -743 -263 -586 -297 -1108 -776 -1461 -1341 -238 -380 -417 -831 -509 -1280 -77 -375 -95 -875 -45 -1268 71 -552 270 -1090 570 -1540 134 -201 247 -339 425 -515 l157 -155 6 -140 c15 -316 127 -787 282 -1186 398 -1023 1149 -1874 2054 -2331 218 -110 217 -110 385 -30 640 306 1228 829 1654 1468 385 578 650 1271 732 1910 11 85 20 182 20 216 l0 61 138 141 c497 507 826 1136 966 1846 123 624 87 1305 -103 1910 -375 1200 -1286 2120 -2445 2470 -148 45 -148 45 -193 25z m1277 -940 c478 -395 852 -936 1056 -1530 364 -1057 223 -2217 -379 -3125 -39 -58 -103 -148 -143 -200 -69 -90 -219 -262 -233 -268 -3 -1 -218 211 -477 470 l-471 473 3 185 c1 102 3 277 3 390 l1 205 78 60 c113 87 336 315 423 431 264 352 432 772 478 1196 25 230 8 560 -40 787 -74 348 -235 719 -442 1021 l-31 45 44 -35 c25 -19 83 -66 130 -105z m-4256 103 c-4 -7 -33 -51 -64 -98 -283 -425 -450 -961 -450 -1445 0 -444 126 -891 357 -1269 142 -231 361 -478 570 -641 l89 -70 -2 -379 -3 -380 -119 -120 c-65 -67 -273 -280 -463 -475 l-344 -353 -79 83 c-222 237 -393 477 -530 749 -228 449 -353 913 -374 1395 -28 618 89 1204 347 1740 242 501 567 895 1031 1248 40 30 44 32 34 15z m3346 -4042 l0 -354 138 -133 c76 -74 155 -153 176 -177 l39 -43 -222 -223 -221 -224 0 -222 c0 -168 -3 -222 -12 -225 -7 -2 -56 -15 -108 -30 -130 -35 -297 -119 -397 -199 -145 -115 -265 -293 -327 -481 -25 -77 -57 -217 -52 -223 17 -16 314 -85 424 -97 l62 -7 0 -903 0 -902 -147 -110 c-82 -61 -191 -137 -243 -170 -96 -60 -262 -153 -274 -153 -3 0 -6 764 -6 1698 l0 1697 210 210 c177 177 210 214 210 239 0 24 -32 60 -210 233 l-210 205 0 303 0 302 83 7 c345 29 727 142 1002 295 39 22 73 40 78 40 4 1 7 -158 7 -353z m-2447 283 c281 -142 578 -228 897 -261 l125 -13 3 -296 2 -295 -215 -213 c-170 -170 -215 -219 -215 -240 0 -21 45 -71 215 -241 l215 -215 0 -1687 c0 -928 -4 -1689 -8 -1692 -21 -13 -318 172 -519 323 l-143 106 0 901 0 901 88 12 c97 13 220 41 324 72 l69 21 -7 42 c-48 290 -210 554 -431 704 -114 77 -262 143 -388 172 l-70 16 -3 224 -3 225 -224 219 c-124 120 -225 223 -225 230 0 6 83 94 185 196 l185 185 0 332 c0 219 3 333 10 333 6 0 65 -28 133 -61z m1262 -1209 l110 -110 -113 -113 -112 -112 -112 112 -113 113 110 110 c60 60 112 110 115 110 3 0 55 -50 115 -110z m-1769 -162 l194 -192 0 -146 0 -147 -197 -7 c-185 -6 -308 -17 -320 -30 -9 -9 18 -196 42 -292 101 -397 403 -668 808 -725 l85 -12 6 -66 c7 -89 6 -671 -1 -671 -4 0 -41 27 -82 59 -187 145 -456 296 -702 397 -63 25 -117 49 -122 53 -24 23 -174 439 -220 611 -71 267 -136 675 -137 865 l0 50 222 222 c123 123 225 223 227 223 2 0 91 -86 197 -192z m3736 -45 l226 -228 -4 -75 c-28 -454 -134 -916 -302 -1318 l-47 -114 -105 -41 c-231 -91 -490 -237 -700 -393 l-110 -82 0 372 0 372 86 12 c403 59 705 325 809 714 26 97 53 293 42 304 -12 13 -243 33 -374 34 l-133 0 0 147 0 148 187 187 c103 104 190 188 193 188 3 0 107 -102 232 -227z m-3312 -728 c97 -22 209 -65 289 -112 86 -51 201 -160 250 -237 45 -72 73 -134 63 -140 -10 -6 -144 -24 -232 -32 -175 -14 -402 39 -531 125 -93 62 -116 82 -172 152 -63 80 -137 245 -118 265 12 13 374 -4 451 -21z m2916 0 c-31 -123 -118 -261 -215 -342 -189 -156 -446 -210 -769 -161 -72 11 -73 11 -67 37 15 62 82 160 164 241 73 73 102 94 191 138 170 83 295 109 544 111 l158 1 -6 -25z m-3248 -1472 c160 -88 407 -274 502 -377 l25 -28 1 -234 c1 -129 0 -234 -2 -234 -6 0 -179 183 -241 256 -99 115 -212 265 -297 396 -75 116 -186 302 -186 312 0 7 118 -46 198 -91z m3297 21 c-142 -259 -369 -564 -614 -824 l-80 -85 -1 241 0 241 73 69 c92 89 176 154 302 237 96 62 327 187 347 187 5 0 -7 -30 -27 -66z"/></g></svg>
+      <span class="wordmark" style="font-size:17px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
+    </div>
+    <p style="font-size:12.5px; color:#7C8B83; line-height:1.65; margin:0 0 22px 0;">Máscaras y trajes de terror seleccionados. Operamos desde Lima, Perú.</p>
+    <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px 20px; font-size:13px; color:#9FB0A7; padding-bottom:22px; border-bottom:1px solid #14211B;">
+      <span>Máscaras</span><span>Envíos y entregas</span>
+      <span>Disfraces</span><span>Cambios en 7 días</span>
+      <span>Arquetipos</span><span>Contacto</span>
+    </div>
+    <div style="display:flex; align-items:center; justify-content:space-between; padding-top:18px;">
+      <span style="font-size:11.5px; color:#5E6E66;">© 2026 GALNYX</span>
+      <span class="mono" style="font-size:10px; color:#5E6E66;">Hecho en Lima</span>
+    </div>
+  </div>
+
+  <div style="position:relative; height:0; z-index:30;">
+    <div class="fab" style="right:16px; bottom:20px; width:48px; height:48px;"><svg width="23" height="23" viewBox="0 0 24 24" fill="none"><path d="M3.5 20.5l1.4-4.6A8.2 8.2 0 1 1 8.3 19l-4.8 1.5z" stroke="#56BD78" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.6 9.6c0 2.9 2.4 5.3 5.3 5.3.5 0 .9-.4.9-.9v-1l-1.7-.5-.8.8a5.6 5.6 0 0 1-2.1-2.1l.8-.8-.5-1.7h-1c-.5 0-.9.4-.9.9z" fill="#56BD78"/></svg></div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

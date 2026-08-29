@@ -1,0 +1,114 @@
+{
+  "artboards": [
+    {
+      "file": "Tipografia.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1320,
+      "h": 1680,
+      "title": "Sistema tipográfico — GALNYX",
+      "page": "page-tipografia"
+    },
+    {
+      "file": "Gamas.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1180,
+      "title": "Seis gamas de color — elige una",
+      "page": "page-gamas"
+    },
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 3380,
+      "title": "Home — GALNYX",
+      "page": "page-tienda"
+    },
+    {
+      "file": "Producto.dc.html",
+      "x": 1560,
+      "y": 0,
+      "w": 1440,
+      "h": 1700,
+      "title": "Ficha de producto",
+      "page": "page-tienda"
+    },
+    {
+      "file": "Blog.dc.html",
+      "x": 3120,
+      "y": 0,
+      "w": 1440,
+      "h": 2280,
+      "title": "Blog",
+      "page": "page-tienda"
+    },
+    {
+      "file": "Fondos.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1180,
+      "title": "Fondos para foto de producto",
+      "page": "page-fondos"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "nota-tipo",
+      "x": 0,
+      "y": -160,
+      "w": 700,
+      "text": "Sistema de 4 familias reales (no un solo cambio de fuente): Instrument Serif (titulares/precios) + Big Shoulders (marca/etiquetas) + Instrument Sans (cuerpo) + JetBrains Mono (datos).\nYa aplicado en toda la tienda de la página siguiente, con las 6 fuentes .woff2 reales incrustadas — no depende de internet para verse así. El porqué de cada rol está explicado abajo en esta misma página.",
+      "page": "page-tipografia"
+    },
+    {
+      "id": "nota-gamas",
+      "x": 0,
+      "y": -150,
+      "w": 700,
+      "text": "Las seis gamas aplicadas al MISMO componente, para que compares en igualdad de condiciones.\nLos códigos hex bajo cada muestra son los que van directo al CSS.\nDime cuál eliges y repinto toda la tienda con esa gama.",
+      "page": "page-gamas"
+    },
+    {
+      "id": "nota-tienda",
+      "x": 0,
+      "y": -150,
+      "w": 700,
+      "text": "Ecommerce completo en la gama 01 (Verde Fósforo) con el sistema tipográfico de 4 familias, como punto de partida.\nHome · Ficha de producto · Blog — con brillo pulsante y partículas en el hero para un acabado más producido.\nSi eliges otra gama, se repinta todo — la estructura no cambia.",
+      "page": "page-tienda"
+    },
+    {
+      "id": "nota-fondos",
+      "x": 0,
+      "y": -150,
+      "w": 700,
+      "text": "Los fondos los pone la web por CSS, no la foto. Tú fotografías sobre negro y recortas: así todo el catálogo se ve uniforme aunque dispares en días y luces distintas.",
+      "page": "page-fondos"
+    }
+  ],
+  "launch": {
+    "view": "canvas",
+    "page": "page-tipografia"
+  },
+  "pages": [
+    {
+      "id": "page-tipografia",
+      "name": "Tipografía"
+    },
+    {
+      "id": "page-gamas",
+      "name": "Gamas de color"
+    },
+    {
+      "id": "page-tienda",
+      "name": "Tienda"
+    },
+    {
+      "id": "page-fondos",
+      "name": "Fondos de producto"
+    }
+  ]
+}

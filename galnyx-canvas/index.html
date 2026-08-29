@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GALNYX — Máscaras y disfraces de terror · Lima, Perú</title>
+<meta name="description" content="Prototipo navegable de la tienda GALNYX: 99 productos reales, catálogo de máscaras y disfraces, flujo de compra completo.">
+<link rel="stylesheet" href="fuentes.css">
+<style>
+  :root{--bg:#020A06;--raised:#06150F;--card:#14211B;--line:#1A2620;--border:#25312B;
+        --faint:#7C8B83;--muted:#9FB0A7;--text:#DFE7E2;--hi:#F5FAF7;--acc:#56BD78;--acc2:#7BD497;--deep:#2E854D}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:"Instrument Sans",ui-sans-serif,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  .dsp{font-family:"Instrument Serif",Georgia,serif}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+  .kicker{font-family:"Big Shoulders Variable","Big Shoulders",sans-serif;font-variation-settings:"wdth" 75;
+          text-transform:uppercase;font-weight:650;letter-spacing:.11em}
+  header{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  header video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 45%}
+  header .velo{position:absolute;inset:0;background:linear-gradient(98deg,rgba(2,10,6,.96) 26%,rgba(2,10,6,.62) 54%,rgba(2,10,6,.15) 82%)}
+  header .velo2{position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,10,6,.9),transparent 42%)}
+  .cab{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:96px 28px 76px}
+  .cab .kicker{font-size:11px;color:var(--acc);margin-bottom:22px}
+  h1{font-family:"Instrument Serif",Georgia,serif;font-weight:800;font-size:clamp(42px,7vw,84px);
+     line-height:.94;letter-spacing:-.03em;color:var(--hi);margin:0 0 22px}
+  h1 em{font-style:italic;font-weight:600;display:block;padding-left:8%}
+  .cab p{font-size:clamp(15px,2.2vw,18px);line-height:1.7;color:var(--muted);max-width:520px;margin:0 0 30px}
+  .datos{display:flex;flex-wrap:wrap;gap:26px}
+  .datos div{min-width:96px}
+  .datos b{display:block;font-family:"Instrument Serif",Georgia,serif;font-size:30px;color:var(--hi);line-height:1}
+  .datos span{font-size:12px;color:var(--faint)}
+  main{max-width:1180px;margin:0 auto;padding:60px 28px 100px}
+  .grupo{margin-bottom:52px}
+  .grupo h2{font-family:"Instrument Serif",Georgia,serif;font-weight:700;font-size:26px;letter-spacing:-.02em;
+            color:var(--hi);margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .tag{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+       color:var(--faint);border:1px solid var(--border);border-radius:4px;padding:3px 8px;vertical-align:middle;margin-left:8px}
+  .grupo.interno{opacity:.62}
+  .rejilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+  .ficha{display:flex;flex-direction:column;gap:7px;padding:17px 18px;background:var(--raised);
+         border:1px solid var(--line);border-radius:11px;text-decoration:none;transition:transform .25s ease,border-color .25s ease}
+  .ficha:hover{transform:translateY(-3px);border-color:var(--deep)}
+  .ficha .n{font-size:14.5px;color:var(--hi);line-height:1.35}
+  .ficha .m{font-family:"JetBrains Mono",monospace;font-size:10.5px;color:var(--faint);letter-spacing:.04em}
+  .aviso{background:var(--raised);border:1px solid var(--border);border-radius:12px;padding:20px 22px;
+         margin-bottom:44px;font-size:13.5px;line-height:1.7;color:var(--muted)}
+  .aviso b{color:var(--hi);font-weight:600}
+  footer{border-top:1px solid var(--line);padding:30px 28px;text-align:center;font-size:12.5px;color:var(--faint)}
+  @media(max-width:640px){.cab{padding:64px 20px 52px}main{padding:44px 20px 72px}}
+</style>
+</head>
+<body>
+
+<header>
+  <video autoplay loop muted playsinline preload="metadata" poster="hero-poster.webp" aria-hidden="true">
+    <source src="hero.mp4" type="video/mp4">
+  </video>
+  <div class="velo"></div><div class="velo2"></div>
+  <div class="cab">
+    <div class="kicker">Máscaras y disfraces de terror · Lima, Perú</div>
+    <h1>Deja de ser<em>quien eras.</em></h1>
+    <p>Prototipo navegable. Todas las páginas salen del catálogo real: nombres, precios, descripciones y fotos vienen de las carpetas de producto, no hay datos de ejemplo.</p>
+    <div class="datos">
+      <div><b>99</b><span>productos</span></div>
+      <div><b>41</b><span>máscaras</span></div>
+      <div><b>58</b><span>disfraces</span></div>
+      <div><b>12</b><span>historias</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="aviso">
+    <b>Cómo leer esto.</b> Cada enlace abre una página completa del sitio. Las marcadas con 📱 están diseñadas a 390 px (celular); el resto a 1440 px (escritorio) — ábrelas en una ventana ancha o usa el zoom del navegador. Los grupos marcados como <span class="tag">interno</span> son documentación del sistema de diseño, no páginas de la tienda.
+  </div>
+      <section class="grupo">
+        <h2>Tienda</h2>
+        <div class="rejilla">
+        <a class="ficha" href="Main.dc.html">
+          <span class="n">Home — GALNYX</span>
+          <span class="m">1440 · 7131 px</span>
+        </a>
+        <a class="ficha" href="Producto.dc.html">
+          <span class="n">Ficha de producto</span>
+          <span class="m">1440 · 1641 px</span>
+        </a>
+        <a class="ficha" href="Historias.dc.html">
+          <span class="n">Historias — índice</span>
+          <span class="m">1440 · 3012 px</span>
+        </a>
+        <a class="ficha" href="Historia.dc.html">
+          <span class="n">Historia — una pieza, una historia</span>
+          <span class="m">1440 · 2580 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo">
+        <h2>Móvil</h2>
+        <div class="rejilla">
+        <a class="ficha" href="MovilHome.dc.html">
+          <span class="n">Móvil · Home</span>
+          <span class="m">📱 390 · 5572 px</span>
+        </a>
+        <a class="ficha" href="MovilMenu.dc.html">
+          <span class="n">Móvil · Menú</span>
+          <span class="m">📱 390 · 864 px</span>
+        </a>
+        <a class="ficha" href="MovilCatalogo.dc.html">
+          <span class="n">Móvil · Catálogo</span>
+          <span class="m">📱 390 · 1911 px</span>
+        </a>
+        <a class="ficha" href="MovilProducto.dc.html">
+          <span class="n">Móvil · Ficha</span>
+          <span class="m">📱 390 · 2297 px</span>
+        </a>
+        <a class="ficha" href="MovilPago.dc.html">
+          <span class="n">Móvil · Carrito y pago</span>
+          <span class="m">📱 390 · 1798 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo">
+        <h2>Catálogo y colecciones</h2>
+        <div class="rejilla">
+        <a class="ficha" href="Menus.dc.html">
+          <span class="n">Mega-menú — árbol real de catálogo</span>
+          <span class="m">1440 · 757 px</span>
+        </a>
+        <a class="ficha" href="Catalogo.dc.html">
+          <span class="n">Catálogo con filtros — Máscaras</span>
+          <span class="m">1440 · 2346 px</span>
+        </a>
+        <a class="ficha" href="Coleccion.dc.html">
+          <span class="n">Colección — plantilla de arquetipo</span>
+          <span class="m">1440 · 2225 px</span>
+        </a>
+        <a class="ficha" href="Pareja.dc.html">
+          <span class="n">Colección — Trajes de pareja</span>
+          <span class="m">1440 · 2480 px</span>
+        </a>
+        <a class="ficha" href="ColeccionCazador.dc.html">
+          <span class="n">Colección — Cazador enmascarado</span>
+          <span class="m">1440 · 2291 px</span>
+        </a>
+        <a class="ficha" href="ColeccionGlamour.dc.html">
+          <span class="n">Colección — Glamour adulto</span>
+          <span class="m">1440 · 2536 px</span>
+        </a>
+        <a class="ficha" href="ColeccionHadas.dc.html">
+          <span class="n">Colección — Cuentos de hadas</span>
+          <span class="m">1440 · 1651 px</span>
+        </a>
+        <a class="ficha" href="Disfraces.dc.html">
+          <span class="n">Disfraces — catálogo completo</span>
+          <span class="m">1440 · 8147 px</span>
+        </a>
+        <a class="ficha" href="Mascaras.dc.html">
+          <span class="n">Máscaras — catálogo completo</span>
+          <span class="m">1440 · 6536 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo">
+        <h2>Conjuntos</h2>
+        <div class="rejilla">
+        <a class="ficha" href="Looks.dc.html">
+          <span class="n">Conjuntos — listado</span>
+          <span class="m">1440 · 3450 px</span>
+        </a>
+        <a class="ficha" href="LookDetalle.dc.html">
+          <span class="n">Detalle de conjunto</span>
+          <span class="m">1440 · 2292 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo">
+        <h2>Compra</h2>
+        <div class="rejilla">
+        <a class="ficha" href="Carrito.dc.html">
+          <span class="n">Carrito — drawer</span>
+          <span class="m">1440 · 1020 px</span>
+        </a>
+        <a class="ficha" href="Checkout.dc.html">
+          <span class="n">Checkout 1 — envío</span>
+          <span class="m">1440 · 1224 px</span>
+        </a>
+        <a class="ficha" href="CheckoutPago.dc.html">
+          <span class="n">Checkout 2 — pago</span>
+          <span class="m">1440 · 1826 px</span>
+        </a>
+        <a class="ficha" href="Confirmacion.dc.html">
+          <span class="n">Checkout 3 — confirmación</span>
+          <span class="m">1440 · 1161 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo">
+        <h2>Marca y contenido</h2>
+        <div class="rejilla">
+        <a class="ficha" href="Nosotros.dc.html">
+          <span class="n">Nosotros / Cómo trabajamos</span>
+          <span class="m">1440 · 3062 px</span>
+        </a>
+        <a class="ficha" href="Contacto.dc.html">
+          <span class="n">Contacto y WhatsApp</span>
+          <span class="m">1440 · 1718 px</span>
+        </a>
+        <a class="ficha" href="Error404.dc.html">
+          <span class="n">404</span>
+          <span class="m">1440 · 1560 px</span>
+        </a>
+        <a class="ficha" href="Vacio.dc.html">
+          <span class="n">Estados vacíos</span>
+          <span class="m">1440 · 1415 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo interno">
+        <h2>SEO y sistema de imagen <span class="tag">interno</span></h2>
+        <div class="rejilla">
+        <a class="ficha" href="Foto.dc.html">
+          <span class="n">Sistema de imagen</span>
+          <span class="m">1440 · 4700 px</span>
+        </a>
+        <a class="ficha" href="SEO.dc.html">
+          <span class="n">Plan de SEO</span>
+          <span class="m">1440 · 4125 px</span>
+        </a>
+        <a class="ficha" href="TemaPlay.dc.html">
+          <span class="n">Demo — tema GALNYX Play</span>
+          <span class="m">1440 · 3066 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo interno">
+        <h2>Tipografía <span class="tag">interno</span></h2>
+        <div class="rejilla">
+        <a class="ficha" href="Tipografia.dc.html">
+          <span class="n">Sistema tipográfico</span>
+          <span class="m">1320 · 1600 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo interno">
+        <h2>Gamas de color <span class="tag">interno</span></h2>
+        <div class="rejilla">
+        <a class="ficha" href="Gamas.dc.html">
+          <span class="n">Seis gamas de color</span>
+          <span class="m">1440 · 1707 px</span>
+        </a>
+        </div>
+      </section>
+      <section class="grupo interno">
+        <h2>Fondos de producto <span class="tag">interno</span></h2>
+        <div class="rejilla">
+        <a class="ficha" href="Fondos.dc.html">
+          <span class="n">Fondos para foto de producto</span>
+          <span class="m">1440 · 2250 px</span>
+        </a>
+        </div>
+      </section>
+</main>
+
+<footer>GALNYX · Lima, Perú · Prototipo generado desde el catálogo real</footer>
+</body>
+</html>

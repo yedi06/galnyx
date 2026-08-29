@@ -1,0 +1,57 @@
+<!-- Índice de historias. Sustituye al blog de artículos genéricos: en vez de
+     "Látex, resina o silicona", cada entrada es UN producto real del catálogo
+     con su propia historia. La parrilla la genera el build desde
+     scripts/historias.json — aquí no hay ningún dato escrito a mano.
+     Cada tarjeta ya muestra nombre y precio reales: la historia es la entrada,
+     la compra es la salida, y eso se ve desde el índice. -->
+<div style="position:relative; width:1440px; background:var(--bg); color:var(--text);">
+<!--@HEADER:historias:2:sticky@-->
+
+  <div style="padding:22px 64px 0 64px;">
+    <div style="font-size:12.5px; color:var(--text-faintest);">Inicio &nbsp;/&nbsp; <span style="color:var(--text-muted);">Historias</span></div>
+  </div>
+
+  <!-- ============ apertura ============ -->
+  <div style="position:relative; padding:44px 64px 44px 64px; border-bottom:1px solid var(--card); overflow:hidden;">
+    <div class="glow-pulse-corner" style="position:absolute; top:-220px; right:-80px; width:620px; height:620px; border-radius:50%; background:radial-gradient(circle, rgba(var(--accent-deep-rgb),0.15), transparent 66%); pointer-events:none;"></div>
+
+    <div style="position:relative; display:grid; grid-template-columns: 1.2fr 0.8fr; gap:64px; align-items:flex-end;">
+      <div>
+        <div class="kicker" style="font-size:11px; color:var(--accent); margin-bottom:20px;">Historias · una por pieza</div>
+        <h1 class="dsp" style="font-weight:800; font-size:70px; line-height:0.98; letter-spacing:-0.03em; color:var(--text-hi); margin:0 0 20px 0;">
+          Cada máscara<br><span class="dsp-i" style="font-weight:600; padding-left:50px;">viene de algún lado.</span>
+        </h1>
+        <p style="font-size:16.5px; line-height:1.7; color:var(--text-muted); max-width:520px; margin:0;">De dónde salió el personaje, por qué su diseño funciona y cómo se lee puesto. Al final de cada historia está la pieza, con su precio y su botón.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:12px; overflow:hidden;">
+        <div style="background:var(--bg-raised); padding:22px;">
+          <div class="dsp" style="font-weight:700; font-size:28px; color:var(--text-hi);"><!--@N:historias@--></div>
+          <div style="font-size:12.5px; color:var(--text-faint); margin-top:5px; line-height:1.5;">historias publicadas</div>
+        </div>
+        <div style="background:var(--bg-raised); padding:22px;">
+          <div class="dsp" style="font-weight:700; font-size:28px; color:var(--text-hi);"><!--@N:todo@--></div>
+          <div style="font-size:12.5px; color:var(--text-faint); margin-top:5px; line-height:1.5;">productos en catálogo</div>
+        </div>
+        <div style="background:var(--bg-raised); padding:22px;">
+          <div class="dsp" style="font-weight:700; font-size:28px; color:var(--text-hi);">2</div>
+          <div style="font-size:12.5px; color:var(--text-faint); margin-top:5px; line-height:1.5;">minutos de lectura</div>
+        </div>
+        <div style="background:var(--bg-raised); padding:22px;">
+          <div class="dsp" style="font-weight:700; font-size:28px; color:var(--accent);">1</div>
+          <div style="font-size:12.5px; color:var(--text-faint); margin-top:5px; line-height:1.5;">clic hasta la compra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ la parrilla ============ -->
+  <div style="padding:40px 64px 84px 64px;">
+    <div style="display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:24px;">
+<!--@HISTORIAS@-->
+    </div>
+  </div>
+
+<!--@FOOTER@-->
+<!--@FAB@-->
+</div>
