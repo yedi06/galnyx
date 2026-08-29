@@ -41,6 +41,19 @@ imagenes/Disfraces/…/producto.txt
       node scripts/empaquetar.mjs                → galnyx-tienda.html (bundle del canvas)
 ```
 
+### URLs
+
+El build escribe cada página **dos veces** en `galnyx-canvas/`: con su nombre de
+artboard (`Main.dc.html`, lo que consume el canvas) y con su URL limpia
+(`index.html`, lo que ve el visitante). Comparten los 121 activos, así que la
+copia cuesta ~30 KB de HTML por página. El mapa vive en `RUTAS`, dentro de
+`build.mjs`; añadir una página es añadir su entrada ahí.
+
+El envoltorio resuelve además tres cosas que un diseño de ancho fijo necesita
+para servirse como sitio: centra el lienzo (si no, queda pegado a la izquierda
+con una franja vacía al lado), lo escala con `zoom` cuando la ventana es más
+angosta, y manda a la versión de 390 px a quien entra desde un teléfono.
+
 ### Los marcadores
 
 | Marcador | Qué inserta |

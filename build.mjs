@@ -2,7 +2,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { photo } from './photos.mjs';
 import { scene } from './scenes.mjs';
-import { patchLegacy } from './patch.mjs';
 
 const ROOT = path.resolve('.');
 const SRC = path.join(ROOT, 'src');
@@ -216,11 +215,70 @@ const ICONS = {
 };
 
 /* ---------- barra de anuncio + cabecera de 5 grupos ---------- */
+const SITIO = 'https://yedi06.github.io/galnyx/';
+const OG_IMAGEN = 'og.jpg';
+
+/* esc() se usa en el <head> del envoltorio, que se arma antes que el bloque de
+   catálogo donde estaba definido. Se sube aquí para que exista a tiempo. */
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+/* ---------- rutas del sitio ----------
+   Cada artboard se publica dos veces en galnyx-canvas/: con su nombre .dc.html
+   (lo que consume el canvas) y con una URL limpia (lo que ve el visitante).
+   Son 34 archivos HTML de ~30 KB: duplicarlos cuesta 1 MB y evita tener que
+   mantener dos carpetas con los mismos 121 activos.
+
+   'movil' apunta a la versión de celular cuando existe: el script del envoltorio
+   la usa para llevar allí a quien entra desde un teléfono. Sin eso, alguien que
+   llega de un anuncio de Instagram vería la maqueta de 1440 px reducida. */
+const RUTAS = {
+  Main:             { url: 'index.html',              titulo: 'GALNYX — Máscaras y disfraces de terror hiperrealistas | Lima, Perú', desc: 'Máscaras de látex y disfraces de terror seleccionados uno por uno. Envío 24–48 h en Lima, cambios en 7 días. 99 modelos en catálogo.', movil: 'movil-home.html' },
+  Mascaras:         { url: 'mascaras.html',           titulo: 'Máscaras de terror — 41 modelos | GALNYX', desc: 'Máscaras de goma y de plástico. Michael Myers, Payaso It, Leatherface, Venom y 37 modelos más. Desde S/15.', movil: 'movil-catalogo.html' },
+  Disfraces:        { url: 'disfraces.html',          titulo: 'Disfraces — 58 modelos | GALNYX', desc: 'Disfraces de terror, superhéroes, cuentos y carreras. Desde S/45, envío 24–48 h en Lima.', movil: 'movil-catalogo.html' },
+  Catalogo:         { url: 'catalogo.html',           titulo: 'Catálogo completo | GALNYX', desc: 'Los 99 productos de GALNYX: máscaras de goma, de plástico y disfraces.', movil: 'movil-catalogo.html' },
+  Producto:         { url: 'producto.html',           titulo: 'Ficha de producto | GALNYX', desc: 'Foto real de la pieza, precio y compra en un clic.', movil: 'movil-producto.html' },
+  Coleccion:        { url: 'coleccion-payaso.html',   titulo: 'Payaso siniestro — 7 máscaras | GALNYX', desc: 'Los siete payasos del catálogo: It, Robber, Terrifier, Twisted Metal, Payday, Ojón y Joker.' },
+  ColeccionCazador: { url: 'coleccion-cazador.html',  titulo: 'Cazador enmascarado | GALNYX', desc: 'Michael Myers, Leatherface, Killer, Pigsaw y Conejo asesino.' },
+  ColeccionGlamour: { url: 'coleccion-glamour.html',  titulo: 'Glamour adulto | GALNYX', desc: 'Diosa griega, Cleopatra, Enfermera, Vaquera y Animadora.' },
+  ColeccionHadas:   { url: 'coleccion-hadas.html',    titulo: 'Cuentos de hadas | GALNYX', desc: 'Blanca Nieves, Cenicienta, Rapunzel y Barbie escuela de princesas.' },
+  Pareja:           { url: 'parejas.html',            titulo: 'Parejas — máscara y disfraz que combinan | GALNYX', desc: 'Nueve parejas del catálogo. Cada pieza se compra por separado, a su precio.' },
+  Looks:            { url: 'looks.html',              titulo: 'Arquetipos | GALNYX', desc: 'Cuatro arquetipos fotografiados. La máscara y el disfraz de cada uno, por separado.' },
+  LookDetalle:      { url: 'look.html',               titulo: 'Payaso siniestro — las dos piezas | GALNYX', desc: 'La máscara y el disfraz de la foto, cada uno con su precio.' },
+  Historias:        { url: 'historias.html',          titulo: 'Historias — de dónde viene cada máscara | GALNYX', desc: 'El origen de cada personaje y por qué su diseño funciona. Al final de cada historia, la pieza.' },
+  Historia:         { url: 'historia.html',           titulo: 'La cara que no expresa nada — Michael Myers | GALNYX', desc: 'La máscara más imitada del cine de terror empezó como una decisión de presupuesto.' },
+  Carrito:          { url: 'carrito.html',            titulo: 'Tu carrito | GALNYX', desc: 'Revisa tu pedido antes de pagar.', movil: 'movil-pago.html' },
+  Checkout:         { url: 'checkout.html',           titulo: 'Datos de envío | GALNYX', desc: 'Envío 24–48 h en Lima Metropolitana.', movil: 'movil-pago.html' },
+  CheckoutPago:     { url: 'pago.html',               titulo: 'Pago — Yape, Plin o contra entrega | GALNYX', desc: 'Paga con Yape, Plin o contra entrega en Lima.', movil: 'movil-pago.html' },
+  Confirmacion:     { url: 'confirmacion.html',       titulo: 'Pedido confirmado | GALNYX', desc: 'Tu pedido está en camino.' },
+  Nosotros:         { url: 'nosotros.html',           titulo: 'Cómo trabajamos | GALNYX', desc: 'Proveedor directo, stock verificado y despacho en 24–48 h desde Lima.' },
+  Contacto:         { url: 'contacto.html',           titulo: 'Contacto — WhatsApp +51 904 817 248 | GALNYX', desc: 'Escríbenos por WhatsApp de 9 a. m. a 9 p. m. Responde una persona.' },
+  Error404:         { url: '404.html',                titulo: 'Página no encontrada | GALNYX', desc: 'Esta pieza ya no está aquí, pero el catálogo sigue en pie.' },
+  Menus:            { url: 'menu.html',               titulo: 'Mega-menú | GALNYX', desc: 'El árbol completo del catálogo.' },
+  Vacio:            { url: 'sin-resultados.html',     titulo: 'Sin resultados | GALNYX', desc: 'Esa combinación de filtros no devuelve nada.' },
+  MovilHome:        { url: 'movil-home.html',         titulo: 'GALNYX — Máscaras y disfraces de terror | Lima', desc: 'Máscaras de látex y disfraces de terror. Envío 24–48 h en Lima.' },
+  MovilMenu:        { url: 'movil-menu.html',         titulo: 'Menú | GALNYX', desc: 'Navega el catálogo.' },
+  MovilCatalogo:    { url: 'movil-catalogo.html',     titulo: 'Máscaras | GALNYX', desc: 'El catálogo de máscaras en tu celular.' },
+  MovilProducto:    { url: 'movil-producto.html',     titulo: 'Michael Myers — S/130 | GALNYX', desc: 'Máscara de Michael Myers en látex ultra realista, talla única amoldable.' },
+  MovilPago:        { url: 'movil-pago.html',         titulo: 'Carrito y pago | GALNYX', desc: 'Yape, Plin o contra entrega.' },
+  SEO:              { url: 'sistema-seo.html',        titulo: 'Sistema · SEO | GALNYX', desc: 'Documentación interna.', interno: true },
+  Foto:             { url: 'sistema-foto.html',       titulo: 'Sistema · Fotografía | GALNYX', desc: 'Documentación interna.', interno: true },
+  Fondos:           { url: 'sistema-fondos.html',     titulo: 'Sistema · Fondos | GALNYX', desc: 'Documentación interna.', interno: true },
+  Gamas:            { url: 'sistema-gamas.html',      titulo: 'Sistema · Color | GALNYX', desc: 'Documentación interna.', interno: true },
+  TemaPlay:         { url: 'sistema-temas.html',      titulo: 'Sistema · Temas | GALNYX', desc: 'Documentación interna.', interno: true },
+  Tipografia:       { url: 'sistema-tipografia.html', titulo: 'Sistema · Tipografía | GALNYX', desc: 'Documentación interna.', interno: true },
+};
+
+/* Destinos del menú y del pie. Cuando algo todavía no tiene página propia se
+   manda a la que más se le parece en vez de dejar un enlace muerto: un enlace
+   que no lleva a ningún lado cuesta más que uno que lleva a algo cercano. */
+const R = (n) => (RUTAS[n] ? RUTAS[n].url : 'index.html');
+const WHATSAPP = 'https://wa.me/51904817248';
+
 const NAVLINKS = [
-  ['Catálogo', 'catalogo', true],
-  ['Colecciones', 'colecciones', true],
-  ['Looks', 'looks', false],
-  ['Historias', 'historias', false],
+  ['Catálogo', 'catalogo', R('Mascaras')],
+  ['Colecciones', 'colecciones', R('Looks')],
+  ['Parejas', 'parejas', R('Pareja')],
+  ['Historias', 'historias', R('Historias')],
 ];
 const header = (active, cart, sticky) => `
   <div style="background:#06150F; border-bottom:1px solid #14211B; padding:11px 0; text-align:center;">
@@ -229,18 +287,18 @@ const header = (active, cart, sticky) => `
 
   <div style="display:flex; align-items:center; justify-content:space-between; padding:18px 64px; border-bottom:1px solid #14211B;${sticky ? ' position:sticky; top:0; z-index:20; background:rgba(2,10,6,0.94);' : ' background:#020A06;'}">
     <div style="display:flex; align-items:center; gap:44px;">
-      <div style="display:flex; align-items:center; gap:11px;">
+      <a href="${R('Main')}" style="display:flex; align-items:center; gap:11px; text-decoration:none;">
         ${logo(30)}
         <span class="wordmark" style="font-size:23px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
-      </div>
-      <div style="display:flex; align-items:center; gap:30px; font-size:14px;">
-${NAVLINKS.map(([label, id, drop]) => '        <span class="lnk" style="display:inline-flex; align-items:center;' + (active === id ? ' color:#F5FAF7;' : '') + '">' + label + (drop ? ICONS.chev : '') + '</span>').join('\n')}
-      </div>
+      </a>
+      <nav style="display:flex; align-items:center; gap:30px; font-size:14px;">
+${NAVLINKS.map(([label, id, href]) => '        <a class="lnk" href="' + href + '" style="display:inline-flex; align-items:center; text-decoration:none;' + (active === id ? ' color:#F5FAF7;' : '') + '">' + label + '</a>').join('\n')}
+      </nav>
     </div>
     <div style="display:flex; align-items:center; gap:10px;">
-      <div class="ico">${ICONS.search}</div>
-      <div class="ico">${ICONS.wa}</div>
-      <div class="ico" style="width:auto; padding:0 13px; gap:8px;">${ICONS.cart}<span class="mono" style="font-size:12px; color:#DFE7E2;">${cart}</span></div>
+      <a class="ico" href="${R('Catalogo')}" aria-label="Buscar en el catálogo">${ICONS.search}</a>
+      <a class="ico" href="${WHATSAPP}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">${ICONS.wa}</a>
+      <a class="ico" href="${R('Carrito')}" style="width:auto; padding:0 13px; gap:8px; text-decoration:none;" aria-label="Ver el carrito">${ICONS.cart}<span class="mono" style="font-size:12px; color:#DFE7E2;">${cart}</span></a>
     </div>
   </div>`;
 
@@ -248,10 +306,10 @@ const footer = () => `
   <div style="border-top:1px solid #14211B; padding:52px 64px 40px 64px;">
     <div style="display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap:44px; padding-bottom:40px;">
       <div>
-        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+        <a href="${R('Main')}" style="display:flex; align-items:center; gap:10px; margin-bottom:16px; text-decoration:none;">
           ${logo(26)}
           <span class="wordmark" style="font-size:20px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
-        </div>
+        </a>
         <p style="font-size:13px; color:#7C8B83; line-height:1.65; margin:0 0 18px 0; max-width:290px;">Máscaras y trajes de terror seleccionados. Operamos desde Lima, Perú.</p>
         <div style="display:flex; gap:10px;">
           <div style="width:34px; height:34px; border:1px solid #25312B; border-radius:8px; display:flex; align-items:center; justify-content:center;">
@@ -268,25 +326,25 @@ const footer = () => `
       <div>
         <div class="mono" style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#5E6E66; margin-bottom:14px;">Tienda</div>
         <div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px; color:#9FB0A7;">
-          <span>Máscaras de goma</span><span>Máscaras de plástico</span><span>Disfraces</span>
+          <a class="lnk" href="${R('Mascaras')}">Máscaras de goma</a><a class="lnk" href="${R('Mascaras')}">Máscaras de plástico</a><a class="lnk" href="${R('Disfraces')}">Disfraces</a>
         </div>
       </div>
       <div>
         <div class="mono" style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#5E6E66; margin-bottom:14px;">Ayuda</div>
         <div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px; color:#9FB0A7;">
-          <span>Envíos y entregas</span><span>Cambios en 7 días</span><span>Cómo trabajamos</span><span>Contacto</span>
+          <a class="lnk" href="${R('Nosotros')}">Envíos y entregas</a><a class="lnk" href="${R('Nosotros')}">Cambios en 7 días</a><a class="lnk" href="${R('Nosotros')}">Cómo trabajamos</a><a class="lnk" href="${R('Contacto')}">Contacto</a>
         </div>
       </div>
       <div>
         <div class="mono" style="font-size:11px; letter-spacing:0.12em; text-transform:uppercase; color:#5E6E66; margin-bottom:14px;">Legal</div>
         <div style="display:flex; flex-direction:column; gap:10px; font-size:13.5px; color:#9FB0A7;">
-          <span>Términos y condiciones</span><span>Política de privacidad</span><span>Libro de reclamaciones</span>
+          <a class="lnk" href="${R('Contacto')}">Términos y condiciones</a><a class="lnk" href="${R('Contacto')}">Política de privacidad</a><a class="lnk" href="${R('Contacto')}">Libro de reclamaciones</a>
         </div>
       </div>
     </div>
     <div style="display:flex; align-items:center; justify-content:space-between; padding-top:24px; border-top:1px solid #14211B;">
       <span style="font-size:12.5px; color:#5E6E66;">© 2026 GALNYX. Todos los derechos reservados.</span>
-      <span class="mono" style="font-size:11px; color:#5E6E66;">Hecho en Lima, Perú</span>
+      <span class="mono" style="font-size:11px; color:#5E6E66;">Hecho en Lima, Perú · <a class="lnk" href="paginas.html">mapa del sitio</a></span>
     </div>
   </div>`;
 
@@ -321,10 +379,10 @@ const chkheader = (step) => {
   const pct = n === 1 ? '16.6%' : n === 2 ? '50%' : '100%';
   return `
   <div style="display:flex; align-items:center; justify-content:space-between; padding:20px 64px; border-bottom:1px solid #14211B; background:#020A06;">
-    <div style="display:flex; align-items:center; gap:11px;">
+    <a href="${R('Main')}" style="display:flex; align-items:center; gap:11px; text-decoration:none;">
       ${logo(28)}
       <span class="wordmark" style="font-size:22px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
-    </div>
+    </a>
     <div style="display:flex; align-items:center; gap:9px;">
       ${ICONS.lock.replace('width="22" height="22"', 'width="15" height="15"').replace(/#56BD78/g, '#7C8B83')}
       <span class="mono" style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:#7C8B83;">Compra protegida</span>
@@ -355,7 +413,7 @@ ${STEPS.map(([label, num], i) => {
 };
 
 const fab = () => `
-  <div style="position:relative; height:0; z-index:30;"><div class="fab">${ICONS.waBig}</div></div>`;
+  <div style="position:relative; height:0; z-index:30;"><a class="fab" href="${WHATSAPP}" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">${ICONS.waBig}</a></div>`;
 
 /* ---------- móvil: barra superior de 56 px, objetivos de 44 px ---------- */
 const mheader = (cart) => `
@@ -364,19 +422,19 @@ const mheader = (cart) => `
   </div>
   <div style="position:sticky; top:0; z-index:30; display:flex; align-items:center; justify-content:space-between; padding:0 8px 0 4px; height:56px; background:rgba(2,10,6,0.95); border-bottom:1px solid #14211B;">
     <div style="display:flex; align-items:center;">
-      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;">
+      <a href="${R('MovilMenu')}" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;" aria-label="Abrir el menú">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#DFE7E2" stroke-width="1.9" stroke-linecap="round"/></svg>
-      </div>
-      <div style="display:flex; align-items:center; gap:8px;">
+      </a>
+      <a href="${R('MovilHome')}" style="display:flex; align-items:center; gap:8px; text-decoration:none;">
         ${logo(24)}
         <span class="wordmark" style="font-size:19px; letter-spacing:0.04em; color:#F2F7F4;">GALNYX</span>
-      </div>
+      </a>
     </div>
     <div style="display:flex; align-items:center;">
-      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;">${ICONS.search}</div>
-      <div style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; position:relative;">${ICONS.cart}
+      <a href="${R('MovilCatalogo')}" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center;" aria-label="Buscar">${ICONS.search}</a>
+      <a href="${R('MovilPago')}" style="width:44px; height:44px; display:flex; align-items:center; justify-content:center; position:relative;" aria-label="Ver el carrito">${ICONS.cart}
         <span class="mono" style="position:absolute; top:6px; right:4px; min-width:16px; height:16px; border-radius:8px; background:#56BD78; color:#02160A; font-size:9.5px; display:flex; align-items:center; justify-content:center; padding:0 4px;">${cart}</span>
-      </div>
+      </a>
     </div>
   </div>`;
 
@@ -388,9 +446,9 @@ const mfooter = () => `
     </div>
     <p style="font-size:12.5px; color:#7C8B83; line-height:1.65; margin:0 0 22px 0;">Máscaras y trajes de terror seleccionados. Operamos desde Lima, Perú.</p>
     <div style="display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px 20px; font-size:13px; color:#9FB0A7; padding-bottom:22px; border-bottom:1px solid #14211B;">
-      <span>Máscaras</span><span>Envíos y entregas</span>
-      <span>Disfraces</span><span>Cambios en 7 días</span>
-      <span>Arquetipos</span><span>Contacto</span>
+      <a class="lnk" href="${R('MovilCatalogo')}">Máscaras</a><a class="lnk" href="${R('Nosotros')}">Envíos y entregas</a>
+      <a class="lnk" href="${R('MovilCatalogo')}">Disfraces</a><a class="lnk" href="${R('Nosotros')}">Cambios en 7 días</a>
+      <a class="lnk" href="${R('Looks')}">Arquetipos</a><a class="lnk" href="${R('Contacto')}">Contacto</a>
     </div>
     <div style="display:flex; align-items:center; justify-content:space-between; padding-top:18px;">
       <span style="font-size:11.5px; color:#5E6E66;">© 2026 GALNYX</span>
@@ -398,12 +456,69 @@ const mfooter = () => `
     </div>
   </div>`;
 
-/* ---------- envoltorio .dc.html ---------- */
-const shell = (body, script) => `<!doctype html>
-<html>
+/* ---------- envoltorio de página ----------
+   Las páginas se diseñaron a ancho fijo (1440 px escritorio, 390 px móvil).
+   Servidas tal cual quedaban pegadas a la izquierda con una franja vacía al
+   lado, que es justo lo que delata una maqueta. El envoltorio resuelve tres
+   cosas sin tocar el diseño de ninguna página:
+
+   1. Centrado. El lienzo va al medio y el fondo de la ventana es el de la
+      marca, así el ancho sobrante deja de leerse como un error.
+   2. Escalado. Si la ventana es más angosta que el lienzo, se aplica `zoom`
+      para que entre completo. `zoom` y no `transform:scale` a propósito:
+      transform no reflowa y deja barra horizontal y huecos abajo.
+   3. Puente a móvil. Quien entra desde un teléfono a una página de escritorio
+      va a su equivalente de 390 px. Sin esto, el tráfico de Instagram y TikTok
+      -- que es la mayoría -- aterrizaría en la maqueta ancha reducida.
+
+   Y las etiquetas que un sitio con tráfico pagado necesita sí o sí: título,
+   descripción, y la tarjeta de compartir para cuando el enlace se pega en
+   WhatsApp o en un anuncio. */
+const shell = (body, script, meta) => `<!doctype html>
+<html lang="es">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>${esc(meta.titulo)}</title>
+  <meta name="description" content="${esc(meta.desc)}">
+  ${meta.interno ? '<meta name="robots" content="noindex">' : '<link rel="canonical" href="' + SITIO + meta.url + '">'}
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GALNYX">
+  <meta property="og:locale" content="es_PE">
+  <meta property="og:title" content="${esc(meta.titulo)}">
+  <meta property="og:description" content="${esc(meta.desc)}">
+  <meta property="og:url" content="${SITIO}${meta.url}">
+  <meta property="og:image" content="${SITIO}${OG_IMAGEN}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#020A06">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script src="./support.js"></script>
+  <style>
+    html { background:#020A06; }
+    body { min-height:100vh; }
+    /* el lienzo de ancho fijo, centrado */
+    body > x-dc > div:first-of-type { margin-left:auto; margin-right:auto; }
+    a { color:inherit; }
+  </style>
+  <script>
+  (function () {
+    var ANCHO = ${meta.ancho};
+    var MOVIL = ${meta.movil ? JSON.stringify(meta.movil) : 'null'};
+    /* A un teléfono se le manda la versión de 390 px si existe. Se comprueba
+       una vez, antes de pintar, y solo hacia abajo: nunca devuelve al de
+       escritorio, para que quien elija "ver versión completa" se quede ahí. */
+    if (MOVIL && Math.min(screen.width, window.innerWidth) < 700) {
+      location.replace(MOVIL + location.search + location.hash);
+      return;
+    }
+    function encajar() {
+      var v = document.documentElement.clientWidth;
+      document.documentElement.style.zoom = v < ANCHO ? (v / ANCHO) : '';
+    }
+    encajar();
+    addEventListener('resize', encajar);
+  })();
+  </script>
 </head>
 <body>
 <x-dc>
@@ -490,7 +605,7 @@ function fichaHistoria(slug) {
   const h = _historias[slug];
   const p = _porSlug.get(slug);
   if (!p) throw new Error('historia sin producto en el inventario: ' + slug);
-  return `      <a class="card-hov" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+  return `      <a class="card-hov" href="${R('Historia')}" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:14px; overflow:hidden; text-decoration:none;">
         <div class="pbg" style="height:230px;">${foto(slug, 194)}</div>
         <div style="padding:22px;">
           <div class="kicker" style="font-size:9.5px; color:var(--accent); margin-bottom:11px;">${esc(h.kicker)} · ${esc(String(h.lectura))} min</div>
@@ -542,7 +657,6 @@ const _inv = JSON.parse(fs.readFileSync(INVENTARIO, 'utf8'));
 const _ampliadas = fs.existsSync(AMPLIADAS)
   ? JSON.parse(fs.readFileSync(AMPLIADAS, 'utf8')).descripciones : {};
 
-const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 /* Los pendientes del inventario no se publican: si alguno se colara aquí sería
    una tarjeta con un hueco delante del cliente, así que se corta el build. */
@@ -567,7 +681,7 @@ const CAT_DISFRACES = 'Disfraces';
    radio, mismo alto de foto. Lo único que se suma es el párrafo de
    descripción. No lleva reseñas ni estrellas: ese dato no existe. */
 function tarjeta(p) {
-  return `      <div class="card-hov" style="background:var(--bg-raised); border:1px solid var(--line); border-radius:14px; overflow:hidden;">
+  return `      <a class="card-hov" href="${R('Producto')}" style="display:block; background:var(--bg-raised); border:1px solid var(--line); border-radius:14px; overflow:hidden; text-decoration:none;">
         <div style="height:290px; background:radial-gradient(circle at 50% 38%, var(--card), var(--bg) 74%); display:flex; align-items:flex-end; justify-content:center; position:relative;">
           ${foto(p.slug, 250)}
         </div>
@@ -576,7 +690,7 @@ function tarjeta(p) {
           <p style="font-size:12.5px; line-height:1.65; color:var(--text-muted); margin:10px 0 14px 0;">${esc(p.descripcion)}</p>
           <span class="dsp" style="font-weight:700; font-size:19px; color:var(--text-hi);">${esc(p.precio)}</span>
         </div>
-      </div>`;
+      </a>`;
 }
 
 const grilla = (categoria) => catalogo(categoria).map(tarjeta).join('\n');
@@ -635,16 +749,39 @@ function expand(src) {
 
 const MARKER = '<!--@SCRIPT@-->';
 const files = fs.readdirSync(SRC).filter((f) => f.endsWith('.dc.html'));
+
+/* Cada página se escribe dos veces en la misma carpeta:
+     Main.dc.html   -> lo que consume el canvas (nombres de artboard)
+     index.html     -> lo que ve el visitante (URL limpia)
+   Comparten los 121 activos, así que el coste de la copia son unos 30 KB de
+   HTML por página. A cambio, el sitio publicado deja de tener URLs con
+   ".dc.html" y el home vive en la raíz, como en cualquier tienda. */
 for (const f of files) {
+  const nombre = f.replace('.dc.html', '');
+  const ruta = RUTAS[nombre];
+  if (!ruta) throw new Error('falta la ruta de ' + f + ' en RUTAS (build.mjs)');
   const raw = fs.readFileSync(path.join(SRC, f), 'utf8');
   const i = raw.indexOf(MARKER);
   const body = i === -1 ? raw : raw.slice(0, i);
   const script = i === -1 ? '' : raw.slice(i + MARKER.length);
-  const out = shell(expand(body).trim(), expand(script).trim());
+  const ancho = nombre.startsWith('Movil') ? 390 : 1440;
+  const out = shell(expand(body).trim(), expand(script).trim(), { ...ruta, ancho });
   fs.writeFileSync(path.join(OUT, f), out);
-  console.log(f.padEnd(24), (out.length / 1024).toFixed(0) + ' KB');
+  fs.writeFileSync(path.join(OUT, ruta.url), out);
+  console.log(('/' + ruta.url).padEnd(26), (out.length / 1024).toFixed(0) + ' KB');
 }
-if (/<!--@[A-Z]/.test(fs.readFileSync(path.join(OUT, files[0]), 'utf8'))) {
+
+/* Un artboard que se borra de src/ deja su URL limpia huérfana en la carpeta.
+   Se limpian aquí para que el sitio no sirva páginas que ya no existen. */
+const urlsVivas = new Set(files.map((f) => RUTAS[f.replace('.dc.html', '')].url));
+const urlsPosibles = new Set(Object.values(RUTAS).map((r) => r.url));
+for (const f of fs.readdirSync(OUT)) {
+  if (urlsPosibles.has(f) && !urlsVivas.has(f)) {
+    fs.unlinkSync(path.join(OUT, f));
+    console.log('retirada la URL huérfana', f);
+  }
+}
+if (/<!--@[A-Z]/.test(fs.readFileSync(path.join(OUT, 'index.html'), 'utf8'))) {
   throw new Error('quedaron marcadores sin expandir');
 }
 
